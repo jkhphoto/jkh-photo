@@ -67,8 +67,8 @@ export default function IndexList({ projects }) {
 
         <div className="idx-table">
           <div className="idx-table-head">
-            <span className="idx-col-num">#</span>
-            <span className="idx-col-name">Project</span>
+            <span className="idx-col-num"></span>
+            <span className="idx-col-name">`</span>
             <span className="idx-col-cat">Category</span>
             <span className="idx-col-client">Client</span>
             <span className="idx-col-date">Date</span>
@@ -80,8 +80,7 @@ export default function IndexList({ projects }) {
             return (
               <Link
                 key={p._sys.filename}
-                href={`/projects/${p._sys.filename}`}
-                className="idx-row"
+                href={`/projects/${p._sys.filename}`}                className="idx-row"
                 onMouseEnter={() => { setPreviewSrc(p.featuredImage || null); setActive(true) }}
                 onMouseLeave={() => { setActive(false); setPreviewSrc(null) }}
               >
