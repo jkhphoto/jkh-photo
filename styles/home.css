@@ -1,0 +1,67 @@
+.hero-video {
+  margin-top: var(--nav-h); height: 70vh; overflow: hidden;
+  position: relative; background: #0a0a0a;
+}
+.hero-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-video-fallback {
+  position: absolute; inset: 0; display: flex;
+  align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.1em; color: #555; text-transform: uppercase;
+}
+
+.projects { padding: 0 24px 80px; }
+.proj-list { list-style: none; border-top: 1px solid var(--line); }
+.proj-item { border-bottom: 1px solid var(--line); }
+.proj-item a {
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 20px 0; transition: padding-left 0.35s var(--expo);
+}
+.proj-item a:hover { padding-left: 10px; }
+
+.proj-item-name {
+  font-family: var(--display); font-size: clamp(28px, 5vw, 56px);
+  font-weight: 400; text-transform: uppercase;
+  letter-spacing: 0.01em; line-height: 1; transition: opacity 0.25s;
+}
+.proj-item-tag {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--dim);
+  white-space: nowrap; transition: opacity 0.25s;
+}
+.proj-item-num {
+  font-family: var(--mono); font-size: 10px; color: var(--dim2);
+  margin-left: auto; text-align: right; transition: opacity 0.25s;
+}
+
+.proj-list:hover .proj-item:not(:hover) .proj-item-name { opacity: 0.15; }
+.proj-list:hover .proj-item:not(:hover) .proj-item-num { opacity: 0.15; }
+.proj-list:hover .proj-item:not(:hover) .proj-item-tag { opacity: 0.1; }
+
+.proj-preview {
+  position: fixed; width: 300px; pointer-events: none; z-index: 150;
+  opacity: 0; transform: scale(0.9) rotate(-1deg);
+  transition: opacity 0.3s var(--expo), transform 0.35s var(--expo);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+.proj-preview.show { opacity: 1; transform: scale(1) rotate(0deg); }
+
+.home-footer {
+  padding: 28px 24px; display: flex; justify-content: space-between;
+  align-items: center; border-top: 1px solid var(--line);
+}
+.foot-l { font-size: 9px; color: var(--dim); letter-spacing: 0.04em; }
+.foot-r { display: flex; gap: 18px; }
+.foot-r a {
+  font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--dim); transition: color 0.2s;
+}
+.foot-r a:hover { color: var(--fg); }
+
+@media (max-width: 768px) {
+  .projects { padding: 0 16px 60px; }
+  .proj-item-name { font-size: 22px; }
+  .proj-item-tag { display: none; }
+  .proj-preview { display: none; }
+  .home-footer { padding: 20px 16px; flex-direction: column; gap: 10px; text-align: center; }
+}

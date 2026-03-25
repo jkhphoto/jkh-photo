@@ -1,0 +1,71 @@
+'use client'
+import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
+
+export default function HomeProjectList({ projects }) {
+  const [previewSrc, setPreviewSrc] = useState(null)
+  const [active, setActive] = useState(false)
+  const previewRef = useRef(null)
+  const mx = useRef(0), my = useRef(0), px = useRef(0), py = useRef(0)
+
+  useEffect(() => {
+    let raf
+    const tick = () => {
+      if (active) {
+        px.current += (mx.current - px.current) * 0.1
+        py.current += (my.current - py.current) * 0.1
+        if (previewRef.current) {
+          previewRef.current.style.left = px.current + 'px'
+          previewRef.current.style.top = py.current + 'px'
+        }
+      }
+      raf = requestAnimationFrame(tick)
+    }
+    tick()
+    return () => cancelAnimationFrame(raf)
+  }, [active])
+
+  useEffect(() => {
+    const fn = (e) => {
+      mx.current = e.clientX + 24; my.current = e.clientY - 160
+      if (!active) { px.current = mx.current; py.current = my.current }
+    }
+    document.addEventListener('mousemove', fn)
+    return () => document.removeEventListener('mousemove', fn)
+  }, [active])
+
+  if (!projects || projects.length === 0) return null
+  const sorted = [...projects].sort((a, b) => (a.number || 99) - (b.number || 99))
+
+  return (
+    <>
+      <section className="projects">
+        <ul className="proj-list">
+          {sorted.map((p) => {
+            const num = p.number ? String(p.number).padStart(2, '0') : null
+            return (
+              <li key={p._sys.filename} className="proj-item"
+                onMouseEnter={() => { setPreviewSrc(p.featuredImage || null); setActive(true) }}
+                onMouseLeave={() => { setActive(false); setPreviewSrc(null) }}>
+                <Link href={`/projects/${p._sys.filename}`}>
+                  <span className="proj-item-name">{p.title}</span>
+                  <span className="proj-item-tag">{p.category}</span>
+                  {num && <span className="proj-item-num">[{num}]</span>}
+                </Link>
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+      <footer className="home-footer">
+        <div className="foot-l">© 2025 JKH Photo — Brooklyn, NY</div>
+        <div className="foot-r">
+          <a href="https://www.instagram.com/jkh_photo" target="_blank" rel="noopener">IG</a>
+          <a href="https://www.linkedin.com/in/josephkhale/" target="_blank" rel="noopener">LI</a>
+          <a href="mailto:hello@josephkhale.com">Email</a>
+        </div>
+      </footer>
+      <img ref={previewRef} className={`proj-preview ${previewSrc && active ? 'show' : ''}`} src={previewSrc || ''} alt="" />
+    </>
+  )
+}
