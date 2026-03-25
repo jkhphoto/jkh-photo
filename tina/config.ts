@@ -84,6 +84,39 @@ export default defineConfig({
                 label: "Centered",
                 fields: [{ name: "image", label: "Image", type: "image", required: true }],
               },
+
+              {
+                name: "centeredSmall",
+                label: "Centered (small)",
+                fields: [{ name: "image", label: "Image", type: "image", required: true }],
+              },
+              {
+                name: "centeredLarge",
+                label: "Centered (large)",
+                fields: [{ name: "image", label: "Image", type: "image", required: true }],
+              },
+              {
+                name: "diptych",
+                label: "Diptych (two centered, gap)",
+                fields: [
+                  { name: "left", label: "Left Image", type: "image", required: true },
+                  { name: "right", label: "Right Image", type: "image", required: true },
+                ],
+              },
+              {
+                name: "text",
+                label: "Text Block",
+                fields: [
+                  { name: "content", label: "Text", type: "string", ui: { component: "textarea" } },
+                ],
+              },
+              {
+                name: "spacer",
+                label: "Spacer",
+                fields: [
+                  { name: "height", label: "Height (px)", type: "number" },
+                ],
+              },
             
             ],
           },
