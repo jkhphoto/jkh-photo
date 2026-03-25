@@ -3,16 +3,12 @@ backend:
   repo: jkhphoto/jkh-photo
   branch: main
   base_url: https://jkh-photo.pages.dev
-  auth_endpoint: /api/authbackend:
-  name: github
-  repo: jkhphoto/jkh-photo
-  branch: main
+  auth_endpoint: /api/auth
 
 media_folder: public/images
 public_folder: /images
 
 collections:
-  # ── Projects ──
   - name: project
     label: Projects
     folder: content/projects
@@ -26,7 +22,7 @@ collections:
       - { name: client, label: Client, widget: string, required: false }
       - { name: date, label: Date, widget: string, required: false, hint: "e.g. July 2025, Ongoing" }
       - { name: location, label: Location, widget: string, required: false, hint: "e.g. Jacksonville, Florida" }
-      - { name: coordinates, label: Coordinates, widget: string, required: false, hint: "e.g. 30.3322° N, 81.6557° W" }
+      - { name: coordinates, label: Coordinates, widget: string, required: false, hint: "e.g. 30.3322 N, 81.6557 W" }
       - { name: number, label: Project Number, widget: number, required: false, value_type: int }
       - { name: featured, label: Show on Homepage, widget: boolean, default: false }
       - { name: featuredImage, label: Featured Image (homepage hover), widget: image, required: false }
@@ -107,8 +103,6 @@ collections:
         fields:
           - { name: role, label: Role, widget: string }
           - { name: name, label: Name, widget: string }
-
-  # ── BTS ──
   - name: bts
     label: BTS
     folder: content/bts
@@ -122,8 +116,6 @@ collections:
         widget: list
         fields:
           - { name: image, label: Image, widget: image }
-
-  # ── Print ──
   - name: print
     label: Print
     folder: content/print
