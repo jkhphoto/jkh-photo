@@ -1,14 +1,25 @@
 import ProjectPage from './ProjectPage'
+import fs from 'fs'
+import path from 'path'
 
 export async function generateStaticParams() {
+  // Try TinaCMS API first
   try {
     const client = (await import('../../../tina/__generated__/client')).default
     const result = await client.queries.projectConnection()
-    return result.data.projectConnection.edges.map((edge) => ({
+    const params = result.data.projectConnection.edges.map((edge) => ({
       slug: edge.node._sys.filename,
     }))
+    if (params.length > 0) return params
+  } catch (e) {}
+
+  // Fallback: read content directory directly
+  const contentDir = path.join(process.cwd(), 'content/projects')
+  try {
+    const files = fs.readdirSync(contentDir).filter((f) => f.endsWith('.mdx'))
+    return files.map((f) => ({ slug: f.replace('.mdx', '') }))
   } catch (e) {
-    return []
+    return [{ slug: '_placeholder' }]
   }
 }
 
