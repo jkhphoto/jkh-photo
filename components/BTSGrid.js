@@ -19,7 +19,6 @@ function BTSImage({ src, index, onClick }) {
     <div
       ref={ref}
       className={`bts-item ${vis ? 'vis' : ''}`}
-      style={{ animationDelay: `${(index % 8) * 0.06}s` }}
       onClick={() => onClick(index)}
     >
       <img src={src} alt="" loading="lazy" />
@@ -29,6 +28,8 @@ function BTSImage({ src, index, onClick }) {
 
 function BTSLightbox({ images, startIndex, onClose }) {
   const scrollRef = useRef(null)
+  const [current, setCurrent] = useState(startIndex + 1)
+  const total = images.length
 
   const handleKey = useCallback((e) => {
     if (e.key === 'Escape') onClose()
@@ -50,12 +51,36 @@ function BTSLightbox({ images, startIndex, onClose }) {
     }
   }, [startIndex])
 
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+    const items = container.querySelectorAll('.bts-lb-item')
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idx = Array.from(items).indexOf(entry.target)
+            if (idx !== -1) setCurrent(idx + 1)
+          }
+        })
+      },
+      { root: container, threshold: 0.5 }
+    )
+
+    items.forEach((item) => io.observe(item))
+    return () => io.disconnect()
+  }, [])
+
+  const pad = (n) => String(n).padStart(2, '0')
+
   return (
-    <div className="bts-lb" onClick={onClose}>
-      <button className="bts-lb-close" onClick={(e) => { e.stopPropagation(); onClose() }}>
-        Close [Esc]
-      </button>
-      <div className="bts-lb-scroll" ref={scrollRef} onClick={(e) => e.stopPropagation()}>
+    <div className="bts-lb">
+      <div className="bts-lb-top">
+        <span className="bts-lb-counter">{pad(current)} / {pad(total)}</span>
+        <button className="bts-lb-close" onClick={onClose}>Close [Esc]</button>
+      </div>
+      <div className="bts-lb-scroll" ref={scrollRef}>
         {images.map((img, i) => (
           <div key={i} className="bts-lb-item">
             <img src={img.image} alt="" />
