@@ -2,6 +2,11 @@ backend:
   name: github
   repo: jkhphoto/jkh-photo
   branch: main
+  base_url: https://jkh-photo.pages.dev
+  auth_endpoint: /api/authbackend:
+  name: github
+  repo: jkhphoto/jkh-photo
+  branch: main
 
 media_folder: public/images
 public_folder: /images
