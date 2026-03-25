@@ -51,7 +51,6 @@ export default function IndexList({ projects }) {
       <div className="idx-page">
         <div className="idx-header">
           <h1 className="idx-title">Index</h1>
-          <span className="idx-count">{filtered.length} Project{filtered.length !== 1 ? 's' : ''}</span>
         </div>
 
         <div className="idx-filters">

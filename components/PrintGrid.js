@@ -139,7 +139,6 @@ export default function PrintGrid({ items }) {
       <div className="print-header">
         <span className="print-header-label">Archive</span>
         <h1 className="print-page-title">Print</h1>
-        <span className="print-header-count">{items.length} Volume{items.length !== 1 ? 's' : ''}</span>
       </div>
       {items.map((item, i) => (
         <PrintSection key={i} item={item} index={i} />

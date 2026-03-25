@@ -110,7 +110,6 @@ export default function BTSGrid({ images }) {
       <div className="bts-page">
         <div className="bts-header">
           <h1 className="bts-title">BTS</h1>
-          <span className="bts-count">{images.length} Images</span>
         </div>
         <div className="bts-grid">
           {images.map((img, i) => (
