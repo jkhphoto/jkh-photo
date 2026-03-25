@@ -35,6 +35,15 @@
 .g-cinematic { margin: 20px -32px; padding: 0; }
 .g-cinematic .g-img { flex: 0 0 100%; }
 .g-cinematic img { width: 100vw; max-width: 100vw; }
+.g-centered { justify-content: center; padding: 40px 0; }
+.g-centered .g-img { flex: 0 0 auto; max-width: 65%; }
+.g-centered.g-centered-sm .g-img { max-width: 45%; }
+.g-centered.g-centered-lg .g-img { max-width: 80%; }
+.g-diptych { justify-content: center; padding: 40px 0; gap: 16px; }
+.g-diptych .g-img { flex: 0 0 auto; max-width: 40%; }
+.g-text { padding: 60px 0; justify-content: center; }
+.g-text p { max-width: 560px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; line-height: 1.7; color: var(--dim2); text-align: center; }
+.g-spacer { display: block; }
 
 .credits { margin-top: 0; margin-bottom: 60px; padding: 0 32px; border-top: 1px solid rgba(0,0,0,0.12); }
 .credits.open { padding-bottom: 32px; }
