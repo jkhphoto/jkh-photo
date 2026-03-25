@@ -79,6 +79,11 @@ export default defineConfig({
                 label: "Cinematic (edge-to-edge)",
                 fields: [{ name: "image", label: "Image", type: "image", required: true }],
               },
+	      {
+                name: "centered",
+                label: "Centered",
+                fields: [{ name: "image", label: "Image", type: "image", required: true }],
+              },
             
             ],
           },
