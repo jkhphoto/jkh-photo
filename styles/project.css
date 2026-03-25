@@ -1,4 +1,9 @@
-.proj-head {
+.g-centered { justify-content: center; align-items: center; padding: 20px 0; min-height: calc(100vh - 120px); }
+.g-centered .g-img { flex: 0 0 auto; max-width: 65%; }
+.g-centered .g-img img { max-height: 85vh; width: auto; object-fit: contain; }
+.g-centered.g-centered-sm .g-img { max-width: 45%; }
+.g-centered.g-centered-sm .g-img img { max-height: 80vh; }
+.g-centered.g-centered-lg .g-img { max-width: 80%; }.proj-head {
   margin-top: var(--nav-h); padding: 16px 32px 20px;
   display: flex; align-items: baseline;
   justify-content: space-between; gap: 24px;
