@@ -35,14 +35,13 @@ export default function HomeProjectList({ projects }) {
   }, [active])
 
   if (!projects || projects.length === 0) return null
-  const sorted = [...projects].sort((a, b) => (a.number || 99) - (b.number || 99))
 
   return (
     <>
       <section className="projects">
         <ul className="proj-list">
-          {sorted.map((p) => {
-            const num = p.number ? String(p.number).padStart(2, '0') : null
+          {projects.map((p) => {
+            const num = String(p.displayNumber || 0).padStart(2, '0')
             return (
               <li key={p._sys.filename} className="proj-item"
                 onMouseEnter={() => { setPreviewSrc(p.featuredImage || null); setActive(true) }}
@@ -50,7 +49,7 @@ export default function HomeProjectList({ projects }) {
                 <Link href={`/projects/${p._sys.filename}`}>
                   <span className="proj-item-name">{p.title}</span>
                   <span className="proj-item-tag">{p.category}</span>
-                  {num && <span className="proj-item-num">[{num}]</span>}
+                  <span className="proj-item-num">[{num}]</span>
                 </Link>
               </li>
             )

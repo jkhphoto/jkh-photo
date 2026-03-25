@@ -25,7 +25,7 @@ export default function Nav() {
     <nav ref={ref}>
       <Link href="/" className="logo">JKH Photo</Link>
       <div className="links">
-        <Link href="/">Work</Link>
+        <Link href="/">Home</Link>
         <Link href="/index">Index</Link>
         <Link href="/bts">BTS</Link>
         <Link href="/print">Print</Link>

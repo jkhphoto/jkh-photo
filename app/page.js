@@ -1,9 +1,10 @@
 import '../styles/home.css'
 import HomeProjectList from '../components/HomeProjectList'
-import { getCollection } from '../lib/content'
+import { getOrderedProjects } from '../lib/content'
 
 export default async function Home() {
-  const projects = getCollection('project').filter((p) => p.featured)
+  const allOrdered = getOrderedProjects()
+  const projects = allOrdered.filter((p) => p.featured)
 
   return (
     <>

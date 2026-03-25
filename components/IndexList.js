@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 export default function IndexList({ projects }) {
+  const [filter, setFilter] = useState('All')
   const [previewSrc, setPreviewSrc] = useState(null)
   const [active, setActive] = useState(false)
   const previewRef = useRef(null)
@@ -42,14 +43,27 @@ export default function IndexList({ projects }) {
     )
   }
 
-  const sorted = [...projects].sort((a, b) => (a.number || 99) - (b.number || 99))
+  const categories = ['All', ...Array.from(new Set(projects.map(p => p.category).filter(Boolean)))]
+  const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter)
 
   return (
     <>
       <div className="idx-page">
         <div className="idx-header">
           <h1 className="idx-title">Index</h1>
-          <span className="idx-count">{sorted.length} Projects</span>
+          <span className="idx-count">{filtered.length} Project{filtered.length !== 1 ? 's' : ''}</span>
+        </div>
+
+        <div className="idx-filters">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`idx-filter ${filter === cat ? 'active' : ''}`}
+              onClick={() => setFilter(cat)}
+            >
+              {cat}
+            </button>
+          ))}
         </div>
 
         <div className="idx-table">
@@ -62,8 +76,8 @@ export default function IndexList({ projects }) {
             <span className="idx-col-loc">Location</span>
           </div>
 
-          {sorted.map((p) => {
-            const num = p.number ? String(p.number).padStart(2, '0') : '—'
+          {filtered.map((p) => {
+            const num = String(p.displayNumber || 0).padStart(2, '0')
             return (
               <Link
                 key={p._sys.filename}

@@ -23,7 +23,6 @@ collections:
       - { name: date, label: Date, widget: string, required: false, hint: "e.g. July 2025, Ongoing" }
       - { name: location, label: Location, widget: string, required: false, hint: "e.g. Jacksonville, Florida" }
       - { name: coordinates, label: Coordinates, widget: string, required: false, hint: "e.g. 30.3322 N, 81.6557 W" }
-      - { name: number, label: Project Number, widget: number, required: false, value_type: int }
       - { name: featured, label: Show on Homepage, widget: boolean, default: false }
       - { name: featuredImage, label: Featured Image (homepage hover), widget: image, required: false }
       - name: gallery
@@ -103,6 +102,21 @@ collections:
         fields:
           - { name: role, label: Role, widget: string }
           - { name: name, label: Name, widget: string }
+
+  - name: settings
+    label: Settings
+    files:
+      - name: order
+        label: Project Order
+        file: content/settings/order.mdx
+        fields:
+          - { name: title, label: Title, widget: hidden, default: "Project Order" }
+          - name: order
+            label: Drag to reorder projects
+            widget: list
+            fields:
+              - { name: slug, label: Project Slug, widget: string }
+
   - name: bts
     label: BTS
     folder: content/bts
@@ -116,6 +130,7 @@ collections:
         widget: list
         fields:
           - { name: image, label: Image, widget: image }
+
   - name: print
     label: Print
     folder: content/print

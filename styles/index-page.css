@@ -8,7 +8,7 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
   padding-bottom: 16px;
   border-bottom: 1px solid var(--line);
 }
@@ -37,10 +37,39 @@
   letter-spacing: 0.06em;
 }
 
-/* ── Table ── */
-.idx-table {
-  width: 100%;
+/* ── Filters ── */
+.idx-filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
 }
+
+.idx-filter {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim2);
+  background: none;
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: color 0.25s ease, border-color 0.25s ease;
+}
+
+.idx-filter:hover {
+  color: var(--fg);
+  border-color: var(--dim);
+}
+
+.idx-filter.active {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+/* ── Table ── */
+.idx-table { width: 100%; }
 
 .idx-table-head {
   display: grid;
@@ -64,9 +93,7 @@
   color: inherit;
   transition: padding-left 0.35s var(--expo);
 }
-.idx-row:hover {
-  padding-left: 10px;
-}
+.idx-row:hover { padding-left: 10px; }
 
 .idx-col-num {
   font-size: 10px;
@@ -96,7 +123,6 @@
   transition: opacity 0.25s;
 }
 
-/* Dim non-hovered rows */
 .idx-table:hover .idx-row:not(:hover) .idx-col-name { opacity: 0.15; }
 .idx-table:hover .idx-row:not(:hover) .idx-col-cat,
 .idx-table:hover .idx-row:not(:hover) .idx-col-client,
@@ -133,4 +159,5 @@
   .idx-col-client { display: none; }
   .idx-col-loc { display: none; }
   .idx-preview { display: none; }
+  .idx-filters { flex-wrap: wrap; }
 }

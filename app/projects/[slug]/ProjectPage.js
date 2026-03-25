@@ -8,7 +8,7 @@ import Lightbox from '../../../components/Lightbox'
 
 export default function ProjectPage({ project }) {
   const [lightboxSrc, setLightboxSrc] = useState(null)
-  const num = project.number ? String(project.number).padStart(2, '0') : null
+  const num = project.displayNumber ? String(project.displayNumber).padStart(2, '0') : null
 
   return (
     <>
@@ -25,7 +25,7 @@ export default function ProjectPage({ project }) {
 
       <Gallery rows={project.gallery} onImageClick={(src) => setLightboxSrc(src)} />
       <Credits credits={project.credits} />
-      <ProjectBanner title={project.title} category={project.category} date={project.date} number={project.number} location={project.location} />
+      <ProjectBanner title={project.title} category={project.category} date={project.date} number={project.displayNumber} location={project.location} />
       <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
     </>
   )
