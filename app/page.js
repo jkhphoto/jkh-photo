@@ -1,13 +1,9 @@
 import '../styles/home.css'
 import HomeProjectList from '../components/HomeProjectList'
+import { getCollection } from '../lib/content'
 
 export default async function Home() {
-  let projects = []
-  try {
-    const client = (await import('../tina/__generated__/client')).default
-    const result = await client.queries.projectConnection()
-    projects = result.data.projectConnection.edges.map((e) => e.node).filter((p) => p.featured)
-  } catch (e) {}
+  const projects = getCollection('project').filter((p) => p.featured)
 
   return (
     <>

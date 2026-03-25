@@ -1,0 +1,140 @@
+backend:
+  name: github
+  repo: jkhphoto/jkh-photo
+  branch: main
+
+media_folder: public/images
+public_folder: /images
+
+collections:
+  # ── Projects ──
+  - name: project
+    label: Projects
+    folder: content/projects
+    extension: mdx
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: category, label: Category, widget: select, options: [Editorial, Commercial, Personal], required: false }
+      - { name: client, label: Client, widget: string, required: false }
+      - { name: date, label: Date, widget: string, required: false, hint: "e.g. July 2025, Ongoing" }
+      - { name: location, label: Location, widget: string, required: false, hint: "e.g. Jacksonville, Florida" }
+      - { name: coordinates, label: Coordinates, widget: string, required: false, hint: "e.g. 30.3322° N, 81.6557° W" }
+      - { name: number, label: Project Number, widget: number, required: false, value_type: int }
+      - { name: featured, label: Show on Homepage, widget: boolean, default: false }
+      - { name: featuredImage, label: Featured Image (homepage hover), widget: image, required: false }
+      - name: gallery
+        label: Gallery
+        widget: list
+        types:
+          - name: pair
+            label: Pair (equal)
+            widget: object
+            fields:
+              - { name: left, label: Left Image, widget: image }
+              - { name: right, label: Right Image, widget: image }
+          - name: pairWide
+            label: Pair (wide left)
+            widget: object
+            fields:
+              - { name: left, label: Left Image (larger), widget: image }
+              - { name: right, label: Right Image (smaller), widget: image }
+          - name: pairNarrow
+            label: Pair (wide right)
+            widget: object
+            fields:
+              - { name: left, label: Left Image (smaller), widget: image }
+              - { name: right, label: Right Image (larger), widget: image }
+          - name: trio
+            label: Three Images
+            widget: object
+            fields:
+              - { name: img1, label: Image 1, widget: image }
+              - { name: img2, label: Image 2, widget: image }
+              - { name: img3, label: Image 3, widget: image }
+          - name: full
+            label: Full Width
+            widget: object
+            fields:
+              - { name: image, label: Image, widget: image }
+          - name: cinematic
+            label: Cinematic (edge-to-edge)
+            widget: object
+            fields:
+              - { name: image, label: Image, widget: image }
+          - name: centered
+            label: Centered
+            widget: object
+            fields:
+              - { name: image, label: Image, widget: image }
+          - name: centeredSmall
+            label: Centered (small)
+            widget: object
+            fields:
+              - { name: image, label: Image, widget: image }
+          - name: centeredLarge
+            label: Centered (large)
+            widget: object
+            fields:
+              - { name: image, label: Image, widget: image }
+          - name: diptych
+            label: Diptych (two centered, gap)
+            widget: object
+            fields:
+              - { name: left, label: Left Image, widget: image }
+              - { name: right, label: Right Image, widget: image }
+          - name: text
+            label: Text Block
+            widget: object
+            fields:
+              - { name: content, label: Text, widget: text }
+          - name: spacer
+            label: Spacer
+            widget: object
+            fields:
+              - { name: height, label: "Height (px)", widget: number, value_type: int }
+      - name: credits
+        label: Credits
+        widget: list
+        required: false
+        fields:
+          - { name: role, label: Role, widget: string }
+          - { name: name, label: Name, widget: string }
+
+  # ── BTS ──
+  - name: bts
+    label: BTS
+    folder: content/bts
+    extension: mdx
+    format: yaml-frontmatter
+    create: false
+    fields:
+      - { name: title, label: Title, widget: string, required: true }
+      - name: images
+        label: Images
+        widget: list
+        fields:
+          - { name: image, label: Image, widget: image }
+
+  # ── Print ──
+  - name: print
+    label: Print
+    folder: content/print
+    extension: mdx
+    format: yaml-frontmatter
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { name: title, label: Title, widget: string, required: true }
+      - { name: year, label: Year, widget: string, required: false, hint: "e.g. 2024" }
+      - { name: cover, label: Cover Image, widget: image, required: true }
+      - { name: description, label: Description, widget: text, required: false }
+      - { name: link, label: Purchase Link, widget: string, required: false, hint: URL to buy }
+      - name: spreads
+        label: Interior Spreads
+        widget: list
+        required: false
+        fields:
+          - { name: image, label: Spread Image, widget: image }

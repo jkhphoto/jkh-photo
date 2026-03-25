@@ -1,15 +1,11 @@
 import '../../styles/print.css'
 import PrintGrid from '../../components/PrintGrid'
+import { getCollection } from '../../lib/content'
 
 export const metadata = { title: 'Print — JKH Photo' }
 
 export default async function PrintPage() {
-  let items = []
-  try {
-    const client = (await import('../../tina/__generated__/client')).default
-    const result = await client.queries.printConnection()
-    items = result.data.printConnection.edges.map((e) => e.node)
-  } catch (e) {}
+  const items = getCollection('print')
 
   return <PrintGrid items={items} />
 }
