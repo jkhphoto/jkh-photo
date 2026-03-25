@@ -1,0 +1,136 @@
+.idx-page {
+  margin-top: var(--nav-h);
+  padding: 32px 24px 80px;
+  min-height: calc(100vh - var(--nav-h));
+}
+
+.idx-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.idx-title {
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.idx-count {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.idx-empty {
+  padding: 120px 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 0.06em;
+}
+
+/* ── Table ── */
+.idx-table {
+  width: 100%;
+}
+
+.idx-table-head {
+  display: grid;
+  grid-template-columns: 48px 1fr 100px 120px 100px 140px;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim2);
+}
+
+.idx-row {
+  display: grid;
+  grid-template-columns: 48px 1fr 100px 120px 100px 140px;
+  gap: 12px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left 0.35s var(--expo);
+}
+.idx-row:hover {
+  padding-left: 10px;
+}
+
+.idx-col-num {
+  font-size: 10px;
+  color: var(--dim2);
+  letter-spacing: 0.04em;
+}
+
+.idx-col-name {
+  font-family: var(--display);
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  transition: opacity 0.25s;
+}
+
+.idx-col-cat,
+.idx-col-client,
+.idx-col-date,
+.idx-col-loc {
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dim);
+  align-self: center;
+  transition: opacity 0.25s;
+}
+
+/* Dim non-hovered rows */
+.idx-table:hover .idx-row:not(:hover) .idx-col-name { opacity: 0.15; }
+.idx-table:hover .idx-row:not(:hover) .idx-col-cat,
+.idx-table:hover .idx-row:not(:hover) .idx-col-client,
+.idx-table:hover .idx-row:not(:hover) .idx-col-date,
+.idx-table:hover .idx-row:not(:hover) .idx-col-loc,
+.idx-table:hover .idx-row:not(:hover) .idx-col-num { opacity: 0.1; }
+
+/* ── Hover preview ── */
+.idx-preview {
+  position: fixed;
+  width: 300px;
+  pointer-events: none;
+  z-index: 150;
+  opacity: 0;
+  transform: scale(0.9) rotate(-1deg);
+  transition: opacity 0.3s var(--expo), transform 0.35s var(--expo);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+.idx-preview.show {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+@media (max-width: 900px) {
+  .idx-table-head { display: none; }
+  .idx-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 14px;
+    align-items: baseline;
+  }
+  .idx-col-num { order: 2; }
+  .idx-col-name { order: 1; flex: 1 0 100%; font-size: 22px; }
+  .idx-col-client { display: none; }
+  .idx-col-loc { display: none; }
+  .idx-preview { display: none; }
+}

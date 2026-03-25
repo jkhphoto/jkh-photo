@@ -8,6 +8,7 @@ export default defineConfig({
   media: { tina: { mediaRoot: "images", publicFolder: "public" } },
   schema: {
     collections: [
+      /* ── Projects ── */
       {
         name: "project",
         label: "Projects",
@@ -78,6 +79,11 @@ export default defineConfig({
                 label: "Cinematic (edge-to-edge)",
                 fields: [{ name: "image", label: "Image", type: "image", required: true }],
               },
+              {
+                name: "centered",
+                label: "Centered",
+                fields: [{ name: "image", label: "Image", type: "image", required: true }],
+              },
             ],
           },
           {
@@ -89,6 +95,59 @@ export default defineConfig({
             fields: [
               { name: "role", label: "Role", type: "string", required: true },
               { name: "name", label: "Name", type: "string", required: true },
+            ],
+          },
+        ],
+      },
+
+      /* ── BTS ── */
+      {
+        name: "bts",
+        label: "BTS",
+        path: "content/bts",
+        format: "mdx",
+        ui: { allowedActions: { create: false, delete: false } },
+        fields: [
+          { name: "title", label: "Title", type: "string", isTitle: true, required: true },
+          {
+            name: "images",
+            label: "Images",
+            type: "object",
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.image || "New Image" }) },
+            fields: [
+              { name: "image", label: "Image", type: "image", required: true },
+            ],
+          },
+        ],
+      },
+
+      /* ── Print ── */
+      {
+        name: "print",
+        label: "Print",
+        path: "content/print",
+        format: "mdx",
+        ui: {
+          filename: {
+            readonly: false,
+            slugify: (v) => (v?.title || "").toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, ""),
+          },
+        },
+        fields: [
+          { name: "title", label: "Title", type: "string", required: true, isTitle: true },
+          { name: "year", label: "Year", type: "string", description: "e.g. 2024" },
+          { name: "cover", label: "Cover Image", type: "image", required: true },
+          { name: "description", label: "Description", type: "string", ui: { component: "textarea" } },
+          { name: "link", label: "Purchase Link", type: "string", description: "URL to buy" },
+          {
+            name: "spreads",
+            label: "Interior Spreads",
+            type: "object",
+            list: true,
+            ui: { itemProps: (item) => ({ label: item?.image || "New Spread" }) },
+            fields: [
+              { name: "image", label: "Spread Image", type: "image", required: true },
             ],
           },
         ],

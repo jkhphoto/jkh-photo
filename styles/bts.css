@@ -1,0 +1,127 @@
+.bts-page {
+  margin-top: var(--nav-h);
+  padding: 32px 24px 80px;
+  min-height: calc(100vh - var(--nav-h));
+}
+
+.bts-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--line);
+}
+
+.bts-title {
+  font-family: var(--display);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.bts-count {
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.bts-empty {
+  padding: 120px 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--dim);
+  letter-spacing: 0.06em;
+}
+
+/* ── Grid ── */
+.bts-grid {
+  columns: 4;
+  column-gap: 20px;
+}
+
+.bts-item {
+  break-inside: avoid;
+  margin-bottom: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s var(--expo), transform 0.6s var(--expo);
+}
+.bts-item.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bts-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s var(--expo);
+}
+.bts-item:hover img {
+  transform: scale(1.02);
+}
+
+/* ── Fullscreen scroll lightbox ── */
+.bts-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(10,10,10,0.97);
+}
+
+.bts-lb-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 510;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+}
+.bts-lb-close:hover { color: #fff; }
+
+.bts-lb-scroll {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-snap-type: y proximity;
+  -webkit-overflow-scrolling: touch;
+  padding: 60px 0;
+}
+
+.bts-lb-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 80px;
+  scroll-snap-align: start;
+}
+
+.bts-lb-item img {
+  max-width: 100%;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) { .bts-grid { columns: 3; } }
+@media (max-width: 768px) {
+  .bts-page { padding: 24px 16px 60px; }
+  .bts-grid { columns: 2; column-gap: 12px; }
+  .bts-item { margin-bottom: 12px; }
+  .bts-lb-item { padding: 40px 20px; }
+}
