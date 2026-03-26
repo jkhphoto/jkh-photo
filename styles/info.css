@@ -45,6 +45,8 @@
   padding: 20px 32px 24px 32px;
   border-left: 1px solid var(--line);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .info-intro {
@@ -65,6 +67,11 @@
 .info-section {
   padding: 16px 0;
   border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.info-section:last-child {
+  margin-top: auto;
+  padding-bottom: 0;
 }
 
 .info-cols {
