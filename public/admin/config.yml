@@ -105,7 +105,7 @@ collections:
           - { name: name, label: Name, widget: string }
 
   - name: bts
-X    label: BTS
+    label: BTS
     folder: content/bts
     extension: mdx
     format: yaml-frontmatter
