@@ -27,7 +27,7 @@
   transition: opacity 0.7s var(--expo), transform 0.7s var(--expo);
 }
 .g-img.vis { opacity: 1; transform: translateY(0); }
-.g-img img { width: 100%; height: auto; display: block; cursor: pointer; max-height: calc(100vh - 140px); object-fit: cover; }
+.g-img img { width: 100%; height: auto; display: block; cursor: pointer; max-height: calc(100vh - 140px); object-fit: contain; }
 
 .g-full .g-img { flex: 0 0 100%; }
 .g-pair .g-img { flex: 1; }
