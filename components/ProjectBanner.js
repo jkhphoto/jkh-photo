@@ -1,9 +1,3 @@
-cd ~/Downloads/jkh-tina
-nano components/ProjectBanner.js
-```
-
-Replace the entire file with:
-```
 'use client'
 import { useState, useEffect } from 'react'
 
