@@ -28,12 +28,11 @@ export default function InfoPage() {
           <p className="info-bio-text">
             Hey— I'm Joe.<br /><br />
             I am a commercial and editorial photographer based in Brooklyn, New York.
-            I serve as a Partner &amp; Head of Photo at Footstep Creative.
+ I serve as a Partner &amp; Head of Photo at <a href="https://www.footstepcreative.com" target="_blank" rel="noopener">Footstep Creative</a>.
             I am interested in capturing people who are great at whatever they
             do — athletes, artists, or entrepreneurs. Available for assignments globally.
           </p>
         </div>
-
         <div className="info-section">
           <div className="info-three-cols">
             <div>
