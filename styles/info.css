@@ -58,7 +58,23 @@
   max-width: 620px;
   font-weight: 400;
 }
-
+.info-contact-row {
+  display: flex;
+  gap: 24px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.info-contact-row a {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--dim);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.info-contact-row a:hover {
+  color: var(--accent);
+}
 .info-section {
   padding: 16px 0 0;
   border-top: 1px solid rgba(0,0,0,0.06);
