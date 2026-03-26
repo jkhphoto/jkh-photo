@@ -5,19 +5,12 @@ const portraits = ['/images/portrait.jpg', '/images/portrait-2.jpg', '/images/po
 
 export default function InfoPage() {
   const [pIdx, setPIdx] = useState(0)
-export default function InfoPage() {
+
   return (
     <div className="info-page">
-
-      {/* LEFT — portrait + contact */}
       <div className="info-left">
         <div>
-          <img
-            className="info-portrait"
- src={portraits[pIdx]}
-            onMouseEnter={() => setPIdx((pIdx + 1) % portraits.length)}
-            alt="Joe Hale"
-          />
+          <img className="info-portrait" src={portraits[pIdx]} alt="Joe Hale" onMouseEnter={() => setPIdx((pIdx + 1) % portraits.length)} />
         </div>
         <div className="info-left-contact">
           <a href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
@@ -26,19 +19,16 @@ export default function InfoPage() {
           <a href="https://www.linkedin.com/in/josephkhale/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
-
-      {/* RIGHT — content */}
       <div className="info-right">
-
         <div className="info-intro">
           <p className="info-bio-text">
-            Hey— I'm Joe.<br /><br />
+            Hey&mdash; I'm Joe.<br /><br />
             I am a commercial and editorial photographer based in Brooklyn, New York.
- I serve as a Partner &amp; Head of Photo at <a href="https://www.footstepcreative.com" target="_blank" rel="noopener">Footstep Creative</a>.
+            I serve as a Partner &amp; Head of Photo at <a href="https://www.footstepcreative.com" target="_blank" rel="noopener">Footstep Creative</a>.
             I am interested in capturing people who are great at whatever they
-            do — athletes, artists, or entrepreneurs. Available for assignments globally.
+            do &mdash; athletes, artists, or entrepreneurs. Available for assignments globally.
           </p>
- <div className="info-contact-row">
+          <div className="info-contact-row">
             <a href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
             <a href="tel:5187950309">518-795-0309</a>
             <a href="https://www.instagram.com/jkh_photo" target="_blank" rel="noopener">Instagram</a>
@@ -49,61 +39,18 @@ export default function InfoPage() {
           <div className="info-three-cols">
             <div>
               <div className="info-col-label">Select Clients</div>
-              <div className="info-col-body">
-                NIKE<br />
-                adidas<br />
-                Under Armour<br />
-                On Running<br />
-                lululemon<br />
-                PUMA<br />
-                Celsius<br />
-                REI<br />
-                WHOOP<br />
-                Veja<br />
-                Diadora<br />
-                776 Fund<br />
-                New Balance<br />
-                The North Face<br />
-                Tracksmith<br />
-                Red Bull<br />
-                NOBULL<br />
-                NOAH<br />
-                TCS
-              </div>
+              <div className="info-col-body">NIKE<br />adidas<br />Under Armour<br />On Running<br />lululemon<br />PUMA<br />Celsius<br />REI<br />WHOOP<br />Veja<br />Diadora<br />776 Fund<br />New Balance<br />The North Face<br />Tracksmith<br />Red Bull<br />NOBULL<br />NOAH<br />TCS</div>
             </div>
             <div>
               <div className="info-col-label">Select Publications</div>
-              <div className="info-col-body">
-                HYPEBEAST<br />
-                SLAM<br />
-                Sports Illustrated<br />
-                ESPN<br />
-                Boardroom<br />
-                Runner's World<br />
-                One37PM<br />
-                Outside Magazine<br />
-                The Washington Post<br />
-                OFF Magazine<br />
-                Glorious Sport Magazine<br />
-                Athleta Magazine<br />
-                TEMPO Journal
-              </div>
+              <div className="info-col-body">HYPEBEAST<br />SLAM<br />Sports Illustrated<br />ESPN<br />Boardroom<br />Runner's World<br />One37PM<br />Outside Magazine<br />The Washington Post<br />OFF Magazine<br />Glorious Sport Magazine<br />Athleta Magazine<br />TEMPO Journal</div>
             </div>
             <div>
               <div className="info-col-label">Select Agencies</div>
-              <div className="info-col-body">
-                Wieden + Kennedy<br />
-                Anomaly<br />
-                VaynerMedia<br />
-                Shadow Lion<br />
-                Mojo Supermarket<br />
-                Cinco Design<br />
-                M+C Saatchi
-              </div>
+              <div className="info-col-body">Wieden + Kennedy<br />Anomaly<br />VaynerMedia<br />Shadow Lion<br />Mojo Supermarket<br />Cinco Design<br />M+C Saatchi</div>
             </div>
           </div>
         </div>
-
         <div className="info-section">
           <div className="info-cols">
             <div>
@@ -125,14 +72,12 @@ export default function InfoPage() {
               </a>
               <a href="https://forimmediaterelease.beehiiv.com/subscribe" target="_blank" rel="noopener" className="press-item">
                 <div className="press-title">Newsletter</div>
-                <div className="press-detail">For Immediate Release — Subscribe</div>
+                <div className="press-detail">For Immediate Release &mdash; Subscribe</div>
               </a>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   )
 }
