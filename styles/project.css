@@ -18,7 +18,6 @@
   font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--dim); transition: letter-spacing 0.4s var(--expo), color 0.25s ease; cursor: default;
 }
-.proj-meta span:hover { letter-spacing: 0.14em; color: var(--fg); }
 
 .gallery { padding: 40px 32px 0; display: flex; flex-direction: column; }
 .g-row { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 28px; }
