@@ -1,5 +1,10 @@
 'use client'
+import { useState } from 'react'
 
+const portraits = ['/images/portrait.jpg', '/images/portrait-2.jpg', '/images/portrait-3.jpg']
+
+export default function InfoPage() {
+  const [pIdx, setPIdx] = useState(0)
 export default function InfoPage() {
   return (
     <div className="info-page">
@@ -9,7 +14,8 @@ export default function InfoPage() {
         <div>
           <img
             className="info-portrait"
-            src="/images/portrait.jpg"
+ src={portraits[pIdx]}
+            onMouseEnter={() => setPIdx((pIdx + 1) % portraits.length)}
             alt="Joe Hale"
           />
         </div>
@@ -32,6 +38,12 @@ export default function InfoPage() {
             I am interested in capturing people who are great at whatever they
             do — athletes, artists, or entrepreneurs. Available for assignments globally.
           </p>
+ <div className="info-contact-row">
+            <a href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
+            <a href="tel:5187950309">518-795-0309</a>
+            <a href="https://www.instagram.com/jkh_photo" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.linkedin.com/in/josephkhale/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
         </div>
         <div className="info-section">
           <div className="info-three-cols">
