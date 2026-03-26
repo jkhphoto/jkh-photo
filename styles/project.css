@@ -79,6 +79,12 @@
 .proj-banner-meta { display: flex; gap: 20px; }
 .proj-banner-meta span { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); }
 
+.proj-banner-meta span + span::before {
+  content: '·';
+  margin-right: 20px;
+  color: var(--dim2);
+}
+
 .lightbox {
   position: fixed; inset: 0; z-index: 500;
   background: rgba(10,10,10,0.95); display: flex;
@@ -93,6 +99,13 @@
 }
 .lightbox-close:hover { color: #fff; }
 body:has(.proj-head) .clock-corner { display: none; }
+
+.proj-meta span + span::before {
+  content: '·';
+  margin-right: 24px;
+  color: var(--dim2);
+}
+
 @media (max-width: 768px) {
   .proj-head { flex-direction: column; gap: 12px; padding: 12px 20px 16px; }
   .proj-meta { gap: 16px; }

@@ -36,6 +36,13 @@
   color: var(--fg);
 }
 
+.info-contact-row a + a::before {
+  content: '·';
+  margin-right: 24px;
+  color: var(--dim2);
+  pointer-events: none;
+}
+
 .info-right {
   padding: 32px 40px 24px 48px;
   border-left: 1px solid var(--line);
