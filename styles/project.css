@@ -93,7 +93,7 @@
   background: none; border: none; font-family: var(--mono);
 }
 .lightbox-close:hover { color: #fff; }
-
+body:has(.proj-head) .clock-corner { display: none; }
 @media (max-width: 768px) {
   .proj-head { flex-direction: column; gap: 12px; padding: 12px 20px 16px; }
   .proj-meta { gap: 16px; }
