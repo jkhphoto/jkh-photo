@@ -37,17 +37,17 @@ collections:
               - { name: left, label: Left Image, widget: image }
               - { name: right, label: Right Image, widget: image }
           - name: pairWide
-            label: Pair (wide left)
+            label: Landscape Pair (left larger)
             widget: object
             fields:
-              - { name: left, label: Left Image (larger), widget: image }
-              - { name: right, label: Right Image (smaller), widget: image }
+              - { name: left, label: Landscape Image, widget: image }
+              - { name: right, label: Portrait Image, widget: image }
           - name: pairNarrow
-            label: Pair (wide right)
+            label: Portrait Pair (right larger)
             widget: object
             fields:
-              - { name: left, label: Left Image (smaller), widget: image }
-              - { name: right, label: Right Image (larger), widget: image }
+              - { name: left, label: Portrait Image, widget: image }
+              - { name: right, label: Landscape Image, widget: image }
           - name: trio
             label: Three Images
             widget: object
