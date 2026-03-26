@@ -3,11 +3,11 @@
   height: calc(100vh - var(--nav-h));
   overflow: hidden;
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 220px 1fr;
 }
 
 .info-left {
-  padding: 24px 24px 24px 32px;
+  padding: 20px 20px 20px 28px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -15,7 +15,7 @@
 
 .info-portrait {
   width: 100%;
-  max-width: 220px;
+  max-width: 180px;
   height: auto;
   display: block;
   cursor: pointer;
@@ -38,12 +38,13 @@
 }
 
 .info-right {
-  padding: 24px 32px 20px 40px;
+  padding: 20px 32px 20px 32px;
   border-left: 1px solid var(--line);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
+  justify-content: flex-start;
+  gap: 20px;
+  overflow-y: auto;
 }
 
 .info-intro {
@@ -52,19 +53,19 @@
 
 .info-bio-text {
   font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1.7;
+  font-size: 10px;
+  line-height: 1.6;
   color: var(--fg);
   letter-spacing: 0.02em;
-  max-width: 620px;
+  max-width: 580px;
   font-weight: 400;
 }
 
 .info-contact-row {
   display: flex;
   gap: 24px;
-  margin-top: 12px;
-  padding-top: 10px;
+  margin-top: 8px;
+  padding-top: 8px;
   border-top: 1px solid var(--line);
 }
 .info-contact-row a {
@@ -85,12 +86,11 @@
 }
 
 .info-section {
-  padding: 10px 0 0;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  padding: 0;
 }
 
 .info-section + .info-section {
-  padding-top: 8px;
+  padding-top: 0;
 }
 
 .info-cols {
@@ -118,14 +118,14 @@
 .info-col-body {
   font-family: var(--mono);
   font-size: 9px;
-  line-height: 1.5;
+  line-height: 1.45;
   color: var(--dim);
   letter-spacing: 0.02em;
 }
 
 .press-item {
   display: block;
-  padding: 3px 0;
+  padding: 2px 0;
   transition: padding-left 0.3s var(--expo);
 }
 .press-item:hover { padding-left: 6px; }
