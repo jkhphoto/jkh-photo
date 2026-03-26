@@ -38,34 +38,30 @@
 }
 
 .info-right {
-  padding: 20px 32px 20px 32px;
+  padding: 20px 32px 24px 32px;
   border-left: 1px solid var(--line);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 20px;
   overflow-y: auto;
 }
 
 .info-intro {
-  margin-bottom: 0;
+  margin-bottom: 24px;
 }
 
 .info-bio-text {
   font-family: var(--mono);
-  font-size: 10px;
-  line-height: 1.6;
+  font-size: 12px;
+  line-height: 2;
   color: var(--fg);
   letter-spacing: 0.02em;
-  max-width: 580px;
+  max-width: 520px;
   font-weight: 400;
 }
 
 .info-contact-row {
   display: flex;
   gap: 24px;
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
   border-top: 1px solid var(--line);
 }
 .info-contact-row a {
@@ -86,62 +82,59 @@
 }
 
 .info-section {
-  padding: 0;
-}
-
-.info-section + .info-section {
-  padding-top: 0;
+  padding: 24px 0;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 
 .info-cols {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0 32px;
+  gap: 0 48px;
 }
 
 .info-three-cols {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 0 24px;
+  gap: 0 40px;
 }
 
 .info-col-label {
   font-family: var(--display);
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 400;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--fg);
-  margin-bottom: 4px;
+  margin-bottom: 14px;
 }
 
 .info-col-body {
   font-family: var(--mono);
-  font-size: 9px;
-  line-height: 1.45;
+  font-size: 11px;
+  line-height: 2.2;
   color: var(--dim);
   letter-spacing: 0.02em;
 }
 
 .press-item {
   display: block;
-  padding: 2px 0;
+  padding: 8px 0;
   transition: padding-left 0.3s var(--expo);
 }
 .press-item:hover { padding-left: 6px; }
 .press-title {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 11px;
   color: var(--fg);
   letter-spacing: 0.02em;
   font-weight: 500;
 }
 .press-detail {
   font-family: var(--mono);
-  font-size: 8px;
+  font-size: 10px;
   color: var(--dim2);
   letter-spacing: 0.04em;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
 @media (max-width: 900px) {
@@ -160,12 +153,9 @@
   }
   .info-portrait { max-width: 140px; }
   .info-right {
-    padding: 24px;
+    padding: 32px 24px;
     border-left: none;
-    overflow: auto;
   }
-  .info-cols { grid-template-columns: 1fr; gap: 20px; }
-  .info-three-cols { grid-template-columns: 1fr; gap: 20px; }
-  .info-contact-row { flex-wrap: wrap; }
-  .info-col-body { font-size: 10px; line-height: 1.7; }
+  .info-cols { grid-template-columns: 1fr; gap: 32px; }
+  .info-three-cols { grid-template-columns: 1fr; gap: 32px; }
 }
