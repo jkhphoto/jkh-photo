@@ -1,14 +1,10 @@
 .hero-video {
   margin-top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow: hidden;
   position: relative; background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
 }
-.hero-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero-video-fallback {
-  position: absolute; inset: 0; display: flex;
-  align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 11px;
-  letter-spacing: 0.1em; color: #555; text-transform: uppercase;
-}
+.hero-video video { width: 70%; height: auto; display: block; }
+.hero-video-fallback { display: none; }
 
 .projects { padding: 0 24px 80px; }
 .proj-list { list-style: none; border-top: 1px solid var(--line); }
