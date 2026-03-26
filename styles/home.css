@@ -1,10 +1,10 @@
 .hero-video {
   margin-top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow: hidden;
-  position: relative; background: var(--bg);
+  background: var(--bg);
   display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
 }
-.hero-video video { width: 50%; height: auto; display: block; }
-.hero-video-fallback { display: none; }
+.hero-video video { width: 50%; height: auto; display: block; background: var(--bg); }
 
 .projects { padding: 0 24px 80px; }
 .proj-list { list-style: none; border-top: 1px solid var(--line); }

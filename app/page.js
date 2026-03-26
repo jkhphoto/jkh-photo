@@ -1,5 +1,6 @@
 import '../styles/home.css'
 import HomeProjectList from '../components/HomeProjectList'
+import HeroVideo from '../components/HeroVideo'
 import { getOrderedProjects } from '../lib/content'
 
 export default async function Home() {
@@ -8,10 +9,7 @@ export default async function Home() {
 
   return (
     <>
-      <div className="hero-video">
-        <video autoPlay muted loop playsInline><source src="/video/reel.mp4" type="video/mp4" /></video>
-        <div className="hero-video-fallback">[ drop reel.mp4 into public/video/ ]</div>
-      </div>
+      <HeroVideo />
       <HomeProjectList projects={projects} />
     </>
   )
