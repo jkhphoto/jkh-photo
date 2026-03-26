@@ -1,10 +1,36 @@
 .hero-video {
   margin-top: var(--nav-h); height: calc(100vh - var(--nav-h)); overflow: hidden;
-  background: var(--bg);
+  background: var(--bg); position: relative;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
 }
 .hero-video video { width: 50%; height: auto; display: block; background: var(--bg); }
+
+.scroll-hint {
+  position: absolute; bottom: 28px; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center;
+  opacity: 1; transition: opacity 0.5s ease;
+}
+.scroll-hint.hidden { opacity: 0; pointer-events: none; }
+.scroll-hint-line {
+  display: block; width: 1px; height: 32px;
+  background: var(--dim2);
+  position: relative;
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-hint-line::after {
+  content: '';
+  position: absolute; bottom: 0; left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 6px; height: 6px;
+  border-right: 1px solid var(--dim2);
+  border-bottom: 1px solid var(--dim2);
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(6px); }
+}
 
 .projects { padding: 0 24px 80px; }
 .proj-list { list-style: none; border-top: 1px solid var(--line); }
