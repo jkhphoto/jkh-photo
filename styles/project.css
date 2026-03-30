@@ -37,8 +37,8 @@
 .g-pair-narrow .g-img:first-child { flex: 1; }
 .g-pair-narrow .g-img:last-child { flex: 0 0 62%; }
 .g-trio .g-img { flex: 1; }
-.g-cinematic { margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); padding: 60px 0; width: 100vw; }
-.g-full { margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); padding: 60px 80px; width: 100vw; box-sizing: border-box; }
+.g-cinematic { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 60px 0; width: 100vw; }
+.g-full { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 60px 80px; width: 100vw; box-sizing: border-box; }
 .g-cinematic .g-img { flex: 0 0 100%; }
 .g-cinematic img { width: 100%; height: auto; }
 .g-centered { justify-content: center; padding: 40px 0; }
