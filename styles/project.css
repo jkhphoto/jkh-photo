@@ -108,12 +108,13 @@ body:has(.proj-head) .clock-corner { display: none; }
 
 @media (max-width: 768px) {
   .proj-head { flex-direction: column; gap: 12px; padding: 12px 20px 16px; }
+  .proj-title { font-size: clamp(42px, 10vw, 56px); }
   .proj-meta { gap: 16px; }
   .g-row { flex-direction: column; gap: 14px; }
   .g-pair-wide .g-img:first-child, .g-pair-wide .g-img:last-child,
   .g-pair-narrow .g-img:first-child, .g-pair-narrow .g-img:last-child { flex: 0 0 100%; }
   .credits { padding: 0 20px; }
-  .gallery { padding: 24px 20px 0; }
-  .g-cinematic { margin: 0 -20px; width: calc(100% + 40px); }
+  .gallery { padding: 24px 10px 0; }
+  .g-cinematic { margin: 0 -10px; width: calc(100% + 20px); }
   .proj-banner { padding: 0 16px; }
 }
