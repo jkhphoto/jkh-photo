@@ -67,6 +67,7 @@ nav.out { transform: translateY(-100%); }
   position: fixed; bottom: 44px; right: 24px;
   font-family: var(--mono); font-size: 10px;
   letter-spacing: 0.08em; color: var(--dim); z-index: 50;
+  transition: opacity 0.3s ease;
 }
 
 @keyframes fadeUp {
