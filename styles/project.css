@@ -19,8 +19,8 @@
   color: var(--dim); transition: letter-spacing 0.4s var(--expo), color 0.25s ease; cursor: default;
 }
 
-.gallery { padding: 0; display: flex; flex-direction: column; align-items: center; max-width: 60vw; margin: 0 auto; }
-.g-row { display: flex; gap: 40px; align-items: center; margin-bottom: 0; padding: 60px 0; width: 100%; }
+.gallery { padding: 0; display: flex; flex-direction: column; align-items: center; }
+.g-row { display: flex; gap: 40px; align-items: center; margin-bottom: 0; padding: 60px 0; width: 100%; max-width: 60vw; }
 .g-row:last-child { margin-bottom: 0; }
 .g-img {
   overflow: hidden; opacity: 0; transform: translateY(20px);
@@ -37,8 +37,8 @@
 .g-pair-narrow .g-img:first-child { flex: 1; }
 .g-pair-narrow .g-img:last-child { flex: 0 0 62%; }
 .g-trio .g-img { flex: 1; }
-.g-cinematic { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 60px 0; width: 100vw; }
-.g-full { position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; padding: 60px 80px; width: 100vw; box-sizing: border-box; }
+.g-cinematic { max-width: 100%; padding: 60px 0; }
+.g-full { max-width: 100%; padding: 60px 80px; box-sizing: border-box; }
 .g-cinematic .g-img { flex: 0 0 100%; }
 .g-cinematic img { width: 100%; height: auto; }
 .g-centered { justify-content: center; padding: 40px 0; }
@@ -115,8 +115,9 @@ body:has(.proj-head) .clock-corner { display: none; }
   .g-pair-wide .g-img:first-child, .g-pair-wide .g-img:last-child,
   .g-pair-narrow .g-img:first-child, .g-pair-narrow .g-img:last-child { flex: 0 0 100%; }
   .credits { padding: 0 20px; }
-  .gallery { padding: 24px 20px 0; max-width: 100%; }
-  .g-cinematic { margin-left: -20px; margin-right: -20px; width: calc(100% + 40px); }
-  .g-full { margin-left: -20px; margin-right: -20px; width: calc(100% + 40px); padding: 60px 0; }
+  .gallery { padding: 24px 0 0; }
+  .g-row { max-width: 100%; padding: 60px 20px; }
+  .g-cinematic { padding: 60px 0; }
+  .g-full { padding: 60px 0; }
   .proj-banner { padding: 0 16px; }
 }
