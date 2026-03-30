@@ -29,6 +29,12 @@
 .g-img.vis { opacity: 1; transform: translateY(0); }
 .g-img img { width: 100%; height: auto; display: block; cursor: pointer; }
 
+.g-pair .g-img img,
+.g-pair-wide .g-img img,
+.g-pair-narrow .g-img img,
+.g-trio .g-img img,
+.g-diptych .g-img img { max-height: 55vh; object-fit: cover; }
+
 .g-full .g-img { flex: 0 0 100%; }
 .g-pair .g-img { flex: 1; }
 .g-pair-wide .g-img:first-child { flex: 0 0 62%; }
