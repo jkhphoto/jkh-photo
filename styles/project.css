@@ -19,7 +19,7 @@
   color: var(--dim); transition: letter-spacing 0.4s var(--expo), color 0.25s ease; cursor: default;
 }
 
-.gallery { padding: 0 80px; display: flex; flex-direction: column; align-items: center; max-width: 60vw; margin: 0 auto; }
+.gallery { padding: 0; display: flex; flex-direction: column; align-items: center; max-width: 60vw; margin: 0 auto; }
 .g-row { display: flex; gap: 40px; align-items: center; margin-bottom: 0; padding: 60px 0; width: 100%; }
 .g-row:last-child { margin-bottom: 0; }
 .g-img {
