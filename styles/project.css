@@ -33,7 +33,7 @@
 .g-pair-wide .g-img img,
 .g-pair-narrow .g-img img,
 .g-trio .g-img img,
-.g-diptych .g-img img { max-height: 55vh; object-fit: cover; }
+.g-diptych .g-img img { max-height: 55vh; object-fit: contain; }
 
 .g-full .g-img { flex: 0 0 100%; }
 .g-pair .g-img { flex: 1; }
