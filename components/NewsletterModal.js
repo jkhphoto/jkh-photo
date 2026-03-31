@@ -1,10 +1,7 @@
 'use client'
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useEffect, useCallback } from 'react'
 
 export default function NewsletterModal({ onClose }) {
-  const [email, setEmail] = useState('')
-  const inputRef = useRef(null)
-
   const handleKey = useCallback((e) => {
     if (e.key === 'Escape') onClose()
   }, [onClose])
@@ -12,21 +9,21 @@ export default function NewsletterModal({ onClose }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', handleKey)
-    if (inputRef.current) inputRef.current.focus()
     return () => {
       document.body.style.overflow = ''
       document.removeEventListener('keydown', handleKey)
     }
   }, [handleKey])
 
-  const handleSubmit = () => {
-    if (!email) return
-    window.open(
-      `https://forimmediaterelease.beehiiv.com/subscribe?email=${encodeURIComponent(email)}`,
-      '_blank'
-    )
-    onClose()
-  }
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://subscribe-forms.beehiiv.com/embed.js'
+    script.async = true
+    document.body.appendChild(script)
+    return () => {
+      try { document.body.removeChild(script) } catch {}
+    }
+  }, [])
 
   return (
     <div className="nl-overlay" onClick={onClose}>
@@ -34,24 +31,14 @@ export default function NewsletterModal({ onClose }) {
         <button className="nl-close" onClick={onClose}>Close [Esc]</button>
         <div className="nl-header">For Immediate Release</div>
         <p className="nl-desc">Newsletter on the business of freelance photography, creative entrepreneurship, and the stories behind the work.</p>
-        <div className="nl-form-wrap">
-          <input
-            ref={inputRef}
-            type="email"
-            className="nl-input"
-            placeholder="Email address"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit() }}
-          />
-          <button
-            className="nl-submit"
-            onClick={handleSubmit}
-            disabled={!email}
-          >
-            Subscribe
-          </button>
-        </div>
+        <iframe
+          src="https://subscribe-forms.beehiiv.com/01f56560-70cc-494b-8e31-83ecd94e96e5"
+          className="nl-iframe"
+          data-test-id="beehiiv-embed"
+          frameBorder="0"
+          scrolling="no"
+          title="Newsletter subscribe"
+        />
       </div>
     </div>
   )
