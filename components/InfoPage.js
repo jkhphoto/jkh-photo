@@ -1,13 +1,9 @@
 'use client'
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 const portraits = ['/images/portrait.jpg', '/images/portrait-2.jpg', '/images/portrait-3.jpg']
 
 function NewsletterModal({ onClose }) {
-  const [email, setEmail] = useState('')
-  const [status, setStatus] = useState('idle') // idle | sending | success | error
-  const inputRef = useRef(null)
-
   const handleKey = useCallback((e) => {
     if (e.key === 'Escape') onClose()
   }, [onClose])
@@ -15,32 +11,19 @@ function NewsletterModal({ onClose }) {
   useEffect(() => {
     document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', handleKey)
-    if (inputRef.current) inputRef.current.focus()
     return () => {
       document.body.style.overflow = ''
       document.removeEventListener('keydown', handleKey)
     }
   }, [handleKey])
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    if (!email || status === 'sending') return
-    setStatus('sending')
-    try {
-      const res = await fetch('https://forimmediaterelease.beehiiv.com/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({ email }),
-      })
-      if (res.ok || res.redirected) {
-        setStatus('success')
-      } else {
-        setStatus('error')
-      }
-    } catch {
-      setStatus('error')
-    }
-  }
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://subscribe-forms.beehiiv.com/embed.js'
+    script.async = true
+    document.body.appendChild(script)
+    return () => { document.body.removeChild(script) }
+  }, [])
 
   return (
     <div className="nl-overlay" onClick={onClose}>
@@ -48,30 +31,14 @@ function NewsletterModal({ onClose }) {
         <button className="nl-close" onClick={onClose}>Close [Esc]</button>
         <div className="nl-header">For Immediate Release</div>
         <p className="nl-desc">Newsletter on the business of freelance photography, creative entrepreneurship, and the stories behind the work.</p>
-        {status === 'success' ? (
-          <div className="nl-success">You're in. Check your inbox to confirm.</div>
-        ) : (
-          <div className="nl-form-wrap">
-            <input
-              ref={inputRef}
-              type="email"
-              className="nl-input"
-              placeholder="Email address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter') handleSubmit(e) }}
-              disabled={status === 'sending'}
-            />
-            <button
-              className="nl-submit"
-              onClick={handleSubmit}
-              disabled={status === 'sending' || !email}
-            >
-              {status === 'sending' ? 'Subscribing...' : 'Subscribe'}
-            </button>
-            {status === 'error' && <div className="nl-error">Something went wrong. Try again.</div>}
-          </div>
-        )}
+        <iframe
+          src="https://subscribe-forms.beehiiv.com/fc7befbe-a99e-40ba-abc6-2e156c7364ee"
+          className="nl-iframe"
+          data-test-id="beehiiv-embed"
+          frameBorder="0"
+          scrolling="no"
+          title="Newsletter subscribe"
+        />
       </div>
     </div>
   )
