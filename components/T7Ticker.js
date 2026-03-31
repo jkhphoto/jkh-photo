@@ -11,25 +11,37 @@ function generateHistory() {
   // Price journey: start ~180, BF dip to ~109, rise through shortage to current ~330
   const keyframes = [
     { day: 0, price: 179.99 },
-    { day: 30, price: 174.99 },
-    { day: 60, price: 169.99 },
-    { day: 90, price: 159.99 },
-    { day: 120, price: 149.99 },
-    { day: 150, price: 139.99 }, // summer sale
-    { day: 170, price: 109.99 }, // BF/CM low
-    { day: 180, price: 119.99 },
-    { day: 210, price: 134.99 },
-    { day: 240, price: 149.99 },
-    { day: 270, price: 169.99 },
-    { day: 300, price: 189.99 }, // shortage starts
-    { day: 330, price: 229.99 },
-    { day: 360, price: 269.99 },
-    { day: 390, price: 299.99 },
-    { day: 420, price: 339.99 },
-    { day: 450, price: 379.99 },
-    { day: 480, price: 399.99 },
-    { day: 510, price: 349.99 }, // brief dip
-    { day: 530, price: 319.99 },
+    { day: 20, price: 185.99 },
+    { day: 40, price: 172.99 },
+    { day: 55, price: 164.99 },
+    { day: 70, price: 155.99 },
+    { day: 90, price: 148.99 },
+    { day: 110, price: 139.99 },
+    { day: 130, price: 124.99 },
+    { day: 150, price: 109.99 },
+    { day: 160, price: 89.99 },  // flash sale crater
+    { day: 165, price: 74.99 },  // BF absolute bottom
+    { day: 170, price: 69.99 },  // THE DIP
+    { day: 175, price: 84.99 },  // bounce
+    { day: 185, price: 109.99 },
+    { day: 200, price: 139.99 },
+    { day: 220, price: 159.99 },
+    { day: 240, price: 189.99 }, // shortage whispers
+    { day: 260, price: 219.99 },
+    { day: 275, price: 259.99 },
+    { day: 290, price: 289.99 },
+    { day: 310, price: 329.99 },
+    { day: 330, price: 369.99 },
+    { day: 350, price: 419.99 }, // panic buying
+    { day: 370, price: 459.99 },
+    { day: 390, price: 499.99 }, // peak insanity
+    { day: 410, price: 479.99 },
+    { day: 430, price: 449.99 }, // slight cool off
+    { day: 450, price: 419.99 },
+    { day: 470, price: 389.99 },
+    { day: 490, price: 359.99 },
+    { day: 510, price: 339.99 },
+    { day: 530, price: 349.99 }, // dead cat bounce
     { day: 540, price: 332.99 }, // current
   ]
 
@@ -43,7 +55,7 @@ function generateHistory() {
     }
     const t = hi.day === lo.day ? 1 : (d - lo.day) / (hi.day - lo.day)
     const base = lo.price + (hi.price - lo.price) * t
-    const noise = (Math.sin(d * 7.3) * 3.5 + Math.cos(d * 2.1) * 2.8) // deterministic wobble
+    const noise = (Math.sin(d * 7.3) * 8 + Math.cos(d * 2.1) * 6 + Math.sin(d * 13.7) * 4) // aggressive wobble
     const price = Math.round((base + noise) * 100) / 100
 
     data.push({ t: startDate + d * 86400000, price })
@@ -62,12 +74,14 @@ const RANGES = [
 ]
 
 const HEADLINES = [
-  'MEMORY SHORTAGE DRIVES SSD PRICES TO NEW HIGHS',
-  'ANALYSTS: "BUY THE DIP" ON PORTABLE STORAGE',
-  'SAMSUNG T7 OUTPERFORMS S&P 500 YTD',
-  'PHOTOGRAPHERS PANIC-BUY STORAGE AS PRICES SURGE',
-  'T7 2TB NOW COSTS MORE THAN SOME CAMERAS',
-  'STORAGE IS THE NEW GOLD, SAYS NO ONE',
+  'BREAKING: MEMORY SHORTAGE ENTERS 9TH MONTH',
+  'SSDT7 UP 400% FROM NOVEMBER LOW — IS IT TOO LATE TO BUY?',
+  'SAMSUNG T7 NOW WORTH MORE THAN SOME USED CAMERAS',
+  'PHOTOGRAPHERS HOARD SSDS LIKE TOILET PAPER IN 2020',
+  'WALL ST CONFUSED BY HARD DRIVE BECOMING ASSET CLASS',
+  'ANALYSTS UPGRADE SSDT7 TO "STRONG BUY" (THEY NEED ONE)',
+  '"I SOLD MY T7 AND PAID RENT" — REDDIT USER',
+  'SSD FUTURES MARKET OPENS ON NASDAQ (NOT REALLY)',
 ]
 
 export default function T7Ticker() {
@@ -94,7 +108,7 @@ export default function T7Ticker() {
   const changePct = (change / first) * 100
   const isUp = change >= 0
 
-  const W = 480, H = 180
+  const W = 900, H = 220
 
   useEffect(() => {
     const cvs = canvasRef.current

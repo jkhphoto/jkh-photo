@@ -3,9 +3,10 @@ import SnakeGame from './SnakeGame'
 import ReactionTest from './ReactionTest'
 import Magic8Ball from './Magic8Ball'
 import GravitySandbox from './GravitySandbox'
-import CurrencyConverter from './CurrencyConverter'
 import T7Ticker from './T7Ticker'
 import Net30 from './Net30'
+import AliveCounter from './AliveCounter'
+import PhotoQuiz from './PhotoQuiz'
 
 function Cell({ id, num, name, size, children }) {
   return (
@@ -31,31 +32,35 @@ export default function BentoExtras() {
       </div>
 
       <div className="bento-grid">
-        <Cell id="snake" num="01" name="Snake" size="wide">
-          <SnakeGame />
-        </Cell>
-
-        <Cell id="t7" num="02" name="SSDT7" size="medium">
+        <Cell id="t7" num="01" name="SSDT7" size="wide">
           <T7Ticker />
         </Cell>
 
-        <Cell id="net30" num="03" name="Net 30" size="medium">
-          <Net30 />
+        <Cell id="snake" num="02" name="Snake" size="wide">
+          <SnakeGame />
         </Cell>
 
-        <Cell id="reaction" num="04" name="Reaction Time" size="medium">
+        <Cell id="reaction" num="03" name="Reaction Time" size="medium">
           <ReactionTest />
         </Cell>
 
-        <Cell id="currency" num="05" name="Currency" size="medium">
-          <CurrencyConverter />
-        </Cell>
-
-        <Cell id="8ball" num="06" name="8-Ball" size="medium">
+        <Cell id="8ball" num="04" name="8-Ball" size="medium">
           <Magic8Ball />
         </Cell>
 
-        <Cell id="gravity" num="07" name="Gravity" size="wide">
+        <Cell id="net30" num="05" name="Net 30" size="medium">
+          <Net30 />
+        </Cell>
+
+        <Cell id="alive" num="06" name="Seconds Alive" size="medium">
+          <AliveCounter />
+        </Cell>
+
+        <Cell id="quiz" num="07" name="Quiz" size="wide">
+          <PhotoQuiz />
+        </Cell>
+
+        <Cell id="gravity" num="08" name="Gravity" size="wide">
           <GravitySandbox />
         </Cell>
       </div>

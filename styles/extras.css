@@ -389,7 +389,7 @@
 
 /* ── T7 Ticker ── */
 .t7-widget {
-  width: 100%; max-width: 520px;
+  width: 100%; max-width: 100%;
   display: flex; flex-direction: column; gap: 12px;
 }
 
@@ -569,6 +569,247 @@
 .net30-cal-cell.invoice { color: var(--accent); font-weight: 500; }
 .net30-cal-cell.due { color: #fff; font-weight: 500; background: var(--fg); }
 
+/* ── Alive Counter ── */
+.alive-widget {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alive-ask {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.alive-prompt {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--dim);
+}
+
+.alive-input {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg);
+  border: 1px solid var(--line);
+  background: none;
+  padding: 10px 12px;
+  outline: none;
+  letter-spacing: 0.04em;
+  transition: border-color 0.2s ease;
+}
+
+.alive-input:focus {
+  border-color: var(--fg);
+}
+
+.alive-go {
+  appearance: none;
+  border: 1px solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.alive-go:hover { opacity: 0.8; }
+
+.alive-counting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.alive-big {
+  font-family: var(--mono);
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: 0.02em;
+  line-height: 1;
+  tabular-nums: true;
+  font-variant-numeric: tabular-nums;
+}
+
+.alive-unit {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--dim);
+  margin-bottom: 12px;
+}
+
+.alive-stats {
+  display: flex;
+  gap: 20px;
+}
+
+.alive-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.alive-stat-val {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.alive-stat-label {
+  font-family: var(--mono);
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  color: var(--dim2);
+}
+
+.alive-reset {
+  appearance: none;
+  border: none;
+  background: none;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--dim2);
+  cursor: pointer;
+  padding: 4px 8px;
+  margin-top: 8px;
+  transition: color 0.2s ease;
+}
+
+.alive-reset:hover { color: var(--fg); }
+
+/* ── Photo Quiz ── */
+.quiz-widget {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.quiz-title-big {
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.quiz-start {
+  appearance: none;
+  border: 1px solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  padding: 10px 28px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.quiz-start:hover { opacity: 0.8; }
+
+.quiz-progress {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--dim2);
+}
+
+.quiz-question {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--fg);
+  text-align: center;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+.quiz-opts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  width: 100%;
+}
+
+.quiz-opt {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: none;
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--fg);
+  padding: 12px 14px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s ease, background 0.15s ease, opacity 0.15s ease;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.quiz-opt:hover:not(:disabled) {
+  border-color: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.02);
+}
+
+.quiz-opt.correct {
+  border-color: #2d8a4e;
+  background: rgba(45,138,78,0.08);
+  color: #2d8a4e;
+}
+
+.quiz-opt.dim {
+  opacity: 0.4;
+}
+
+.quiz-result-pct {
+  font-family: var(--mono);
+  font-size: 72px;
+  font-weight: 500;
+  color: var(--fg);
+  line-height: 1;
+  letter-spacing: 0.05em;
+}
+
+.quiz-result-text {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+.quiz-result-sub {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  font-style: italic;
+}
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .bento-wrap { padding: 100px 16px 60px; }
@@ -583,18 +824,19 @@
 
   .bento-cell { padding: 16px; }
 
-  .currency-pair { flex-direction: column; gap: 16px; }
-  .currency-swap { margin-top: 0; align-self: center; transform: rotate(90deg); }
-  .currency-amount, .currency-result { font-size: 22px; }
-
   .t7-price { font-size: 26px; }
 
   .reaction-zone { height: 200px; }
   .reaction-ms { font-size: 36px; }
 
-  .bubble { width: 26px; height: 26px; }
-
   .gravity-board canvas { max-width: 100%; }
 
   .net30-due-date { font-size: 14px; }
+
+  .alive-big { font-size: 24px; }
+  .alive-stats { gap: 14px; }
+
+  .quiz-title-big { font-size: 18px; }
+  .quiz-opts { grid-template-columns: 1fr; }
+  .quiz-result-pct { font-size: 56px; }
 }
