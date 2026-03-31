@@ -1,0 +1,64 @@
+'use client'
+import SnakeGame from './SnakeGame'
+import ReactionTest from './ReactionTest'
+import Magic8Ball from './Magic8Ball'
+import GravitySandbox from './GravitySandbox'
+import CurrencyConverter from './CurrencyConverter'
+import T7Ticker from './T7Ticker'
+import Net30 from './Net30'
+
+function Cell({ id, num, name, size, children }) {
+  return (
+    <div className={`bento-cell bento-${size}`} id={id}>
+      <div className="bento-label">
+        <span className="bento-num">{num}</span>
+        <span className="bento-sep">·</span>
+        <span className="bento-name">{name}</span>
+      </div>
+      <div className="bento-content">
+        {children}
+      </div>
+    </div>
+  )
+}
+
+export default function BentoExtras() {
+  return (
+    <div className="bento-wrap">
+      <div className="bento-header">
+        <h1 className="bento-title">Extras</h1>
+        <p className="bento-sub">Things that have nothing to do with photography.</p>
+      </div>
+
+      <div className="bento-grid">
+        <Cell id="snake" num="01" name="Snake" size="wide">
+          <SnakeGame />
+        </Cell>
+
+        <Cell id="t7" num="02" name="SSDT7" size="medium">
+          <T7Ticker />
+        </Cell>
+
+        <Cell id="net30" num="03" name="Net 30" size="medium">
+          <Net30 />
+        </Cell>
+
+        <Cell id="reaction" num="04" name="Reaction Time" size="medium">
+          <ReactionTest />
+        </Cell>
+
+        <Cell id="currency" num="05" name="Currency" size="medium">
+          <CurrencyConverter />
+        </Cell>
+
+        <Cell id="8ball" num="06" name="8-Ball" size="medium">
+          <Magic8Ball />
+        </Cell>
+
+        <Cell id="gravity" num="07" name="Gravity" size="wide">
+          <GravitySandbox />
+        </Cell>
+      </div>
+    </div>
+  )
+}
