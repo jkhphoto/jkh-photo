@@ -1,14 +1,20 @@
 'use client'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import '../../../styles/project.css'
-import Gallery from '../../../components/Gallery'
+import Gallery, { extractImages } from '../../../components/Gallery'
 import Credits from '../../../components/Credits'
 import ProjectBanner from '../../../components/ProjectBanner'
 import Lightbox from '../../../components/Lightbox'
 
 export default function ProjectPage({ project }) {
-  const [lightboxSrc, setLightboxSrc] = useState(null)
+  const [lbIndex, setLbIndex] = useState(null)
+  const allImages = useMemo(() => extractImages(project.gallery), [project.gallery])
   const num = project.displayNumber ? String(project.displayNumber).padStart(2, '0') : null
+
+  const handleImageClick = (src) => {
+    const idx = allImages.indexOf(src)
+    setLbIndex(idx !== -1 ? idx : 0)
+  }
 
   return (
     <>
@@ -23,10 +29,12 @@ export default function ProjectPage({ project }) {
         </div>
       </div>
 
-      <Gallery rows={project.gallery} onImageClick={(src) => setLightboxSrc(src)} />
+      <Gallery rows={project.gallery} onImageClick={handleImageClick} />
       <Credits credits={project.credits} />
       <ProjectBanner title={project.title} category={project.category} date={project.date} number={project.displayNumber} location={project.location} />
-      <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
+      {lbIndex !== null && (
+        <Lightbox images={allImages} startIndex={lbIndex} onClose={() => setLbIndex(null)} />
+      )}
     </>
   )
 }

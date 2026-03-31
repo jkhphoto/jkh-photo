@@ -21,6 +21,39 @@ function GalleryImage({ src, onClick }) {
   )
 }
 
+/* Extract flat ordered image list from gallery rows */
+export function extractImages(rows) {
+  if (!rows) return []
+  const imgs = []
+  rows.forEach((row) => {
+    const t = row.type || row._template
+    switch (t) {
+      case 'pair':
+      case 'pairWide':
+      case 'pairNarrow':
+      case 'diptych':
+        if (row.left) imgs.push(row.left)
+        if (row.right) imgs.push(row.right)
+        break
+      case 'trio':
+        if (row.img1) imgs.push(row.img1)
+        if (row.img2) imgs.push(row.img2)
+        if (row.img3) imgs.push(row.img3)
+        break
+      case 'full':
+      case 'cinematic':
+      case 'centered':
+      case 'centeredSmall':
+      case 'centeredLarge':
+        if (row.image) imgs.push(row.image)
+        break
+      default:
+        break
+    }
+  })
+  return imgs
+}
+
 export default function Gallery({ rows, onImageClick }) {
   if (!rows || rows.length === 0) return null
   return (
