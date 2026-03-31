@@ -1,0 +1,128 @@
+.snake-wrap {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  background: var(--bg);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.snake-hud {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+.snake-score {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.snake-best {
+  color: var(--dim2);
+}
+
+.snake-sep {
+  color: var(--dim2);
+}
+
+.snake-board {
+  position: relative;
+  border: 1px solid var(--line);
+}
+
+.snake-board canvas {
+  display: block;
+}
+
+.snake-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(245, 244, 240, 0.92);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  gap: 4px;
+}
+
+.snake-title {
+  font-family: var(--mono);
+  font-size: 48px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  color: var(--fg);
+  line-height: 1;
+}
+
+.snake-subtitle {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.35em;
+  color: var(--dim);
+  margin-bottom: 24px;
+}
+
+.snake-dead-score {
+  font-family: var(--mono);
+  font-size: 64px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--fg);
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.snake-start {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--dim);
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.snake-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim2);
+}
+
+/* responsive — shrink board on small screens */
+@media (max-width: 600px) {
+  .snake-board {
+    transform: scale(0.75);
+    transform-origin: center;
+  }
+
+  .snake-wrap {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .snake-board {
+    transform: scale(0.6);
+  }
+}

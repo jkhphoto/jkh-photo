@@ -30,6 +30,7 @@ export default function Nav() {
         <Link href="/bts">BTS</Link>
         <Link href="/print">Print</Link>
         <Link href="/info">Info</Link>
+        <Link href="/extras">Extras</Link>
       </div>
     </nav>
   )

@@ -1,0 +1,88 @@
+.extras-wrap {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 24px 80px;
+  background: var(--bg);
+}
+
+.extras-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.extras-title {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 8px;
+}
+
+.extras-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  font-weight: 400;
+}
+
+.extras-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 0;
+  border-top: 1px solid var(--line);
+}
+
+.extras-section:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.extras-section-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.extras-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--dim2);
+  font-weight: 400;
+}
+
+.extras-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+/* Override snake-wrap to not take full viewport when embedded */
+.extras-section .snake-wrap {
+  min-height: unset;
+  padding: 0;
+}
+
+@media (max-width: 600px) {
+  .extras-wrap {
+    padding: 100px 16px 60px;
+  }
+
+  .extras-section {
+    padding: 32px 0;
+  }
+
+  .extras-section-label {
+    margin-bottom: 24px;
+  }
+}
