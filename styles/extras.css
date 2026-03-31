@@ -434,6 +434,29 @@
   gap: 12px;
 }
 
+.t7-marquee {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 6px 0;
+}
+
+.t7-marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 .t7-header {
   display: flex;
   flex-direction: column;
@@ -459,6 +482,14 @@
   font-size: 9px;
   letter-spacing: 0.04em;
   color: var(--dim);
+}
+
+.t7-live {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--dim2);
+  margin-left: auto;
 }
 
 .t7-price-row {
@@ -579,43 +610,24 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  align-items: center;
 }
 
-.net30-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.net30-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.net30-label {
+.net30-today-label {
   font-family: var(--mono);
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.15em;
   color: var(--dim);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.net30-date {
-  font-family: var(--mono);
-  font-size: 14px;
-  font-weight: 500;
+.net30-today-date {
   color: var(--fg);
-  border: 1px solid var(--line);
-  background: none;
-  padding: 10px 12px;
-  outline: none;
-  letter-spacing: 0.04em;
-  transition: border-color 0.2s ease;
-}
-
-.net30-date:focus {
-  border-color: var(--fg);
+  font-weight: 500;
 }
 
 .net30-terms {
@@ -641,18 +653,9 @@
   white-space: nowrap;
 }
 
-.net30-term:last-child {
-  border-right: none;
-}
-
-.net30-term:hover {
-  color: var(--fg);
-}
-
-.net30-term.active {
-  color: var(--fg);
-  background: rgba(0,0,0,0.04);
-}
+.net30-term:last-child { border-right: none; }
+.net30-term:hover { color: var(--fg); }
+.net30-term.active { color: var(--fg); background: rgba(0,0,0,0.04); }
 
 .net30-result {
   display: flex;
@@ -661,13 +664,16 @@
   padding: 16px 0;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+  width: 100%;
+  text-align: center;
 }
 
 .net30-due-label {
   font-family: var(--mono);
   font-size: 9px;
-  letter-spacing: 0.12em;
-  color: var(--dim);
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  font-weight: 500;
 }
 
 .net30-due-date {
@@ -676,6 +682,14 @@
   font-weight: 500;
   color: var(--fg);
   letter-spacing: 0.02em;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.net30-due-date.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .net30-countdown {
@@ -684,14 +698,21 @@
   letter-spacing: 0.06em;
   color: var(--dim);
   margin-top: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease 0.1s;
 }
 
-.net30-countdown.soon {
-  color: #b68a00;
+.net30-countdown.visible {
+  opacity: 1;
 }
 
-.net30-countdown.overdue {
-  color: #c44;
+.net30-vibe {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: var(--dim2);
+  font-style: italic;
+  text-align: center;
 }
 
 /* Mini calendar */
