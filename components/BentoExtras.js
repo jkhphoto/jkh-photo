@@ -7,6 +7,8 @@ import T7Ticker from './T7Ticker'
 import Net30 from './Net30'
 import AliveCounter from './AliveCounter'
 import PhotoQuiz from './PhotoQuiz'
+import ChargeWheel from './ChargeWheel'
+import C1Export from './C1Export'
 
 function Cell({ id, num, name, size, children }) {
   return (
@@ -36,31 +38,39 @@ export default function BentoExtras() {
           <T7Ticker />
         </Cell>
 
-        <Cell id="snake" num="02" name="Snake" size="wide">
+        <Cell id="charge" num="02" name="How Much?" size="medium">
+          <ChargeWheel />
+        </Cell>
+
+        <Cell id="c1" num="03" name="Export" size="medium">
+          <C1Export />
+        </Cell>
+
+        <Cell id="snake" num="04" name="Snake" size="wide">
           <SnakeGame />
-        </Cell>
-
-        <Cell id="reaction" num="03" name="Reaction Time" size="medium">
-          <ReactionTest />
-        </Cell>
-
-        <Cell id="8ball" num="04" name="8-Ball" size="medium">
-          <Magic8Ball />
         </Cell>
 
         <Cell id="net30" num="05" name="Net 30" size="medium">
           <Net30 />
         </Cell>
 
-        <Cell id="alive" num="06" name="Seconds Alive" size="medium">
-          <AliveCounter />
+        <Cell id="reaction" num="06" name="Reaction Time" size="medium">
+          <ReactionTest />
         </Cell>
 
         <Cell id="quiz" num="07" name="Quiz" size="wide">
           <PhotoQuiz />
         </Cell>
 
-        <Cell id="gravity" num="08" name="Gravity" size="wide">
+        <Cell id="8ball" num="08" name="8-Ball" size="medium">
+          <Magic8Ball />
+        </Cell>
+
+        <Cell id="alive" num="09" name="Seconds Alive" size="medium">
+          <AliveCounter />
+        </Cell>
+
+        <Cell id="gravity" num="10" name="Gravity" size="wide">
           <GravitySandbox />
         </Cell>
       </div>

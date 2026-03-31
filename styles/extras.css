@@ -810,6 +810,162 @@
   font-style: italic;
 }
 
+/* ── Charge Wheel ── */
+.charge-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.charge-canvas-wrap {
+  position: relative;
+}
+
+.charge-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  animation: fadeUp 0.4s ease;
+}
+
+.charge-answer {
+  font-family: var(--mono);
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--fg);
+}
+
+.charge-wisdom {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  font-style: italic;
+  text-align: center;
+  max-width: 260px;
+  line-height: 1.5;
+}
+
+.charge-hint {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--dim2);
+  animation: blink 1.8s ease-in-out infinite;
+}
+
+/* ── Capture One Export ── */
+.c1-widget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.c1-idle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.c1-icon {
+  font-size: 32px;
+  color: #cc3333;
+  line-height: 1;
+}
+
+.c1-app-name {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+}
+
+.c1-file-info {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+}
+
+.c1-export-btn {
+  appearance: none;
+  border: 1px solid #cc3333;
+  background: #cc3333;
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-top: 4px;
+}
+
+.c1-export-btn:hover { opacity: 0.85; }
+
+.c1-exporting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.c1-status {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--dim);
+  min-height: 16px;
+  transition: opacity 0.2s ease;
+}
+
+.c1-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  color: var(--dim2);
+}
+
+.c1-meta-sep { color: var(--dim2); }
+
+.c1-progress-bar {
+  width: 200px;
+  height: 3px;
+  background: rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+.c1-progress-fill {
+  height: 100%;
+  background: #cc3333;
+  transition: width 0.3s ease;
+}
+
+.c1-cancel {
+  appearance: none;
+  border: none;
+  background: none;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--dim2);
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+}
+
+.c1-cancel:hover { color: var(--fg); }
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   .bento-wrap { padding: 100px 16px 60px; }
