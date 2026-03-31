@@ -1,34 +1,15 @@
 .snake-wrap {
   min-height: 100dvh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 24px;
+  padding: 0;
   background: var(--bg);
   user-select: none;
   -webkit-user-select: none;
-}
-
-.snake-hud {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-
-.snake-score {
-  color: var(--fg);
-  font-weight: 500;
-}
-
-.snake-best {
-  color: var(--dim2);
 }
 
 .snake-sep {
@@ -37,11 +18,15 @@
 
 .snake-board {
   position: relative;
-  border: 1px solid var(--line);
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .snake-board canvas {
   display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 .snake-overlay {
@@ -57,13 +42,8 @@
   gap: 4px;
 }
 
-.snake-title {
-  font-family: var(--mono);
-  font-size: 48px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  color: var(--fg);
-  line-height: 1;
+.snake-cursor-icon {
+  margin-bottom: 8px;
 }
 
 .snake-subtitle {
@@ -82,7 +62,7 @@
   letter-spacing: 0.15em;
   color: var(--fg);
   line-height: 1;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .snake-start {
@@ -107,22 +87,168 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--dim2);
+  padding: 0 24px;
 }
 
-/* responsive — shrink board on small screens */
+/* ── Initials Input ── */
+.snake-initials-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--dim);
+  margin: 16px 0 12px;
+}
+
+.snake-initials-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.snake-initial-input {
+  width: 40px;
+  height: 48px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,0.5);
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-transform: uppercase;
+  color: var(--fg);
+  outline: none;
+  caret-color: transparent;
+  transition: border-color 0.2s ease;
+}
+
+.snake-initial-input:focus {
+  border-color: var(--fg);
+}
+
+.snake-submit {
+  appearance: none;
+  border: 1px solid var(--fg);
+  background: var(--fg);
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  padding: 8px 24px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.snake-submit:hover {
+  opacity: 0.8;
+}
+
+.snake-skip {
+  appearance: none;
+  border: none;
+  background: none;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--dim2);
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.2s ease;
+}
+
+.snake-skip:hover {
+  color: var(--fg);
+}
+
+/* ── Leaderboard ── */
+.snake-leaderboard {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.snake-lb-empty {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  color: var(--dim2);
+  text-align: center;
+  padding: 12px 0;
+}
+
+.snake-lb-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+}
+
+.snake-lb-row:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.snake-lb-rank {
+  color: var(--dim2);
+  font-size: 9px;
+  width: 18px;
+  flex-shrink: 0;
+}
+
+.snake-lb-sep {
+  color: var(--dim2);
+  flex-shrink: 0;
+}
+
+.snake-lb-initials {
+  color: var(--fg);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  flex-shrink: 0;
+}
+
+.snake-lb-dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--dim2);
+  margin: 0 4px;
+  height: 0;
+  align-self: flex-end;
+  margin-bottom: 3px;
+}
+
+.snake-lb-score {
+  color: var(--fg);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
 @media (max-width: 600px) {
-  .snake-board {
-    transform: scale(0.75);
-    transform-origin: center;
-  }
-
   .snake-wrap {
-    gap: 8px;
+    gap: 12px;
   }
-}
 
-@media (max-width: 400px) {
-  .snake-board {
-    transform: scale(0.6);
+  .snake-footer {
+    padding: 0 16px;
+  }
+
+  .snake-dead-score {
+    font-size: 48px;
+  }
+
+  .snake-initial-input {
+    width: 36px;
+    height: 42px;
+    font-size: 20px;
+  }
+
+  .snake-leaderboard {
+    width: 200px;
   }
 }
