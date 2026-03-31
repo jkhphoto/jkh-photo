@@ -30,7 +30,7 @@ export default function NewsletterModal({ onClose }) {
       <div className="nl-modal" onClick={(e) => e.stopPropagation()}>
         <button className="nl-close" onClick={onClose}>Close [Esc]</button>
         <div className="nl-header">For Immediate Release</div>
-        <p className="nl-desc">Newsletter on the business of freelance photography, creative entrepreneurship, and the stories behind the work.</p>
+        <p className="nl-desc">My newsletter on what I&rsquo;m up to, work I&rsquo;m shooting, and the learnings along the way.</p>
         <iframe
           src="https://subscribe-forms.beehiiv.com/01f56560-70cc-494b-8e31-83ecd94e96e5"
           className="nl-iframe"
