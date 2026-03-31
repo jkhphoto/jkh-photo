@@ -54,11 +54,8 @@ export default function SnakeGame() {
   // measure container and compute grid
   useEffect(() => {
     const measure = () => {
-      const wrap = wrapRef.current
-      if (!wrap) return
-      const rect = wrap.getBoundingClientRect()
-      const maxW = Math.floor(rect.width)
-      const maxH = Math.min(Math.floor(window.innerHeight * 0.7), 600)
+      const maxW = window.innerWidth
+      const maxH = Math.min(Math.floor(window.innerHeight * 0.55), 540)
       const cols = Math.floor(maxW / CELL)
       const rows = Math.floor(maxH / CELL)
       const w = cols * CELL
