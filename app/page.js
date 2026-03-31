@@ -1,6 +1,8 @@
 import '../styles/home.css'
+import '../styles/info.css'
 import HomeProjectList from '../components/HomeProjectList'
 import HeroVideo from '../components/HeroVideo'
+import HomeNewsletterPopup from '../components/HomeNewsletterPopup'
 import { getOrderedProjects } from '../lib/content'
 
 export default async function Home() {
@@ -11,6 +13,7 @@ export default async function Home() {
     <>
       <HeroVideo />
       <HomeProjectList projects={projects} />
+      <HomeNewsletterPopup />
     </>
   )
 }

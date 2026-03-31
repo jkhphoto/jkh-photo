@@ -1,48 +1,8 @@
 'use client'
-import { useState, useEffect, useCallback } from 'react'
+import { useState } from 'react'
+import NewsletterModal from './NewsletterModal'
 
 const portraits = ['/images/portrait.jpg', '/images/portrait-2.jpg', '/images/portrait-3.jpg']
-
-function NewsletterModal({ onClose }) {
-  const handleKey = useCallback((e) => {
-    if (e.key === 'Escape') onClose()
-  }, [onClose])
-
-  useEffect(() => {
-    document.body.style.overflow = 'hidden'
-    document.addEventListener('keydown', handleKey)
-    return () => {
-      document.body.style.overflow = ''
-      document.removeEventListener('keydown', handleKey)
-    }
-  }, [handleKey])
-
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://subscribe-forms.beehiiv.com/embed.js'
-    script.async = true
-    document.body.appendChild(script)
-    return () => { document.body.removeChild(script) }
-  }, [])
-
-  return (
-    <div className="nl-overlay" onClick={onClose}>
-      <div className="nl-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="nl-close" onClick={onClose}>Close [Esc]</button>
-        <div className="nl-header">For Immediate Release</div>
-        <p className="nl-desc">Newsletter on the business of freelance photography, creative entrepreneurship, and the stories behind the work.</p>
-        <iframe
-          src="https://subscribe-forms.beehiiv.com/fc7befbe-a99e-40ba-abc6-2e156c7364ee"
-          className="nl-iframe"
-          data-test-id="beehiiv-embed"
-          frameBorder="0"
-          scrolling="no"
-          title="Newsletter subscribe"
-        />
-      </div>
-    </div>
-  )
-}
 
 export default function InfoPage() {
   const [pIdx, setPIdx] = useState(0)
