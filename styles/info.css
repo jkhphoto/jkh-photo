@@ -125,6 +125,127 @@
   margin-top: 1px;
 }
 
+/* ── Newsletter trigger button reset ── */
+.nl-trigger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  padding: 4px 0;
+}
+
+/* ── Newsletter modal ── */
+.nl-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+  background: rgba(10, 10, 10, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.nl-modal {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  padding: 48px 40px 40px;
+  width: 420px;
+  max-width: 90vw;
+  position: relative;
+}
+
+.nl-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dim);
+  cursor: pointer;
+  transition: color 0.2s;
+  background: none;
+  border: none;
+}
+.nl-close:hover { color: var(--fg); }
+
+.nl-header {
+  font-family: var(--display);
+  font-size: 28px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.nl-desc {
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 1.7;
+  color: var(--dim);
+  letter-spacing: 0.02em;
+  margin-bottom: 24px;
+}
+
+.nl-form-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nl-input {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.03em;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--fg);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.nl-input:focus {
+  border-color: var(--fg);
+}
+.nl-input::placeholder {
+  color: var(--dim2);
+}
+
+.nl-submit {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 10px 16px;
+  background: var(--fg);
+  color: var(--bg);
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+.nl-submit:hover { background: var(--accent); }
+.nl-submit:disabled { opacity: 0.4; cursor: default; }
+
+.nl-success {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--fg);
+  letter-spacing: 0.03em;
+  line-height: 1.6;
+}
+
+.nl-error {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: #b44;
+  letter-spacing: 0.03em;
+}
+
 @media (max-width: 900px) {
   .info-page {
     grid-template-columns: 1fr;
