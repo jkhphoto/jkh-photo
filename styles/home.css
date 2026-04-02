@@ -5,7 +5,7 @@
   display: flex; align-items: center; justify-content: center;
   cursor: pointer;
 }
-.hero-video video { width: 85%; height: auto; display: block; background: var(--bg); }
+.hero-video video { max-height: 80vh; width: auto; max-width: 85%; display: block; background: var(--bg); }
 
 .scroll-hint {
   position: absolute; bottom: 28px; left: 50%;
