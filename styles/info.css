@@ -235,18 +235,23 @@
   .info-left {
     position: static;
     height: auto;
-    padding: 40px 24px 24px;
-    flex-direction: row;
-    align-items: flex-end;
-    gap: 24px;
+    padding: 0;
+    flex-direction: column;
+    gap: 0;
   }
-  .info-portrait { max-width: 140px; }
+  .info-left-contact { display: none; }
+  .info-portrait { max-width: 100%; width: 100%; }
   .info-right {
     padding: 32px 24px;
     border-left: none;
   }
+  .info-intro { flex-direction: column; gap: 24px; }
+  .info-right-contact {
+    display: flex;
+    text-align: left;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+  }
   .info-cols { grid-template-columns: 1fr; gap: 32px; }
   .info-three-cols { grid-template-columns: 1fr; gap: 32px; }
-  .info-right-contact { display: none; }
-  .info-intro { flex-direction: column; }
 }
