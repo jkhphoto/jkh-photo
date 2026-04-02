@@ -38,13 +38,14 @@ nav {
   position: fixed; top: 0; left: 0; right: 0;
   height: var(--nav-h);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 24px; z-index: 200;
+  padding: 0 24px; z-index: 210;
   background: rgba(245,244,240,0.85);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   transition: transform 0.45s var(--expo);
 }
 nav.out { transform: translateY(-100%); }
+nav.menu-open { transform: translateY(0); background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; }
 
 .logo {
   font-family: var(--mono); font-size: 10px; font-weight: 500;
@@ -110,7 +111,7 @@ nav.out { transform: translateY(-100%); }
 .mobile-menu.open { opacity: 1; pointer-events: auto; }
 .mobile-menu a {
   font-family: var(--display);
-  font-size: 42px; font-weight: 700;
+  font-size: 42px; font-weight: 400;
   text-transform: uppercase; letter-spacing: 0.02em;
   color: var(--fg); line-height: 1.4;
   transition: color 0.2s ease;

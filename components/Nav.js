@@ -52,7 +52,7 @@ export default function Nav() {
 
   return (
     <>
-      <nav ref={ref}>
+      <nav ref={ref} className={menuOpen ? 'menu-open' : ''}>
         <Link href="/" className="logo">JKH Photo</Link>
 
         {/* Desktop links */}
