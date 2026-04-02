@@ -248,9 +248,8 @@
   .info-intro { flex-direction: column; gap: 24px; }
   .info-right-contact {
     display: flex;
-    text-align: center;
-    align-items: center;
-    align-self: center;
+    text-align: left;
+    align-items: flex-start;
     padding-top: 8px;
     border-top: 1px solid var(--line);
     width: 100%;
