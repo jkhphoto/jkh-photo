@@ -179,6 +179,9 @@
 .foot-r a:hover { color: var(--accent); }
 
 /* ── Mobile ── */
+@media (max-width: 1024px) {
+  .hero-video video { max-height: none; width: 95%; max-width: 95%; }
+}
 @media (max-width: 768px) {
   .hp-projects { padding: 0 16px 40px; }
   .hp-grid {
@@ -202,6 +205,6 @@
   .hp-card-cat { display: none; }
   .hp-card:not(:has(.hp-card-img)) { min-height: 120px; padding: 20px 14px; }
   .proj-preview { display: none; }
-  .hero-video video { max-height: none; width: 100%; max-width: 100%; }
+  .hero-video video { max-height: none; width: 100%; max-width: 100%; height: calc(100vh - var(--nav-h)); object-fit: cover; }
   .home-footer { padding: 20px 16px; flex-direction: column; gap: 10px; text-align: center; }
 }
