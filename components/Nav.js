@@ -1,13 +1,33 @@
 'use client'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Nav() {
   const ref = useRef(null)
   const last = useRef(0)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const pathname = usePathname()
 
+  // Close menu on route change
+  useEffect(() => {
+    setMenuOpen(false)
+  }, [pathname])
+
+  // Lock body scroll when menu is open
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  // Hide/show nav on scroll
   useEffect(() => {
     const fn = () => {
+      if (menuOpen) return
       const y = window.pageYOffset
       const nav = ref.current
       if (!nav) return
@@ -19,19 +39,45 @@ export default function Nav() {
     }
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
-  }, [])
+  }, [menuOpen])
+
+  const navLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/idx', label: 'Index' },
+    { href: '/bts', label: 'BTS' },
+    { href: '/print', label: 'Print' },
+    { href: '/info', label: 'Info' },
+    { href: '/extras', label: 'Extras' },
+  ]
 
   return (
-    <nav ref={ref}>
-      <Link href="/" className="logo">JKH Photo</Link>
-      <div className="links">
-        <Link href="/">Home</Link>
-        <Link href="/idx">Index</Link>
-        <Link href="/bts">BTS</Link>
-        <Link href="/print">Print</Link>
-        <Link href="/info">Info</Link>
-        <Link href="/extras">Extras</Link>
+    <>
+      <nav ref={ref}>
+        <Link href="/" className="logo">JKH Photo</Link>
+
+        {/* Desktop links */}
+        <div className="links">
+          {navLinks.map(l => (
+            <Link key={l.href} href={l.href}>{l.label}</Link>
+          ))}
+        </div>
+
+        {/* Hamburger — mobile only */}
+        <button
+          className={`hamburger ${menuOpen ? 'open' : ''}`}
+          onClick={() => setMenuOpen(v => !v)}
+          aria-label="Menu"
+        >
+          <span /><span /><span />
+        </button>
+      </nav>
+
+      {/* Fullscreen mobile menu */}
+      <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
+        {navLinks.map(l => (
+          <Link key={l.href} href={l.href}>{l.label}</Link>
+        ))}
       </div>
-    </nav>
+    </>
   )
 }

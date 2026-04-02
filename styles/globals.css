@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;500&display=swap');
 
 @font-face { font-family: 'Arial Narrow'; src: url('/fonts/Arial_Narrow.ttf') format('truetype'); font-weight: 400; font-style: normal; font-display: swap; }
 @font-face { font-family: 'Arial Narrow'; src: url('/fonts/Arial_Narrow_Bold.ttf') format('truetype'); font-weight: 700; font-style: normal; font-display: swap; }
@@ -8,7 +8,6 @@
 :root {
   --display: 'Arial Narrow', Impact, sans-serif;
   --mono: 'Azeret Mono', monospace;
-  --serif: 'EB Garamond', serif;
   --bg: #f5f4f0;
   --fg: #0a0a0a;
   --dim: #777;
@@ -34,6 +33,7 @@ a { color: inherit; text-decoration: none; transition: color 0.2s ease; }
 a:hover { color: var(--accent); }
 img { display: block; max-width: 100%; }
 
+/* ── Nav ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   height: var(--nav-h);
@@ -50,9 +50,11 @@ nav.out { transform: translateY(-100%); }
   font-family: var(--mono); font-size: 10px; font-weight: 500;
   letter-spacing: 0.1em; text-transform: uppercase;
   transition: letter-spacing 0.4s var(--expo);
+  z-index: 210;
 }
 .logo:hover { letter-spacing: 0.18em; }
 
+/* Desktop links */
 .links { display: flex; gap: 20px; }
 .links a {
   font-size: 10px; font-weight: 400; letter-spacing: 0.06em;
@@ -68,6 +70,54 @@ nav.out { transform: translateY(-100%); }
 .links a:hover { color: var(--fg); }
 .links a:hover::after { transform: scaleX(1); transform-origin: left; }
 
+/* Dot separators — desktop */
+.links a + a::before {
+  content: '·';
+  margin-right: 20px;
+  color: var(--dim2);
+  pointer-events: none;
+}
+
+/* Hamburger button — hidden on desktop */
+.hamburger {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  width: 28px; height: 20px; position: relative;
+  z-index: 210; padding: 0;
+}
+.hamburger span {
+  display: block; position: absolute; left: 0;
+  width: 100%; height: 1.5px; background: var(--fg);
+  transition: transform 0.35s var(--expo), opacity 0.25s ease;
+}
+.hamburger span:nth-child(1) { top: 0; }
+.hamburger span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.hamburger span:nth-child(3) { bottom: 0; }
+.hamburger.open span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { bottom: auto; top: 50%; transform: translateY(-50%) rotate(-45deg); }
+
+/* Mobile overlay */
+.mobile-menu {
+  display: none;
+  position: fixed; inset: 0; z-index: 205;
+  background: var(--bg);
+  flex-direction: column; align-items: center; justify-content: center;
+  gap: 0;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.4s var(--expo);
+}
+.mobile-menu.open { opacity: 1; pointer-events: auto; }
+.mobile-menu a {
+  font-family: var(--display);
+  font-size: 42px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.02em;
+  color: var(--fg); line-height: 1.4;
+  transition: color 0.2s ease;
+}
+.mobile-menu a:hover { color: var(--accent); }
+
+/* ── Clock ── */
 .clock-corner {
   position: fixed; bottom: 44px; right: 24px;
   font-family: var(--mono); font-size: 10px;
@@ -80,15 +130,11 @@ nav.out { transform: translateY(-100%); }
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Mobile ── */
 @media (max-width: 768px) {
   nav { padding: 0 16px; }
-  .links { gap: 14px; }
+  .links { display: none; }
+  .hamburger { display: block; }
+  .mobile-menu { display: flex; }
   .clock-corner { bottom: 44px; right: 16px; }
-
-.links a + a::before {
-  content: '·';
-  margin-right: 20px;
-  color: var(--dim2);
-  pointer-events: none;
-}
 }
