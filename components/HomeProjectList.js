@@ -7,8 +7,10 @@ export default function HomeProjectList({ projects }) {
   const [active, setActive] = useState(false)
   const previewRef = useRef(null)
   const sectionRef = useRef(null)
+  const itemsRef = useRef([])
   const mx = useRef(0), my = useRef(0), px = useRef(0), py = useRef(0)
 
+  // Lerp cursor-follow preview
   useEffect(() => {
     let raf
     const tick = () => {
@@ -35,6 +37,7 @@ export default function HomeProjectList({ projects }) {
     return () => document.removeEventListener('mousemove', fn)
   }, [active])
 
+  // Fade clock when section is in view
   useEffect(() => {
     const clock = document.querySelector('.clock-corner')
     if (!clock || !sectionRef.current) return
@@ -46,28 +49,58 @@ export default function HomeProjectList({ projects }) {
     return () => io.disconnect()
   }, [])
 
+  // Scroll reveal
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('hp-vis')
+      })
+    }, { threshold: 0.1 })
+    itemsRef.current.forEach(el => el && io.observe(el))
+    return () => io.disconnect()
+  }, [projects])
+
   if (!projects || projects.length === 0) return null
+
+  // Limit to 6 featured projects
+  const featured = projects.slice(0, 6)
 
   return (
     <>
-      <section className="projects" ref={sectionRef}>
-        <ul className="proj-list">
-          {projects.map((p) => {
-            const num = String(p.displayNumber || 0).padStart(2, '0')
+      <section className="hp-projects" ref={sectionRef}>
+        <div className="hp-grid">
+          {featured.map((p, i) => {
+            const num = String(p.displayNumber || i + 1).padStart(2, '0')
+            const hasImg = !!p.featuredImage
             return (
-              <li key={p._sys.filename} className="proj-item"
-                onMouseEnter={() => { setPreviewSrc(p.featuredImage || null); setActive(true) }}
-                onMouseLeave={() => { setActive(false); setPreviewSrc(null) }}>
-                <Link href={`/projects/${p._sys.filename}`}>
-                  <span className="proj-item-name">{p.title}</span>
-                  <span className="proj-item-tag">{p.category}</span>
-                  <span className="proj-item-num">[{num}]</span>
-                </Link>
-              </li>
+              <Link
+                key={p._sys.filename}
+                href={`/projects/${p._sys.filename}`}
+                className={`hp-card hp-card-${i}`}
+                ref={el => itemsRef.current[i] = el}
+                onMouseEnter={() => { if (hasImg) { setPreviewSrc(p.featuredImage); setActive(true) } }}
+                onMouseLeave={() => { setActive(false); setPreviewSrc(null) }}
+              >
+                {hasImg && (
+                  <div className="hp-card-img">
+                    <img src={p.featuredImage} alt={p.title} />
+                  </div>
+                )}
+                <div className="hp-card-info">
+                  <span className="hp-card-num">{num}</span>
+                  <h3 className="hp-card-title">{p.title}</h3>
+                  <span className="hp-card-cat">{p.category || ''}</span>
+                </div>
+              </Link>
             )
           })}
-        </ul>
+        </div>
+
+        <div className="hp-view-all">
+          <Link href="/idx">View All Projects →</Link>
+        </div>
       </section>
+
       <footer className="home-footer">
         <div className="foot-l">© 2025 JKH Photo — Brooklyn, NY</div>
         <div className="foot-r">
@@ -76,7 +109,13 @@ export default function HomeProjectList({ projects }) {
           <a href="mailto:hello@josephkhale.com">Email</a>
         </div>
       </footer>
-      <img ref={previewRef} className={`proj-preview ${previewSrc && active ? 'show' : ''}`} src={previewSrc || ''} alt="" />
+
+      <img
+        ref={previewRef}
+        className={`proj-preview ${previewSrc && active ? 'show' : ''}`}
+        src={previewSrc || ''}
+        alt=""
+      />
     </>
   )
 }
