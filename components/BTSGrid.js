@@ -78,7 +78,7 @@ function BTSLightbox({ images, startIndex, onClose }) {
     <div className="bts-lb">
       <div className="bts-lb-top">
         <span className="bts-lb-counter">{pad(current)} / {pad(total)}</span>
-        <button className="bts-lb-close" onClick={onClose}>Close [Esc]</button>
+        <button className="bts-lb-close" onClick={onClose}>Close</button>
       </div>
       <div className="bts-lb-scroll" ref={scrollRef}>
         {images.map((img, i) => (

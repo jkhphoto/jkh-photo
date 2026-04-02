@@ -93,7 +93,7 @@ function PrintReader({ item, onClose }) {
       <div className="print-reader-bar">
         <span className="print-reader-title">{item.title}</span>
         <span className="print-reader-page">{currentPage} / {totalPages}</span>
-        <button className="print-reader-close" onClick={onClose}>Close [Esc]</button>
+        <button className="print-reader-close" onClick={onClose}>Close</button>
       </div>
       <div className="print-reader-scroll" ref={scrollRef} onScroll={handleScroll}>
         <div className="print-reader-page-wrap">

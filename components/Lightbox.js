@@ -55,7 +55,7 @@ export default function Lightbox({ images, startIndex, onClose }) {
     <div className="proj-lb">
       <div className="proj-lb-top">
         <span className="proj-lb-counter">{pad(current)} / {pad(total)}</span>
-        <button className="proj-lb-close" onClick={onClose}>Close [Esc]</button>
+        <button className="proj-lb-close" onClick={onClose}>Close</button>
       </div>
       <div className="proj-lb-scroll" ref={scrollRef}>
         {images.map((src, i) => (

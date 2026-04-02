@@ -28,7 +28,7 @@ export default function NewsletterModal({ onClose }) {
   return (
     <div className="nl-overlay" onClick={onClose}>
       <div className="nl-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="nl-close" onClick={onClose}>Close [Esc]</button>
+        <button className="nl-close" onClick={onClose}>Close</button>
         <div className="nl-header">For Immediate Release</div>
         <p className="nl-desc">My newsletter on what I&rsquo;m up to, work I&rsquo;m shooting, and the learnings along the way.</p>
         <iframe
