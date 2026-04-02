@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -45,7 +45,6 @@ export default function Nav() {
     { href: '/', label: 'Home' },
     { href: '/idx', label: 'Index' },
     { href: '/bts', label: 'BTS' },
-    { href: '/print', label: 'Print' },
     { href: '/info', label: 'Info' },
   ]
 
@@ -56,8 +55,11 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="links">
-          {navLinks.map(l => (
-            <Link key={l.href} href={l.href}>{l.label}</Link>
+          {navLinks.map((l, i) => (
+            <React.Fragment key={l.href}>
+              {i > 0 && <span className="links-dot">·</span>}
+              <Link href={l.href}>{l.label}</Link>
+            </React.Fragment>
           ))}
         </div>
 
