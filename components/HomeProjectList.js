@@ -1,41 +1,10 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 
 export default function HomeProjectList({ projects }) {
-  const [previewSrc, setPreviewSrc] = useState(null)
-  const [active, setActive] = useState(false)
-  const previewRef = useRef(null)
   const sectionRef = useRef(null)
   const itemsRef = useRef([])
-  const mx = useRef(0), my = useRef(0), px = useRef(0), py = useRef(0)
-
-  // Lerp cursor-follow preview
-  useEffect(() => {
-    let raf
-    const tick = () => {
-      if (active) {
-        px.current += (mx.current - px.current) * 0.1
-        py.current += (my.current - py.current) * 0.1
-        if (previewRef.current) {
-          previewRef.current.style.left = px.current + 'px'
-          previewRef.current.style.top = py.current + 'px'
-        }
-      }
-      raf = requestAnimationFrame(tick)
-    }
-    tick()
-    return () => cancelAnimationFrame(raf)
-  }, [active])
-
-  useEffect(() => {
-    const fn = (e) => {
-      mx.current = e.clientX + 24; my.current = e.clientY - 160
-      if (!active) { px.current = mx.current; py.current = my.current }
-    }
-    document.addEventListener('mousemove', fn)
-    return () => document.removeEventListener('mousemove', fn)
-  }, [active])
 
   // Fade clock when section is in view
   useEffect(() => {
@@ -78,8 +47,6 @@ export default function HomeProjectList({ projects }) {
                 href={`/projects/${p._sys.filename}`}
                 className={`hp-card hp-card-${i}`}
                 ref={el => itemsRef.current[i] = el}
-                onMouseEnter={() => { if (hasImg) { setPreviewSrc(p.featuredImage); setActive(true) } }}
-                onMouseLeave={() => { setActive(false); setPreviewSrc(null) }}
               >
                 {hasImg && (
                   <div className="hp-card-img">
@@ -109,13 +76,6 @@ export default function HomeProjectList({ projects }) {
           <a href="mailto:hello@josephkhale.com">Email</a>
         </div>
       </footer>
-
-      <img
-        ref={previewRef}
-        className={`proj-preview ${previewSrc && active ? 'show' : ''}`}
-        src={previewSrc || ''}
-        alt=""
-      />
     </>
   )
 }

@@ -156,15 +156,6 @@
   letter-spacing: 0.16em;
 }
 
-/* Cursor preview (kept from before) */
-.proj-preview {
-  position: fixed; width: 300px; pointer-events: none; z-index: 150;
-  opacity: 0; transform: scale(0.9) rotate(-1deg);
-  transition: opacity 0.3s var(--expo), transform 0.35s var(--expo);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-}
-.proj-preview.show { opacity: 1; transform: scale(1) rotate(0deg); }
-
 /* ── Footer ── */
 .home-footer {
   padding: 28px 24px; display: flex; justify-content: space-between;

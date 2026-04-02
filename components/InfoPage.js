@@ -31,6 +31,12 @@ export default function InfoPage() {
               I am interested in capturing people who are great at whatever they
               do &mdash; athletes, artists, or entrepreneurs. Available for assignments globally.
             </p>
+            <div className="info-right-contact">
+              <a className="contact-primary" href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
+              <a className="contact-primary" href="tel:5187950309">518-795-0309</a>
+              <a href="https://www.instagram.com/jkh_photo" target="_blank" rel="noopener">Instagram</a>
+              <a href="https://www.linkedin.com/in/josephkhale/" target="_blank" rel="noopener">LinkedIn</a>
+            </div>
           </div>
           <div className="info-section">
             <div className="info-three-cols">

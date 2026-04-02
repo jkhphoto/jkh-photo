@@ -51,6 +51,32 @@
 
 .info-intro {
   margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.info-right-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.info-right-contact a {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--dim);
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.info-right-contact a.contact-primary {
+  font-size: 11px;
+  color: var(--fg);
+}
+.info-right-contact a:hover {
+  color: var(--accent);
 }
 
 .info-bio-text {
@@ -221,4 +247,6 @@
   }
   .info-cols { grid-template-columns: 1fr; gap: 32px; }
   .info-three-cols { grid-template-columns: 1fr; gap: 32px; }
+  .info-right-contact { display: none; }
+  .info-intro { flex-direction: column; }
 }
