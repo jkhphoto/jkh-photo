@@ -23,7 +23,7 @@ export default function ProjectBanner({ title, category, date, number, location 
   }, [])
 
   useEffect(() => {
-    const targets = document.querySelectorAll('.g-cinematic, .g-full, .g-centered')
+    const targets = document.querySelectorAll('.g-cinematic')
     if (!targets.length) return
     const io = new IntersectionObserver(
       (entries) => {
