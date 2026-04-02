@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -55,11 +55,8 @@ export default function Nav() {
 
         {/* Desktop links */}
         <div className="links">
-          {navLinks.map((l, i) => (
-            <React.Fragment key={l.href}>
-              {i > 0 && <span className="links-dot">·</span>}
-              <Link href={l.href}>{l.label}</Link>
-            </React.Fragment>
+          {navLinks.map(l => (
+            <Link key={l.href} href={l.href}>{l.label}</Link>
           ))}
         </div>
 
@@ -78,6 +75,10 @@ export default function Nav() {
         {navLinks.map(l => (
           <Link key={l.href} href={l.href}>{l.label}</Link>
         ))}
+        <div className="mobile-menu-contact">
+          <a href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
+          <a href="tel:5187950309">518-795-0309</a>
+        </div>
       </div>
     </>
   )

@@ -56,7 +56,7 @@ nav.menu-open { transform: translateY(0); background: transparent; backdrop-filt
 .logo:hover { letter-spacing: 0.18em; }
 
 /* Desktop links */
-.links { display: flex; gap: 20px; }
+.links { display: flex; gap: 24px; }
 .links a {
   font-size: 10px; font-weight: 400; letter-spacing: 0.06em;
   text-transform: uppercase; color: var(--dim);
@@ -70,14 +70,6 @@ nav.menu-open { transform: translateY(0); background: transparent; backdrop-filt
 }
 .links a:hover { color: var(--fg); }
 .links a:hover::after { transform: scaleX(1); transform-origin: left; }
-
-/* Dot separators — desktop */
-.links a + a::before {
-  content: '·';
-  margin-right: 20px;
-  color: var(--dim2);
-  pointer-events: none;
-}
 
 /* Hamburger button — hidden on desktop */
 .hamburger {
@@ -117,6 +109,24 @@ nav.menu-open { transform: translateY(0); background: transparent; backdrop-filt
   transition: color 0.2s ease;
 }
 .mobile-menu a:hover { color: var(--accent); }
+
+.mobile-menu-contact {
+  position: absolute;
+  bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.mobile-menu-contact a {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  color: var(--dim);
+  text-transform: none;
+  transition: color 0.2s;
+}
+.mobile-menu-contact a:hover { color: var(--accent); }
 
 /* ── Clock ── */
 .clock-corner {

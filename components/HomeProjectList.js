@@ -64,7 +64,7 @@ export default function HomeProjectList({ projects }) {
         </div>
 
         <div className="hp-view-all">
-          <Link href="/idx">View All Projects →</Link>
+          <Link href="/idx">Index →</Link>
         </div>
       </section>
 

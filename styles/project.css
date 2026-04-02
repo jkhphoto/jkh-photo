@@ -162,7 +162,7 @@ body:has(.proj-head) .clock-corner { display: none; }
 
   /* Gallery: full-width vertical stack */
   .gallery { padding: 12px 0 0; }
-  .g-row { flex-direction: column; gap: 0; padding: 0; min-height: 0; }
+  .g-row { flex-direction: column; gap: 20px; padding: 24px 0; min-height: 0; }
   .g-img { width: 100%; }
   .g-img img { width: 100%; }
 
@@ -180,7 +180,7 @@ body:has(.proj-head) .clock-corner { display: none; }
   /* Centered: remove min-height and constrained sizing */
   .g-centered { min-height: 0; padding: 0; }
   .g-centered .g-img img { max-height: none; width: 100%; object-fit: cover; }
-  .g-diptych { padding: 0; gap: 0; }
+  .g-diptych { padding: 0; gap: 12px; }
   .g-text { padding: 24px 16px; }
 
   /* Cinematic: already edge-to-edge, just reset padding */
