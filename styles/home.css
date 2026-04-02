@@ -180,11 +180,11 @@
     gap: 14px;
     row-gap: 24px;
   }
-  /* Stack: first card full width, rest 2-col */
+  /* Staggered: full → pair → full → pair */
   .hp-card-0 { grid-column: 1 / -1; }
   .hp-card-1,
-  .hp-card-2,
-  .hp-card-3,
+  .hp-card-2 { grid-column: span 1; }
+  .hp-card-3 { grid-column: 1 / -1; }
   .hp-card-4,
   .hp-card-5 { grid-column: span 1; }
 
