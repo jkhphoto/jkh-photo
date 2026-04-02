@@ -248,10 +248,11 @@
   .info-intro { flex-direction: column; gap: 24px; }
   .info-right-contact {
     display: flex;
-    text-align: left;
+    text-align: center;
+    align-items: center;
     padding-top: 8px;
     border-top: 1px solid var(--line);
   }
   .info-cols { grid-template-columns: 1fr; gap: 32px; }
-  .info-three-cols { grid-template-columns: 1fr; gap: 32px; }
+  .info-three-cols { grid-template-columns: 1fr 1fr; gap: 24px; }
 }
