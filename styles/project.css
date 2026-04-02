@@ -162,12 +162,34 @@ body:has(.proj-head) .clock-corner { display: none; }
   .proj-meta { gap: 8px 16px; flex-wrap: wrap; }
   .proj-meta span { font-size: 8px; }
   .proj-meta span + span::before { margin-right: 16px; }
-  .g-row { flex-direction: column; gap: 14px; }
-  .g-pair-wide .g-img:first-child, .g-pair-wide .g-img:last-child,
-  .g-pair-narrow .g-img:first-child, .g-pair-narrow .g-img:last-child { flex: 0 0 100%; }
   .credits { padding: 0 16px; }
-  .gallery { padding: 12px 8px 0; }
-  .g-cinematic { margin: 0 -8px; width: calc(100% + 16px); }
+
+  /* Gallery: full-width vertical stack */
+  .gallery { padding: 12px 0 0; }
+  .g-row { flex-direction: column; gap: 0; padding: 0; }
+  .g-img { width: 100%; }
+  .g-img img { width: 100%; }
+
+  /* Kill all layout-specific sizing */
+  .g-full .g-img,
+  .g-pair .g-img,
+  .g-pair-wide .g-img:first-child, .g-pair-wide .g-img:last-child,
+  .g-pair-narrow .g-img:first-child, .g-pair-narrow .g-img:last-child,
+  .g-trio .g-img,
+  .g-centered .g-img,
+  .g-centered.g-centered-sm .g-img,
+  .g-centered.g-centered-lg .g-img,
+  .g-diptych .g-img { flex: 0 0 100%; max-width: 100%; }
+
+  /* Centered: remove min-height and constrained sizing */
+  .g-centered { min-height: 0; padding: 0; }
+  .g-centered .g-img img { max-height: none; width: 100%; object-fit: cover; }
+  .g-diptych { padding: 0; gap: 0; }
+  .g-text { padding: 24px 16px; }
+
+  /* Cinematic: already edge-to-edge, just reset padding */
+  .g-cinematic { margin: 0; width: 100%; padding: 0; }
+
   .proj-banner { padding: 0 16px; height: auto; min-height: 34px; flex-wrap: wrap; gap: 4px; padding-top: 6px; padding-bottom: 6px; }
   .proj-banner-title { font-size: 12px; }
   .proj-banner-meta { gap: 12px; flex-wrap: wrap; }
