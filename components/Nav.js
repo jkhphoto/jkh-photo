@@ -47,7 +47,6 @@ export default function Nav() {
     { href: '/bts', label: 'BTS' },
     { href: '/print', label: 'Print' },
     { href: '/info', label: 'Info' },
-    { href: '/extras', label: 'Extras' },
   ]
 
   return (
