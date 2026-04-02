@@ -1,9 +1,6 @@
-.g-centered { justify-content: center; align-items: center; padding: 20px 0; min-height: calc(100vh - 120px); }
-.g-centered .g-img { flex: 0 0 auto; max-width: 65%; }
 .g-centered .g-img img { max-height: 85vh; width: auto; object-fit: contain; }
-.g-centered.g-centered-sm .g-img { max-width: 45%; }
 .g-centered.g-centered-sm .g-img img { max-height: 80vh; }
-.g-centered.g-centered-lg .g-img { max-width: 80%; }.proj-head {
+.proj-head {
   margin-top: var(--nav-h); padding: 6px 32px 12px;
   display: flex; align-items: baseline;
   justify-content: space-between; gap: 24px;
@@ -20,7 +17,7 @@
 }
 
 .gallery { padding: 0 23vw; display: flex; flex-direction: column; align-items: center; }
-.g-row { display: flex; gap: 40px; align-items: center; margin-bottom: 0; padding: 60px 0; width: 100%; }
+.g-row { display: flex; gap: 40px; align-items: center; justify-content: center; margin-bottom: 0; min-height: calc(100vh - 120px); padding: 40px 0; width: 100%; }
 .g-row:last-child { margin-bottom: 0; }
 .g-img {
   overflow: hidden; opacity: 0; transform: translateY(20px);
@@ -36,14 +33,13 @@
 .g-pair-narrow .g-img:first-child { flex: 1; }
 .g-pair-narrow .g-img:last-child { flex: 0 0 62%; }
 .g-trio .g-img { flex: 1; }
-.g-cinematic { margin: 0 -23vw; padding: 60px 0; width: calc(100% + 46vw); }
+.g-cinematic { margin: 0 -23vw; width: calc(100% + 46vw); }
 .g-cinematic .g-img { flex: 0 0 100%; }
 .g-cinematic img { width: 100%; height: auto; }
-.g-centered { justify-content: center; padding: 40px 0; }
 .g-centered .g-img { flex: 0 0 auto; max-width: 65%; }
 .g-centered.g-centered-sm .g-img { max-width: 45%; }
 .g-centered.g-centered-lg .g-img { max-width: 80%; }
-.g-diptych { justify-content: center; padding: 40px 0; gap: 16px; }
+.g-diptych { gap: 16px; }
 .g-diptych .g-img { flex: 0 0 auto; max-width: 40%; }
 .g-text { padding: 60px 0; justify-content: center; }
 .g-text p { max-width: 560px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; line-height: 1.7; color: var(--dim2); text-align: center; }
@@ -166,7 +162,7 @@ body:has(.proj-head) .clock-corner { display: none; }
 
   /* Gallery: full-width vertical stack */
   .gallery { padding: 12px 0 0; }
-  .g-row { flex-direction: column; gap: 0; padding: 0; }
+  .g-row { flex-direction: column; gap: 0; padding: 0; min-height: 0; }
   .g-img { width: 100%; }
   .g-img img { width: 100%; }
 
