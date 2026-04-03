@@ -149,3 +149,13 @@ nav.menu-open { transform: translateY(0); background: transparent; backdrop-filt
   .mobile-menu { display: flex; }
   .clock-corner { bottom: 44px; right: 16px; }
 }
+
+/* ── Image protection ── */
+.g-img img, .idx-preview, .hp-card-img img, .bts-img img, .print-cover img {
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
+}
+.g-img, .hp-card-img, .bts-img, .print-cover {
+  pointer-events: auto;
+}
