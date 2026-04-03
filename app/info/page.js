@@ -1,5 +1,2 @@
-import '../../styles/info.css'
-import InfoPage from '../../components/InfoPage'
-
-export const metadata = { title: 'Info — JKH Photo' }
-export default function Info() { return <InfoPage /> }
+import Redirect from "../../components/Redirect"
+export default function Page() { return <Redirect /> }
