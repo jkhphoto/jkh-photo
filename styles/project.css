@@ -193,3 +193,40 @@ body:has(.proj-head) .clock-corner { display: none; }
   .proj-banner-meta span + span::before { margin-right: 12px; }
   .proj-lb-item { padding: 40px 20px; }
 }
+/* ── Project Tags ── */
+.proj-tags {
+  padding: 0 32px 60px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.proj-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--dim);
+  border: 1px solid var(--line);
+  padding: 6px 14px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+}
+
+.proj-tag:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ── Index filter separator ── */
+.idx-filter-sep {
+  font-size: 10px;
+  color: var(--dim2);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}
+
+@media (max-width: 768px) {
+  .proj-tags { padding: 0 16px 40px; }
+}

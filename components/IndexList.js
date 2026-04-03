@@ -1,15 +1,29 @@
 'use client'
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
 export default function IndexList({ projects }) {
-  const [filter, setFilter] = useState('All')
+  const searchParams = useSearchParams()
+  const initialFilter = searchParams.get('filter') || 'All'
+  const initialTag = searchParams.get('tag') || null
+
+  const [filter, setFilter] = useState(initialFilter)
+  const [tagFilter, setTagFilter] = useState(initialTag)
   const [previewSrc, setPreviewSrc] = useState(null)
   const [active, setActive] = useState(false)
   const [mobileExpanded, setMobileExpanded] = useState(null)
   const [isMobile, setIsMobile] = useState(false)
   const previewRef = useRef(null)
   const mx = useRef(0), my = useRef(0), px = useRef(0), py = useRef(0)
+
+  // Sync from URL params
+  useEffect(() => {
+    const f = searchParams.get('filter')
+    const t = searchParams.get('tag')
+    if (f) { setFilter(f); setTagFilter(null) }
+    if (t) { setTagFilter(t); setFilter('All') }
+  }, [searchParams])
 
   // Detect mobile breakpoint
   useEffect(() => {
@@ -52,11 +66,9 @@ export default function IndexList({ projects }) {
     if (!p.featuredImage) return
 
     if (mobileExpanded === p._sys.filename) {
-      // Already expanded — let Link navigate
       return
     }
 
-    // First tap — show preview, block navigation
     e.preventDefault()
     setMobileExpanded(p._sys.filename)
   }, [isMobile, mobileExpanded])
@@ -70,7 +82,23 @@ export default function IndexList({ projects }) {
   }
 
   const categories = ['All', ...Array.from(new Set(projects.map(p => p.category).filter(Boolean)))]
-  const filtered = filter === 'All' ? projects : projects.filter(p => p.category === filter)
+
+  // Collect all tags across projects
+  const allTags = Array.from(new Set(projects.flatMap(p => p.tags || [])))
+
+  // Apply filters
+  let filtered = projects
+  if (tagFilter) {
+    filtered = filtered.filter(p => (p.tags || []).includes(tagFilter))
+  } else if (filter !== 'All') {
+    filtered = filtered.filter(p => p.category === filter)
+  }
+
+  const clearTag = () => {
+    setTagFilter(null)
+    // Clean URL
+    window.history.replaceState(null, '', '/idx')
+  }
 
   return (
     <>
@@ -80,15 +108,34 @@ export default function IndexList({ projects }) {
         </div>
 
         <div className="idx-filters">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`idx-filter ${filter === cat ? 'active' : ''}`}
-              onClick={() => setFilter(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+          {tagFilter ? (
+            <>
+              <button className="idx-filter active">{tagFilter}</button>
+              <button className="idx-filter" onClick={clearTag}>× Clear</button>
+            </>
+          ) : (
+            <>
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  className={`idx-filter ${filter === cat ? 'active' : ''}`}
+                  onClick={() => setFilter(cat)}
+                >
+                  {cat}
+                </button>
+              ))}
+              {allTags.length > 0 && <span className="idx-filter-sep">·</span>}
+              {allTags.map((tag) => (
+                <button
+                  key={tag}
+                  className="idx-filter"
+                  onClick={() => setTagFilter(tag)}
+                >
+                  {tag}
+                </button>
+              ))}
+            </>
+          )}
         </div>
 
         <div className="idx-table">

@@ -23,10 +23,11 @@ collections:
       - { name: date, label: Date, widget: string, required: false, hint: "e.g. July 2025, Ongoing" }
       - { name: location, label: Location, widget: string, required: false, hint: "e.g. Jacksonville, Florida" }
       - { name: coordinates, label: Coordinates, widget: string, required: false, hint: "e.g. 30.3322 N, 81.6557 W" }
-      - { name: number, label: Sort Order, widget: number, required: false, value_type: int, hint: "Lower numbers appear first" }	
+      - { name: number, label: Sort Order, widget: number, required: false, value_type: int, hint: "Lower numbers appear first" }
       - { name: active, label: Active, widget: boolean, default: true, hint: "Uncheck to hide this project from the site" }
       - { name: featured, label: Show on Homepage, widget: boolean, default: false }
       - { name: featuredImage, label: Featured Image (homepage hover), widget: image, required: false }
+      - { name: tags, label: Tags, widget: select, multiple: true, required: false, options: [Running, Sports, Fashion, Portrait] }
       - name: gallery
         label: Gallery
         widget: list
