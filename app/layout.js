@@ -7,7 +7,7 @@ export const metadata = { title: 'JKH Photo', description: 'Joe Hale — Photogr
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head />
+      <head><link rel="icon" href="/favicon.png" type="image/png" /></head>
       <body><Nav />{children}<Clock /></body>
     </html>
   )
