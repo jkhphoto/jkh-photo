@@ -1,10 +1,13 @@
+import { Suspense } from 'react'
 import '../../styles/index-page.css'
 import IndexList from '../../components/IndexList'
 import { getOrderedProjects } from '../../lib/content'
 
-export const metadata = { title: 'Index — JKH Photo' }
-
-export default async function IndexPage() {
+export default function IdxPage() {
   const projects = getOrderedProjects()
-  return <IndexList projects={projects} />
+  return (
+    <Suspense>
+      <IndexList projects={projects} />
+    </Suspense>
+  )
 }
