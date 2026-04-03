@@ -2,52 +2,53 @@
 
 .landing {
   margin-top: var(--nav-h);
-  min-height: calc(100vh - var(--nav-h));
-  display: flex;
-  flex-direction: column;
+  height: calc(100vh - var(--nav-h));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
 }
 
-/* Video */
-.landing-video {
-  flex: 1;
+/* Left: Video */
+.landing-left {
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   cursor: pointer;
-  min-height: 50vh;
+  padding: 24px;
 }
 
-.landing-video video {
-  max-height: 75vh;
+.landing-left video {
+  max-height: 85%;
+  max-width: 90%;
   width: auto;
-  max-width: 85%;
+  height: auto;
   display: block;
-  background: var(--bg);
+  object-fit: contain;
 }
 
-/* Bottom section */
-.landing-bottom {
-  padding: 0 24px 48px;
+/* Right: Copy */
+.landing-right {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
+  justify-content: center;
+  border-left: 1px solid var(--line);
+  padding: 24px;
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(10px);
   transition: opacity 0.8s ease 0.3s, transform 0.8s var(--expo) 0.3s;
 }
 
-.landing-bottom.vis {
+.landing-right.vis {
   opacity: 1;
   transform: translateY(0);
 }
 
-.landing-line {
-  width: 1px;
-  height: 40px;
-  background: var(--dim2);
-  margin-bottom: 24px;
+.landing-right-inner {
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
 }
 
 /* Status indicator */
@@ -83,15 +84,12 @@
   line-height: 1.8;
   color: var(--dim);
   letter-spacing: 0.02em;
-  max-width: 380px;
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 /* Newsletter inline */
 .landing-nl {
-  width: 100%;
-  max-width: 400px;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .landing-nl-label {
@@ -144,16 +142,35 @@
 
 /* ── Mobile ── */
 @media (max-width: 768px) {
-  .landing-video video {
-    max-height: none;
-    width: 100%;
+  .landing {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: calc(100vh - var(--nav-h));
+  }
+
+  .landing-left {
+    height: 50vh;
+    padding: 16px;
+  }
+
+  .landing-left video {
+    max-height: 100%;
     max-width: 100%;
-    height: 60vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
   }
 
-  .landing-bottom { padding: 0 16px 40px; }
-  .landing-line { height: 32px; }
-  .landing-msg { font-size: 10px; }
+  .landing-right {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding: 32px 24px 40px;
+  }
+
+  .landing-right-inner {
+    max-width: 100%;
+    text-align: center;
+    align-items: center;
+  }
 }

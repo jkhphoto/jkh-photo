@@ -24,45 +24,45 @@ export default function LandingPage() {
 
   return (
     <main className="landing">
-      {/* Video section */}
-      <section className="landing-video" onClick={toggle}>
+      {/* Left: Video */}
+      <section className="landing-left" onClick={toggle}>
         <video ref={videoRef} autoPlay muted loop playsInline>
           <source src="/video/reel.mp4" type="video/mp4" />
         </video>
       </section>
 
-      {/* Message + Newsletter */}
-      <section className={`landing-bottom ${mounted ? 'vis' : ''}`}>
-        <div className="landing-line" />
+      {/* Right: Copy + Newsletter */}
+      <section className={`landing-right ${mounted ? 'vis' : ''}`}>
+        <div className="landing-right-inner">
+          <div className="landing-status">
+            <span className="landing-dot" />
+            <span>Under Construction</span>
+          </div>
 
-        <div className="landing-status">
-          <span className="landing-dot" />
-          <span>Under Construction</span>
-        </div>
-
-        <p className="landing-msg">
-          New site coming soon. In the meantime, sign up below to stay in the loop.
-        </p>
-
-        <div className="landing-nl">
-          <div className="landing-nl-label">For Immediate Release</div>
-          <p className="landing-nl-desc">
-            My newsletter on what I&rsquo;m up to, work I&rsquo;m shooting, and the learnings along the way.
+          <p className="landing-msg">
+            New site coming soon. In the meantime, sign up below to stay in the loop.
           </p>
-          <iframe
-            src="https://subscribe-forms.beehiiv.com/01f56560-70cc-494b-8e31-83ecd94e96e5"
-            className="landing-nl-iframe"
-            data-test-id="beehiiv-embed"
-            frameBorder="0"
-            scrolling="no"
-            title="Newsletter subscribe"
-          />
-        </div>
 
-        <div className="landing-contact">
-          <a href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
-          <span className="landing-sep">&middot;</span>
-          <a href="https://www.instagram.com/jkh.photo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <div className="landing-nl">
+            <div className="landing-nl-label">For Immediate Release</div>
+            <p className="landing-nl-desc">
+              My newsletter on what I&rsquo;m up to, work I&rsquo;m shooting, and the learnings along the way.
+            </p>
+            <iframe
+              src="https://subscribe-forms.beehiiv.com/01f56560-70cc-494b-8e31-83ecd94e96e5"
+              className="landing-nl-iframe"
+              data-test-id="beehiiv-embed"
+              frameBorder="0"
+              scrolling="no"
+              title="Newsletter subscribe"
+            />
+          </div>
+
+          <div className="landing-contact">
+            <a href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
+            <span className="landing-sep">&middot;</span>
+            <a href="https://www.instagram.com/jkh.photo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+          </div>
         </div>
       </section>
     </main>
