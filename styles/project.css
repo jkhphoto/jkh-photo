@@ -277,3 +277,8 @@ body:has(.proj-head) .clock-corner { display: none; }
   .proj-banner-loc,
   .proj-banner-num { display: none; }
 }
+
+@media (max-width: 768px) {
+  .g-centered { margin-bottom: 20px; }
+  .g-centered:last-child { margin-bottom: 0; }
+}
