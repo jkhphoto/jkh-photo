@@ -1,5 +1,5 @@
 .g-centered .g-img img { max-height: 85vh; width: auto; object-fit: contain; }
-.g-centered.g-centered-sm .g-img img { max-height: 80vh; }
+.g-centered.g-centered-sm .g-img img { max-height: 70vh; }
 .proj-head {
   margin-top: var(--nav-h); padding: 6px 32px 12px;
   display: flex; align-items: baseline;
@@ -36,9 +36,9 @@
 .g-cinematic { margin: 0 -23vw; width: calc(100% + 46vw); }
 .g-cinematic .g-img { flex: 0 0 100%; }
 .g-cinematic img { width: 100%; height: auto; }
-.g-centered .g-img { flex: 0 0 auto; max-width: 90%; }
-.g-centered.g-centered-sm .g-img { max-width: 65%; }
-.g-centered.g-centered-lg .g-img { max-width: 100%; }
+.g-centered .g-img { flex: 0 0 auto; max-width: 65%; }
+.g-centered.g-centered-sm .g-img { max-width: 45%; }
+.g-centered.g-centered-lg .g-img { max-width: 90%; }
 .g-diptych { gap: 16px; }
 .g-diptych .g-img { flex: 0 0 auto; max-width: 40%; }
 .g-text { padding: 60px 0; justify-content: center; }
