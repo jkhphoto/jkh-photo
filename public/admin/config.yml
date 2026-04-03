@@ -27,7 +27,7 @@ collections:
       - { name: active, label: Active, widget: boolean, default: true, hint: "Uncheck to hide this project from the site" }
       - { name: featured, label: Show on Homepage, widget: boolean, default: false }
       - { name: featuredImage, label: Featured Image (homepage hover), widget: image, required: false }
-      - { name: tags, label: Tags, widget: select, multiple: true, required: false, options: [Running, Sports, Fashion, Portrait] }
+      - { name: tags, label: Tags, widget: list, required: false, hint: "e.g. Running, Sports, Fashion, Portrait" }
       - name: gallery
         label: Gallery
         widget: list
