@@ -224,6 +224,7 @@ body:has(.proj-head) .clock-corner { display: none; }
 }
 
 .credits-toggle-row .credits-toggle {
+  width: auto;
   flex-shrink: 0;
 }
 
