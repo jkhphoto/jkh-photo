@@ -83,9 +83,6 @@ export default function IndexList({ projects }) {
 
   const categories = ['All', ...Array.from(new Set(projects.map(p => p.category).filter(Boolean)))]
 
-  // Collect all tags across projects
-  const allTags = Array.from(new Set(projects.flatMap(p => p.tags || [])))
-
   // Apply filters
   let filtered = projects
   if (tagFilter) {
@@ -96,7 +93,6 @@ export default function IndexList({ projects }) {
 
   const clearTag = () => {
     setTagFilter(null)
-    // Clean URL
     window.history.replaceState(null, '', '/idx')
   }
 
@@ -114,27 +110,15 @@ export default function IndexList({ projects }) {
               <button className="idx-filter" onClick={clearTag}>× Clear</button>
             </>
           ) : (
-            <>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  className={`idx-filter ${filter === cat ? 'active' : ''}`}
-                  onClick={() => setFilter(cat)}
-                >
-                  {cat}
-                </button>
-              ))}
-              {allTags.length > 0 && <span className="idx-filter-sep">·</span>}
-              {allTags.map((tag) => (
-                <button
-                  key={tag}
-                  className="idx-filter"
-                  onClick={() => setTagFilter(tag)}
-                >
-                  {tag}
-                </button>
-              ))}
-            </>
+            categories.map((cat) => (
+              <button
+                key={cat}
+                className={`idx-filter ${filter === cat ? 'active' : ''}`}
+                onClick={() => setFilter(cat)}
+              >
+                {cat}
+              </button>
+            ))
           )}
         </div>
 
