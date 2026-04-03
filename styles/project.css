@@ -223,7 +223,7 @@ body:has(.proj-head) .clock-corner { display: none; }
   gap: 16px;
 }
 
-.credits-toggle-row .credits-toggle {
+.credits-toggle-row .credits-toggle { gap: 10px;
   width: auto;
   flex-shrink: 0;
 }
