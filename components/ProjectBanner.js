@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 
-export default function ProjectBanner({ title, category, date, number, location }) {
+export default function ProjectBanner({ title, category, date, number, location, client }) {
   const [show, setShow] = useState(false)
   const [hideForImage, setHideForImage] = useState(false)
 
@@ -42,10 +42,11 @@ export default function ProjectBanner({ title, category, date, number, location 
     <div className={`proj-banner ${show && !hideForImage ? 'show' : ''}`}>
       <span className="proj-banner-title">{title}</span>
       <div className="proj-banner-meta">
-        {category && <span>{category}</span>}
-        {date && <span>{date}</span>}
-        {location && <span>{location}</span>}
-        {num && <span>[{num}]</span>}
+        {category && <span className="proj-banner-cat">{category}</span>}
+        {date && <span className="proj-banner-date">{date}</span>}
+        {client && <span className="proj-banner-client">{client}</span>}
+        {location && <span className="proj-banner-loc">{location}</span>}
+        {num && <span className="proj-banner-num">[{num}]</span>}
       </div>
     </div>
   )

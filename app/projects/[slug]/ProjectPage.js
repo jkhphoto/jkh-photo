@@ -31,7 +31,7 @@ export default function ProjectPage({ project }) {
 
       <Gallery rows={project.gallery} onImageClick={handleImageClick} />
       <Credits credits={project.credits} tags={project.tags} />
-      <ProjectBanner title={project.title} category={project.category} date={project.date} number={project.displayNumber} location={project.location} />
+      <ProjectBanner title={project.title} category={project.category} date={project.date} number={project.displayNumber} location={project.location} client={project.client} />
       {lbIndex !== null && (
         <Lightbox images={allImages} startIndex={lbIndex} onClose={() => setLbIndex(null)} />
       )}

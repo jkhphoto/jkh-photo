@@ -271,3 +271,9 @@ body:has(.proj-head) .clock-corner { display: none; }
     order: 2;
   }
 }
+
+@media (max-width: 768px) {
+  .proj-banner-cat,
+  .proj-banner-loc,
+  .proj-banner-num { display: none; }
+}
