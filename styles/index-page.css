@@ -130,7 +130,10 @@
 .idx-table:hover .idx-row:not(:hover) .idx-col-loc,
 .idx-table:hover .idx-row:not(:hover) .idx-col-num { opacity: 0.1; }
 
-/* ── Hover preview ── */
+/* Hide mobile preview on desktop */
+.idx-mobile-preview { display: none; }
+
+/* ── Hover preview (desktop) ── */
 .idx-preview {
   position: fixed;
   width: 300px;
@@ -160,4 +163,44 @@
   .idx-col-loc { display: none; }
   .idx-preview { display: none; }
   .idx-filters { flex-wrap: wrap; }
+
+  /* Mobile inline preview */
+  .idx-mobile-preview {
+    display: block;
+    order: 10;
+    flex: 1 0 100%;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                margin 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    margin: 0;
+  }
+  .idx-mobile-preview.show {
+    max-height: 300px;
+    opacity: 1;
+    margin: 12px 0 4px;
+  }
+  .idx-mobile-preview img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+  }
+  .idx-mobile-cta {
+    display: block;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-top: 8px;
+  }
+  .idx-row-expanded {
+    padding-bottom: 18px;
+  }
+  .idx-row-expanded .idx-col-name {
+    opacity: 1 !important;
+  }
 }
