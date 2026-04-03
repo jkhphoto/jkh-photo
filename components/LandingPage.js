@@ -61,7 +61,9 @@ export default function LandingPage() {
           <div className="landing-contact">
             <a href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
             <span className="landing-sep">&middot;</span>
-            <a href="https://www.instagram.com/jkh.photo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <a href="https://www.instagram.com/jkh_photo/" target="_blank" rel="noopener noreferrer">Instagram</a>
+            <span className="landing-sep">&middot;</span>
+            <a href="https://www.linkedin.com/in/josephkhale/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>
         </div>
       </section>
