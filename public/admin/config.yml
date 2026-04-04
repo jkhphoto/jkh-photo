@@ -9,7 +9,6 @@ media_folder: public/images
 public_folder: /images
 
 collections:
-  - name: project
     label: Projects
     folder: content/projects
     extension: mdx
