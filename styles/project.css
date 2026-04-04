@@ -45,7 +45,7 @@
 .g-text p { max-width: 560px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.03em; line-height: 1.7; color: var(--dim2); text-align: center; }
 .g-spacer { display: block; }
 
-.credits { margin-top: 20px; margin-bottom: 0; padding: 0 32px; border-top: 1px solid rgba(0,0,0,0.12); }
+.credits { margin-top: 20px; margin-bottom: 40px; padding: 0 32px; border-top: 1px solid rgba(0,0,0,0.12); }
 .credits.open { padding-bottom: 32px; }
 .credits-toggle {
   display: flex; align-items: center; justify-content: space-between;
