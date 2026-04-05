@@ -98,6 +98,16 @@ collections:
             widget: object
             fields:
               - { name: height, label: "Height (px)", widget: number, value_type: int }
+          - name: video
+            label: Video
+            widget: object
+            fields:
+              - { name: video, label: Video File, widget: file }
+          - name: videoFull
+            label: Video (edge-to-edge)
+            widget: object
+            fields:
+              - { name: video, label: Video File, widget: file }
       - name: credits
         label: Credits
         widget: list
