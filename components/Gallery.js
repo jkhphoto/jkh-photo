@@ -21,6 +21,49 @@ function GalleryImage({ src, onClick }) {
   )
 }
 
+function GalleryVideo({ src }) {
+  const ref = useRef(null)
+  const vidRef = useRef(null)
+  const [vis, setVis] = useState(false)
+  const [paused, setPaused] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVis(true); io.unobserve(el) } },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+
+  const handleClick = () => {
+    const v = vidRef.current
+    if (!v) return
+    if (v.paused) {
+      v.play()
+      setPaused(false)
+    } else {
+      v.pause()
+      setPaused(true)
+    }
+  }
+
+  return (
+    <div ref={ref} className={`g-img g-video ${vis ? 'vis' : ''} ${paused ? 'paused' : ''}`} onClick={handleClick}>
+      <video
+        ref={vidRef}
+        src={src}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+    </div>
+  )
+}
+
 /* Extract flat ordered image list from gallery rows */
 export function extractImages(rows) {
   if (!rows) return []
@@ -83,6 +126,10 @@ export default function Gallery({ rows, onImageClick }) {
             return <div key={i} className="g-row g-centered g-centered-lg" style={style}><GalleryImage src={row.image} onClick={onImageClick} /></div>
           case 'diptych':
             return <div key={i} className="g-row g-diptych" style={style}><GalleryImage src={row.left} onClick={onImageClick} /><GalleryImage src={row.right} onClick={onImageClick} /></div>
+          case 'video':
+            return <div key={i} className="g-row g-full" style={style}><GalleryVideo src={row.video} /></div>
+          case 'videoFull':
+            return <div key={i} className="g-row g-full g-cinematic" style={style}><GalleryVideo src={row.video} /></div>
           case 'text':
             return <div key={i} className="g-row g-text" style={style}><p>{row.content}</p></div>
           case 'spacer':

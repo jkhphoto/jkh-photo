@@ -282,3 +282,14 @@ body:has(.proj-head) .clock-corner { display: none; }
   .g-centered { margin-bottom: 20px; }
   .g-centered:last-child { margin-bottom: 0; }
 }
+
+/* ── Gallery Video ── */
+.g-video { cursor: pointer; position: relative; }
+.g-video video { width: 100%; height: auto; display: block; }
+.g-video.paused::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
+  pointer-events: none;
+}
