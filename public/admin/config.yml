@@ -108,6 +108,15 @@ collections:
             widget: object
             fields:
               - { name: video, label: Video File, widget: file }
+          - name: mosaic
+            label: Mosaic Grid
+            widget: object
+            fields:
+              - name: images
+                label: Images
+                widget: list
+                fields:
+                  - { name: image, label: Image, widget: image }
       - name: credits
         label: Credits
         widget: list

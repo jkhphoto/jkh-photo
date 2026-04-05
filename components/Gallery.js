@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 
 function GalleryImage({ src, onClick }) {
   const ref = useRef(null)
@@ -64,6 +64,105 @@ function GalleryVideo({ src }) {
   )
 }
 
+/* ── Mosaic: justified flexbox rows ── */
+function MosaicImage({ src, onClick }) {
+  const ref = useRef(null)
+  const [vis, setVis] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVis(true); io.unobserve(el) } },
+      { threshold: 0.05, rootMargin: '0px 0px -30px 0px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <div ref={ref} className={`g-mosaic-img ${vis ? 'vis' : ''}`} onClick={() => onClick(src)}>
+      <img src={src} alt="" loading="lazy" />
+    </div>
+  )
+}
+
+function GalleryMosaic({ images, onImageClick }) {
+  const containerRef = useRef(null)
+  const [ratios, setRatios] = useState(null)
+  const [containerW, setContainerW] = useState(0)
+  const gap = 6
+  const targetH = 280
+
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    const measure = () => setContainerW(el.clientWidth)
+    measure()
+    const ro = new ResizeObserver(measure)
+    ro.observe(el)
+    return () => ro.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!images || images.length === 0) return
+    let cancelled = false
+    const srcs = images.map(img => typeof img === 'string' ? img : img.image)
+    Promise.all(
+      srcs.map(
+        (src) =>
+          new Promise((resolve) => {
+            const img = new Image()
+            img.onload = () => resolve(img.naturalWidth / img.naturalHeight)
+            img.onerror = () => resolve(1.5)
+            img.src = src
+          })
+      )
+    ).then((r) => {
+      if (!cancelled) setRatios(r)
+    })
+    return () => { cancelled = true }
+  }, [images])
+
+  const rows = useMemo(() => {
+    if (!ratios || !containerW) return null
+    const srcs = images.map(img => typeof img === 'string' ? img : img.image)
+    const result = []
+    let i = 0
+    while (i < srcs.length) {
+      let rowRatioSum = 0
+      let rowItems = []
+      while (i < srcs.length) {
+        rowRatioSum += ratios[i]
+        rowItems.push({ src: srcs[i], ratio: ratios[i] })
+        i++
+        const rowW = containerW - gap * (rowItems.length - 1)
+        const rowH = rowW / rowRatioSum
+        if (rowH <= targetH) break
+      }
+      const totalGap = gap * (rowItems.length - 1)
+      const rowH = (containerW - totalGap) / rowRatioSum
+      result.push({ items: rowItems, height: rowH })
+    }
+    return result
+  }, [ratios, containerW, images, gap, targetH])
+
+  return (
+    <div ref={containerRef} className="g-mosaic">
+      {rows &&
+        rows.map((row, ri) => (
+          <div key={ri} className="g-mosaic-row" style={{ height: row.height, gap }}>
+            {row.items.map((item, ii) => (
+              <MosaicImage
+                key={`${ri}-${ii}`}
+                src={item.src}
+                onClick={onImageClick}
+              />
+            ))}
+          </div>
+        ))}
+    </div>
+  )
+}
+
 /* Extract flat ordered image list from gallery rows */
 export function extractImages(rows) {
   if (!rows) return []
@@ -89,6 +188,12 @@ export function extractImages(rows) {
       case 'centeredSmall':
       case 'centeredLarge':
         if (row.image) imgs.push(row.image)
+        break
+      case 'mosaic':
+        if (row.images) row.images.forEach((img) => {
+          const src = typeof img === 'string' ? img : img.image
+          if (src) imgs.push(src)
+        })
         break
       default:
         break
@@ -130,6 +235,8 @@ export default function Gallery({ rows, onImageClick }) {
             return <div key={i} className="g-row g-full" style={style}><GalleryVideo src={row.video} /></div>
           case 'videoFull':
             return <div key={i} className="g-row g-full g-cinematic" style={style}><GalleryVideo src={row.video} /></div>
+          case 'mosaic':
+            return <div key={i} style={style}><GalleryMosaic images={row.images} onImageClick={onImageClick} /></div>
           case 'text':
             return <div key={i} className="g-row g-text" style={style}><p>{row.content}</p></div>
           case 'spacer':
