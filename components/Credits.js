@@ -33,7 +33,7 @@ export default function Credits({ credits, tags }) {
         )}
         {hasTags && (
           <div className="proj-tags">
-            {tags.map((tag) => (
+            {tags.filter(Boolean).map((tag) => (
               <Link key={tag} href={`/idx?tag=${encodeURIComponent(tag)}`} className="proj-tag">
                 {tag}
               </Link>
