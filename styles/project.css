@@ -217,7 +217,7 @@ body:has(.proj-head) .clock-corner { display: none; }
   .proj-tags { padding: 0 16px 40px; }
 }
 /* ── Credits + Tags Row ── */
-.credits-toggle-row {
+.credits-toggle-row { padding-top: 12px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -228,7 +228,7 @@ body:has(.proj-head) .clock-corner { display: none; }
   flex-shrink: 0;
 }
 
-.credits-toggle-placeholder { padding: 10px 0;
+.credits-toggle-placeholder {
   height: 0;
 }
 
@@ -260,7 +260,7 @@ body:has(.proj-head) .clock-corner { display: none; }
 }
 
 @media (max-width: 768px) {
-  .credits-toggle-row {
+  .credits-toggle-row { padding-top: 12px;
     flex-wrap: wrap;
   }
   .credits-toggle-row .proj-tags {
