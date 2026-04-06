@@ -1,11 +1,12 @@
 /* ── BTS Page ── */
 .bts-page {
-  padding: 60px 40px 80px;
+  padding: 60px 16px 80px;
   min-height: 100vh;
 }
 
 .bts-header {
   margin-bottom: 40px;
+  padding-left: 24px;
 }
 
 .bts-title {
@@ -20,9 +21,8 @@
 /* ── Contact Sheet Grid ── */
 .bts-grid {
   display: grid;
-  grid-template-columns: repeat(6, calc(100% / 7 - 24px));
-  gap: 40px;
-  justify-content: center;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 32px;
   align-items: center;
 }
 
@@ -121,7 +121,8 @@
 /* ── Responsive ── */
 @media (max-width: 1100px) { .bts-grid { grid-template-columns: repeat(4, 1fr); gap: 20px; } }
 @media (max-width: 768px) {
-  .bts-page { padding: 24px 16px 60px; }
+  .bts-page { padding: 24px 8px 60px; }
+  .bts-header { padding-left: 8px; }
   .bts-grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .bts-lb-item { padding: 20px 16px; }
 }
