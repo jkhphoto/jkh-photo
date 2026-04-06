@@ -10,6 +10,11 @@ function shuffle(arr) {
   return a
 }
 
+function fullSrc(src) {
+  if (!src) return src
+  return src.replace('/images/bts-thumbs/', '/images/')
+}
+
 function BTSImage({ src, index, onClick }) {
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
@@ -92,7 +97,7 @@ function BTSLightbox({ images, startIndex, onClose }) {
       <div className="bts-lb-scroll" ref={scrollRef}>
         {images.map((img, i) => (
           <div key={i} className="bts-lb-item">
-            <img src={img.image} alt="" />
+            <img src={fullSrc(img.image)} alt="" />
           </div>
         ))}
       </div>
