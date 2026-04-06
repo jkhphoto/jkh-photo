@@ -18,7 +18,7 @@ function BTSImage({ src, index, onClick }) {
     if (!el) return
     const io = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVis(true); io.unobserve(el) } },
-      { threshold: 0.05, rootMargin: '0px 0px -30px 0px' }
+      { threshold: 0.05, rootMargin: '200px 0px' }
     )
     io.observe(el)
     return () => io.disconnect()
@@ -30,7 +30,7 @@ function BTSImage({ src, index, onClick }) {
       className={`bts-item ${vis ? 'vis' : ''}`}
       onClick={() => onClick(index)}
     >
-      <img src={src} alt="" loading="lazy" />
+      {vis && <img src={src} alt="" />}
     </div>
   )
 }
