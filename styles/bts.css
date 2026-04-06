@@ -1,6 +1,6 @@
 /* ── BTS Page ── */
 .bts-page {
-  padding: 60px 60px 80px;
+  padding: 60px 40px 80px;
   min-height: 100vh;
 }
 
@@ -20,8 +20,9 @@
 /* ── Contact Sheet Grid ── */
 .bts-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(6, calc(100% / 7 - 24px));
+  gap: 40px;
+  justify-content: center;
   align-items: center;
 }
 
