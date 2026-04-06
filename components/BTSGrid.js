@@ -107,10 +107,7 @@ export default function BTSGrid({ images }) {
   if (!images || images.length === 0) {
     return (
       <div className="bts-page">
-        <div className="bts-header">
-          <h1 className="bts-title">BTS</h1>
-        </div>
-        <div className="bts-empty">No images yet. Add BTS images in the CMS.</div>
+        <div className="bts-empty">Add BTS images in the CMS.</div>
       </div>
     )
   }
@@ -118,9 +115,6 @@ export default function BTSGrid({ images }) {
   return (
     <>
       <div className="bts-page">
-        <div className="bts-header">
-          <h1 className="bts-title">BTS</h1>
-        </div>
         <div className="bts-grid">
           {shuffled.map((img, i) => (
             <BTSImage key={i} src={img.image} index={i} onClick={() => setLbIndex(i)} />
