@@ -12,7 +12,6 @@ function shuffle(arr) {
 
 function thumbSrc(src) {
   if (!src) return src
-  // /images/bts/foo.jpg → /images/bts/thumbs/foo.jpg
   const parts = src.split('/')
   const filename = parts.pop()
   return [...parts, 'thumbs', filename].join('/')
@@ -21,6 +20,8 @@ function thumbSrc(src) {
 function BTSImage({ src, index, onClick }) {
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
+  const [useFull, setUseFull] = useState(false)
+
   useEffect(() => {
     const el = ref.current
     if (!el) return
@@ -32,13 +33,15 @@ function BTSImage({ src, index, onClick }) {
     return () => io.disconnect()
   }, [])
 
+  const imgSrc = useFull ? src : thumbSrc(src)
+
   return (
     <div
       ref={ref}
       className={`bts-item ${vis ? 'vis' : ''}`}
       onClick={() => onClick(index)}
     >
-      {vis && <img src={thumbSrc(src)} alt="" />}
+      {vis && <img src={imgSrc} alt="" onError={() => setUseFull(true)} />}
     </div>
   )
 }
