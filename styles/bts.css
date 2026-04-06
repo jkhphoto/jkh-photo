@@ -1,31 +1,17 @@
 /* ── BTS Page ── */
 .bts-page {
-  padding: 20px;
+  padding: 60px 40px 80px;
   min-height: 100vh;
 }
 
-.bts-header {
-  padding: 60px 0 40px;
-}
-
-.bts-title {
-  font-family: var(--display);
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 400;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 1;
-}
-
-/* ── Grid ── */
+/* ── Contact Sheet Grid ── */
 .bts-grid {
-  columns: 8;
-  column-gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 6px;
 }
 
 .bts-item {
-  break-inside: avoid;
-  margin-bottom: 8px;
   overflow: hidden;
   cursor: pointer;
   opacity: 0;
@@ -118,14 +104,12 @@
 }
 
 /* ── Responsive ── */
-@media (max-width: 1400px) { .bts-grid { columns: 7; } }
-@media (max-width: 1100px) { .bts-grid { columns: 5; } }
+@media (max-width: 1100px) { .bts-grid { grid-template-columns: repeat(5, 1fr); } }
 @media (max-width: 768px) {
-  .bts-page { padding: 12px; }
-  .bts-grid { columns: 3; column-gap: 6px; }
-  .bts-item { margin-bottom: 6px; }
+  .bts-page { padding: 24px 12px 60px; }
+  .bts-grid { grid-template-columns: repeat(3, 1fr); gap: 4px; }
   .bts-lb-item { padding: 20px 16px; }
 }
 @media (max-width: 480px) {
-  .bts-grid { columns: 2; }
+  .bts-grid { grid-template-columns: repeat(2, 1fr); }
 }
