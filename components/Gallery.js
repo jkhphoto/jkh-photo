@@ -164,7 +164,7 @@ function GalleryMosaic({ images, onImageClick }) {
                 key={`${ri}-${ii}`}
                 src={item.src}
                 onClick={onImageClick}
-                style={{ width: item.ratio * row.height, flexShrink: 0, flexGrow: 0 }}
+                style={{ flex: `${item.ratio} 1 0%` }}
               />
             ))}
           </div>

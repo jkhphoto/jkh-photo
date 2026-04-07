@@ -307,7 +307,6 @@ body:has(.proj-head) .clock-corner { display: none; }
 }
 .g-mosaic-row:last-child { margin-bottom: 0; }
 .g-mosaic-img {
-  flex: none;
   overflow: hidden;
   opacity: 0;
   transform: translateY(12px);
