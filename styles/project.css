@@ -296,14 +296,14 @@ body:has(.proj-head) .clock-corner { display: none; }
 
 /* ── Gallery Mosaic ── */
 .g-mosaic {
-  margin: 0 -23vw;
-  width: calc(100% + 46vw);
-  padding: 0 16px;
+  margin: 0 -20vw;
+  width: calc(100% + 40vw);
+  padding: 0;
 }
 .g-mosaic-row {
   display: flex;
   overflow: hidden;
-  margin-bottom: 6px;
+  margin-bottom: 32px;
 }
 .g-mosaic-row:last-child { margin-bottom: 0; }
 .g-mosaic-img {
@@ -324,9 +324,8 @@ body:has(.proj-head) .clock-corner { display: none; }
 
 @media (max-width: 768px) {
   .g-mosaic {
-    margin: 0;
     width: 100%;
-    padding: 0 8px;
+    padding: 0;
   }
-  .g-mosaic-row { margin-bottom: 4px; gap: 4px !important; }
+  .g-mosaic-row { margin-bottom: 14px; gap: 14px !important; }
 }

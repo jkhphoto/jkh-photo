@@ -89,8 +89,8 @@ function GalleryMosaic({ images, onImageClick }) {
   const containerRef = useRef(null)
   const [ratios, setRatios] = useState(null)
   const [containerW, setContainerW] = useState(0)
-  const gap = 6
-  const targetH = 280
+  const gap = 32
+  const targetH = 220
 
   /* Shuffle once on mount — stable across re-renders */
   const shuffled = useMemo(() => {
