@@ -65,7 +65,7 @@ function GalleryVideo({ src }) {
 }
 
 /* ── Mosaic: justified flexbox rows ── */
-function MosaicImage({ src, onClick }) {
+function MosaicImage({ src, onClick, style }) {
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
   useEffect(() => {
@@ -79,7 +79,7 @@ function MosaicImage({ src, onClick }) {
     return () => io.disconnect()
   }, [])
   return (
-    <div ref={ref} className={`g-mosaic-img ${vis ? 'vis' : ''}`} onClick={() => onClick(src)}>
+    <div ref={ref} className={`g-mosaic-img ${vis ? 'vis' : ''}`} onClick={() => onClick(src)} style={style}>
       <img src={src} alt="" loading="lazy" />
     </div>
   )
@@ -92,6 +92,17 @@ function GalleryMosaic({ images, onImageClick }) {
   const gap = 6
   const targetH = 280
 
+  /* Shuffle once on mount — stable across re-renders */
+  const shuffled = useMemo(() => {
+    if (!images || images.length === 0) return []
+    const arr = images.map(img => typeof img === 'string' ? img : img.image)
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[arr[i], arr[j]] = [arr[j], arr[i]]
+    }
+    return arr
+  }, [images])
+
   useEffect(() => {
     const el = containerRef.current
     if (!el) return
@@ -103,11 +114,10 @@ function GalleryMosaic({ images, onImageClick }) {
   }, [])
 
   useEffect(() => {
-    if (!images || images.length === 0) return
+    if (shuffled.length === 0) return
     let cancelled = false
-    const srcs = images.map(img => typeof img === 'string' ? img : img.image)
     Promise.all(
-      srcs.map(
+      shuffled.map(
         (src) =>
           new Promise((resolve) => {
             const img = new Image()
@@ -120,19 +130,18 @@ function GalleryMosaic({ images, onImageClick }) {
       if (!cancelled) setRatios(r)
     })
     return () => { cancelled = true }
-  }, [images])
+  }, [shuffled])
 
   const rows = useMemo(() => {
     if (!ratios || !containerW) return null
-    const srcs = images.map(img => typeof img === 'string' ? img : img.image)
     const result = []
     let i = 0
-    while (i < srcs.length) {
+    while (i < shuffled.length) {
       let rowRatioSum = 0
       let rowItems = []
-      while (i < srcs.length) {
+      while (i < shuffled.length) {
         rowRatioSum += ratios[i]
-        rowItems.push({ src: srcs[i], ratio: ratios[i] })
+        rowItems.push({ src: shuffled[i], ratio: ratios[i] })
         i++
         const rowW = containerW - gap * (rowItems.length - 1)
         const rowH = rowW / rowRatioSum
@@ -143,7 +152,7 @@ function GalleryMosaic({ images, onImageClick }) {
       result.push({ items: rowItems, height: rowH })
     }
     return result
-  }, [ratios, containerW, images, gap, targetH])
+  }, [ratios, containerW, shuffled, gap, targetH])
 
   return (
     <div ref={containerRef} className="g-mosaic">
@@ -155,6 +164,7 @@ function GalleryMosaic({ images, onImageClick }) {
                 key={`${ri}-${ii}`}
                 src={item.src}
                 onClick={onImageClick}
+                style={{ width: item.ratio * row.height, flexShrink: 0, flexGrow: 0 }}
               />
             ))}
           </div>
