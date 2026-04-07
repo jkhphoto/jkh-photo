@@ -88,11 +88,10 @@ function MosaicImage({ src, onClick, style }) {
 function GalleryMosaic({ images, onImageClick }) {
   const containerRef = useRef(null)
   const [ratios, setRatios] = useState(null)
-  const [containerW, setContainerW] = useState(0)
   const gap = 32
-  const targetH = 220
+  const perRow = 3
 
-  /* Shuffle once on mount — stable across re-renders */
+  /* Shuffle once on mount */
   const shuffled = useMemo(() => {
     if (!images || images.length === 0) return []
     const arr = images.map(img => typeof img === 'string' ? img : img.image)
@@ -102,16 +101,6 @@ function GalleryMosaic({ images, onImageClick }) {
     }
     return arr
   }, [images])
-
-  useEffect(() => {
-    const el = containerRef.current
-    if (!el) return
-    const measure = () => setContainerW(el.clientWidth)
-    measure()
-    const ro = new ResizeObserver(measure)
-    ro.observe(el)
-    return () => ro.disconnect()
-  }, [])
 
   useEffect(() => {
     if (shuffled.length === 0) return
@@ -133,33 +122,24 @@ function GalleryMosaic({ images, onImageClick }) {
   }, [shuffled])
 
   const rows = useMemo(() => {
-    if (!ratios || !containerW) return null
+    if (!ratios) return null
     const result = []
-    let i = 0
-    while (i < shuffled.length) {
-      let rowRatioSum = 0
-      let rowItems = []
-      while (i < shuffled.length) {
-        rowRatioSum += ratios[i]
-        rowItems.push({ src: shuffled[i], ratio: ratios[i] })
-        i++
-        const rowW = containerW - gap * (rowItems.length - 1)
-        const rowH = rowW / rowRatioSum
-        if (rowH <= targetH) break
+    for (let i = 0; i < shuffled.length; i += perRow) {
+      const items = []
+      for (let j = i; j < Math.min(i + perRow, shuffled.length); j++) {
+        items.push({ src: shuffled[j], ratio: ratios[j] })
       }
-      const totalGap = gap * (rowItems.length - 1)
-      const rowH = (containerW - totalGap) / rowRatioSum
-      result.push({ items: rowItems, height: rowH })
+      result.push(items)
     }
     return result
-  }, [ratios, containerW, shuffled, gap, targetH])
+  }, [ratios, shuffled, perRow])
 
   return (
     <div ref={containerRef} className="g-mosaic">
       {rows &&
         rows.map((row, ri) => (
-          <div key={ri} className="g-mosaic-row" style={{ height: row.height, gap }}>
-            {row.items.map((item, ii) => (
+          <div key={ri} className="g-mosaic-row" style={{ gap }}>
+            {row.map((item, ii) => (
               <MosaicImage
                 key={`${ri}-${ii}`}
                 src={item.src}
