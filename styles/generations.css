@@ -42,6 +42,8 @@
 
 .gen-meta {
   animation: fadeUp 0.8s var(--expo) 0.1s both;
+  container-type: inline-size;
+  min-width: 0;
 }
 
 .gen-label {
@@ -56,12 +58,15 @@
 
 .gen-title {
   font-family: var(--display);
-  font-size: clamp(56px, 9vw, 132px);
+  /* sized off the meta column (cqw), not the viewport, so the single
+     unbreakable word can't spill past the column on wide screens */
+  font-size: clamp(40px, 13.5cqw, 116px);
   font-weight: 700;
   line-height: 0.92;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   margin-bottom: 28px;
+  overflow-wrap: anywhere;
 }
 
 .gen-desc {
@@ -69,7 +74,7 @@
   font-size: 14px; font-weight: 300;
   line-height: 1.7;
   color: var(--fg);
-  max-width: 38ch;
+  max-width: none;
   margin-bottom: 34px;
 }
 
@@ -240,4 +245,81 @@
   .gen-purchase { gap: 18px; }
   .gen-buy { flex: 1; min-width: 180px; }
   .gen-reader-scroll { padding: 4vh 16px; }
+}
+
+/* ── Cover slideshow ── */
+.gen-slides {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  outline: none;
+}
+.gen-slides::-webkit-scrollbar { display: none; }
+.gen-slide {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gen-slide img {
+  width: 100%; height: auto;
+  display: block;
+  user-select: none; -webkit-user-drag: none;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+/* single image keeps the original static look */
+.gen-cover--single .gen-slides { overflow: visible; }
+
+.gen-slide-arrow {
+  position: absolute;
+  top: 50%; transform: translateY(-50%);
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 15px;
+  color: var(--fg);
+  background: rgba(245, 244, 240, 0.78);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--line);
+  cursor: inherit;
+  opacity: 0;
+  transition: opacity 0.3s var(--expo), background 0.2s ease;
+}
+.gen-cover:hover .gen-slide-arrow { opacity: 1; }
+.gen-slide-arrow:hover { background: var(--bg); }
+.gen-slide-arrow:disabled { opacity: 0 !important; pointer-events: none; }
+.gen-slide-arrow--prev { left: 14px; }
+.gen-slide-arrow--next { right: 14px; }
+
+.gen-slide-dots {
+  position: absolute;
+  bottom: 16px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 9px;
+}
+.gen-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(10, 10, 10, 0.22);
+  border: none; padding: 0; cursor: inherit;
+  transition: background 0.25s ease, transform 0.25s var(--expo);
+}
+.gen-dot.is-active { background: var(--accent); transform: scale(1.25); }
+
+.gen-slide-count {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-family: var(--mono);
+  font-size: 9px; letter-spacing: 0.12em;
+  color: var(--bg);
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  padding: 5px 9px;
+}
+
+@media (max-width: 768px) {
+  .gen-slide-arrow { display: none; }
+  .gen-slide-dots { bottom: 12px; }
 }

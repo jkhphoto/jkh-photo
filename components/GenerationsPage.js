@@ -10,13 +10,105 @@ import { useState, useEffect, useRef, useCallback } from 'react'
   processor. If `link` is empty, the button shows a disabled state
   so the page never ships a dead link.
 
-  Optional frontmatter fields the page reads (all have fallbacks):
+  COVER SLIDESHOW
+  Set `covers:` as a list of image paths in the frontmatter to get a
+  swipeable / scrollable cover slideshow (arrows + dots + drag/swipe):
+    covers:
+      - /images/generations-cover.jpeg
+      - /images/gen-cover-02.jpeg
+  With one image (or just the old `cover:` field) it renders a single
+  static cover exactly as before. Use images of similar dimensions so
+  the frame doesn't jump between slides.
+
+  Other frontmatter fields the page reads (all have fallbacks):
     price:   "$85"          edition: "First edition of 500"
     pages:   "300"          format:  "Hardcover"
     link:    "https://..."  processor: "Stripe"   ("PayPal" etc.)
     spreads: [ { image: /images/gen-01.jpg }, ... ]
   ───────────────────────────────────────────────────────────────
 */
+
+function CoverSlideshow({ images, alt }) {
+  const trackRef = useRef(null)
+  const [active, setActive] = useState(0)
+  const single = images.length <= 1
+
+  const goTo = useCallback((i) => {
+    const el = trackRef.current
+    if (!el) return
+    const clamped = Math.max(0, Math.min(images.length - 1, i))
+    const slide = el.children[clamped]
+    if (slide) el.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' })
+  }, [images.length])
+
+  const onScroll = () => {
+    const el = trackRef.current
+    if (!el || !el.clientWidth) return
+    const i = Math.round(el.scrollLeft / el.clientWidth)
+    setActive(Math.max(0, Math.min(images.length - 1, i)))
+  }
+
+  const onKey = (e) => {
+    if (e.key === 'ArrowRight') { e.preventDefault(); goTo(active + 1) }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(active - 1) }
+  }
+
+  return (
+    <div className={`gen-cover${single ? ' gen-cover--single' : ''}`}>
+      <div
+        className="gen-slides"
+        ref={trackRef}
+        onScroll={onScroll}
+        tabIndex={single ? -1 : 0}
+        onKeyDown={single ? undefined : onKey}
+        aria-label={single ? undefined : 'Cover images'}
+      >
+        {images.map((src, i) => (
+          <div className="gen-slide" key={i}>
+            <img
+              src={src}
+              alt={i === 0 ? (alt || '') : ''}
+              draggable={false}
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+          </div>
+        ))}
+      </div>
+
+      {!single && (
+        <>
+          <button
+            className="gen-slide-arrow gen-slide-arrow--prev"
+            aria-label="Previous cover"
+            onClick={() => goTo(active - 1)}
+            disabled={active === 0}
+          >←</button>
+          <button
+            className="gen-slide-arrow gen-slide-arrow--next"
+            aria-label="Next cover"
+            onClick={() => goTo(active + 1)}
+            disabled={active === images.length - 1}
+          >→</button>
+
+          <div className="gen-slide-dots">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                className={`gen-dot${i === active ? ' is-active' : ''}`}
+                aria-label={`Go to cover ${i + 1}`}
+                onClick={() => goTo(i)}
+              />
+            ))}
+          </div>
+
+          <span className="gen-slide-count">
+            {String(active + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
+          </span>
+        </>
+      )}
+    </div>
+  )
+}
 
 function Reader({ item, onClose }) {
   const spreads = item?.spreads || []
@@ -69,9 +161,22 @@ export default function GenerationsPage({ item = {} }) {
   const spreads = item.spreads || []
   const previewRef = useRef(null)
 
-  const price = item.price || ''
-  const link = item.link || ''
-  const processor = item.processor || ''
+  // ── Defaults baked in so the page sells even before the mdx updates ──
+  const PAYPAL_LINK = 'https://www.paypal.com/ncp/payment/PKFF2PCM8PSN8'
+  const DEFAULT_PRICE = '$60 pickup · $73 shipped'
+  const COVER_FALLBACK = '/images/generations-cover.jpeg'
+
+  // Cover slideshow: prefer `covers` list, else `cover`, ignoring the
+  // old deleted placeholder; fall back to the real cover if nothing valid.
+  const listed = (Array.isArray(item.covers) && item.covers.length)
+    ? item.covers
+    : [item.cover]
+  let covers = listed.filter((s) => s && s !== '/images/1x1.jpg')
+  if (!covers.length) covers = [COVER_FALLBACK]
+
+  const price = item.price || DEFAULT_PRICE
+  const link = item.link || PAYPAL_LINK
+  const processor = item.processor || 'PayPal'
   const pages = item.pages || ''
   const format = item.format || ''
   const edition = item.edition || ''
@@ -91,14 +196,7 @@ export default function GenerationsPage({ item = {} }) {
   return (
     <main className="gen">
       <section className="gen-hero">
-        <div
-          className="gen-cover"
-          onClick={() => spreads.length && setReaderOpen(true)}
-          role={spreads.length ? 'button' : undefined}
-        >
-          <img src={item.cover} alt={item.title || 'Generations'} />
-          {spreads.length > 0 && <span className="gen-cover-hint">Look inside ↗</span>}
-        </div>
+        <CoverSlideshow images={covers} alt={item.title || 'Generations'} />
 
         <div className="gen-meta">
           <span className="gen-label">Publication — {item.year || ''}</span>
@@ -121,7 +219,7 @@ export default function GenerationsPage({ item = {} }) {
             {price && <span className="gen-price">{price}</span>}
             {buyable ? (
               <a className="gen-buy" href={link} rel="noopener">
-                Buy the book
+                Buy now
               </a>
             ) : (
               <span className="gen-buy gen-buy--off" aria-disabled="true">
@@ -157,7 +255,7 @@ export default function GenerationsPage({ item = {} }) {
           <div className="gen-preview-cta">
             {price && <span className="gen-price">{price}</span>}
             {buyable ? (
-              <a className="gen-buy" href={link} rel="noopener">Buy the book</a>
+              <a className="gen-buy" href={link} rel="noopener">Buy now</a>
             ) : (
               <span className="gen-buy gen-buy--off" aria-disabled="true">Available soon</span>
             )}
