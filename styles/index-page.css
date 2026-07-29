@@ -134,8 +134,10 @@
 .idx-mobile-preview { display: none; }
 
 /* ── Hover preview (desktop) ── */
-/* Floats over the list, so it needs edge definition — but a tight contact
-   shadow, not a 60px ambient cloud. No jaunty tilt. */
+/* No shadow. A box-shadow paints the element's rectangle, so on a cut-out
+   PNG it draws a container around transparency and defeats the cut-out.
+   The artwork defines its own edge — and nothing else on the site casts a
+   shadow either. */
 .idx-preview {
   position: fixed;
   width: 300px;
@@ -144,7 +146,6 @@
   opacity: 0;
   transform: translateY(6px);
   transition: opacity 0.3s var(--expo), transform 0.35s var(--expo);
-  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
 }
 .idx-preview.show {
   opacity: 1;
