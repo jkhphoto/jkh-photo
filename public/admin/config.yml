@@ -117,6 +117,17 @@ collections:
                 widget: list
                 fields:
                   - { name: image, label: Image, widget: image }
+          - name: sheet
+            label: White Sheet Grid (no gaps)
+            widget: object
+            fields:
+              - { name: columns, label: Columns, widget: number, required: false, default: 3, value_type: int, hint: "How many across. 3 is the default." }
+              - name: images
+                label: Images
+                widget: list
+                hint: "For images shot on white. They tile edge-to-edge with no gaps, so the white becomes one continuous surface."
+                fields:
+                  - { name: image, label: Image, widget: image }
       - name: credits
         label: Credits
         widget: list

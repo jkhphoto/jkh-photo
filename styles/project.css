@@ -297,6 +297,41 @@ body:has(.proj-head) .clock-corner { display: none; }
   pointer-events: none;
 }
 
+/* ── Gallery Sheet: seamless white grid ──
+   The container is pure white and the gap is zero, so images that were
+   themselves shot on white fuse into one continuous plane. Breaks out of
+   the gallery's 23vw measure so the sheet has room to read. */
+.g-sheet {
+  background: #fff;
+  align-self: stretch;      /* .gallery centres its children; opt out */
+  margin: 40px -14vw;
+  width: calc(100% + 28vw);
+}
+.g-sheet-grid {
+  display: grid;
+  gap: 0;
+}
+.g-sheet-cell {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #fff;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.6s var(--expo);
+}
+.g-sheet-cell.vis { opacity: 1; }
+.g-sheet-cell img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .g-sheet { margin: 0; width: 100%; }
+}
+
 /* ── Gallery Mosaic ── */
 .g-mosaic {
   margin: 0 -20vw;

@@ -153,6 +153,49 @@ function GalleryMosaic({ images, onImageClick }) {
   )
 }
 
+/* ── Sheet: seamless white grid ──
+   For images already shot on white (polaroids, product, scans). Cells are
+   square, images sit contained inside them, and the plane is pure white
+   with zero gaps — so the white in the photographs and the white of the
+   container read as one continuous surface. A short last row just leaves
+   white, which is invisible by design. */
+function SheetCell({ src, onClick }) {
+  const ref = useRef(null)
+  const [vis, setVis] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting) { setVis(true); io.unobserve(el) } },
+      { threshold: 0.05, rootMargin: '0px 0px -30px 0px' }
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  return (
+    <div ref={ref} className={`g-sheet-cell ${vis ? 'vis' : ''}`} onClick={() => onClick(src)}>
+      <img src={src} alt="" loading="lazy" />
+    </div>
+  )
+}
+
+function GallerySheet({ images, columns, onImageClick, style }) {
+  const srcs = (images || [])
+    .map((img) => (typeof img === 'string' ? img : img.image))
+    .filter(Boolean)
+  if (!srcs.length) return null
+  const cols = Number(columns) > 0 ? Number(columns) : 3
+  return (
+    <div className="g-sheet" style={style}>
+      <div className="g-sheet-grid" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
+        {srcs.map((src, i) => (
+          <SheetCell key={i} src={src} onClick={onImageClick} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 /* Extract flat ordered image list from gallery rows */
 export function extractImages(rows) {
   if (!rows) return []
@@ -180,6 +223,7 @@ export function extractImages(rows) {
         if (row.image) imgs.push(row.image)
         break
       case 'mosaic':
+      case 'sheet':
         if (row.images) row.images.forEach((img) => {
           const src = typeof img === 'string' ? img : img.image
           if (src) imgs.push(src)
@@ -227,6 +271,8 @@ export default function Gallery({ rows, onImageClick }) {
             return <div key={i} className="g-row g-full g-cinematic" style={style}><GalleryVideo src={row.video} /></div>
           case 'mosaic':
             return <div key={i} style={style}><GalleryMosaic images={row.images} onImageClick={onImageClick} /></div>
+          case 'sheet':
+            return <GallerySheet key={i} images={row.images} columns={row.columns} onImageClick={onImageClick} style={style} />
           case 'text':
             return <div key={i} className="g-row g-text" style={style}><p>{row.content}</p></div>
           case 'spacer':
