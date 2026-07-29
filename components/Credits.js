@@ -26,7 +26,7 @@ export default function Credits({ credits, tags }) {
         {hasCredits ? (
           <button className="credits-toggle" onClick={handleToggle}>
             <span>Credits</span>
-            <span className="credits-icon">+</span>
+            <span className="credits-icon">{open ? '−' : '+'}</span>
           </button>
         ) : (
           <div className="credits-toggle-placeholder" />

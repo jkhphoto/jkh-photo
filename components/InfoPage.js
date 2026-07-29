@@ -50,7 +50,7 @@ export default function InfoPage() {
               </div>
               <div>
                 <div className="info-col-label">Select Agencies</div>
-                <div className="info-col-body">Wieden + Kennedy<br />Anomaly<br />VaynerMedia<br />Shadow Lion<br />Mojo Supermarket<br />Cinco Design<br />M+C Saatchi</div>
+                <div className="info-col-body">Wieden + Kennedy<br />Anomaly<br />VaynerMedia<br />Shadow Lion<br />Mojo Supermarket<br />Cinco Design<br />M+C Saatchi<br />We Are Social</div>
               </div>
             </div>
           </div>

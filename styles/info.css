@@ -92,7 +92,7 @@
 
 .info-section {
   padding: 16px 0;
-  border-top: 1px solid rgba(0,0,0,0.06);
+  border-top: 1px solid var(--rule);
 }
 
 .info-section:last-child {
@@ -162,21 +162,20 @@
 }
 
 /* ── Newsletter modal ── */
+/* Paper laid on a dimmed page, not a floating app dialog: lighter scrim,
+   no blur, no outline — the bg colour is the edge. */
 .nl-overlay {
   position: fixed;
   inset: 0;
   z-index: 600;
-  background: rgba(10, 10, 10, 0.5);
+  background: rgba(10, 10, 10, 0.28);
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
 }
 
 .nl-modal {
   background: var(--bg);
-  border: 1px solid var(--line);
   padding: 40px 32px 24px;
   width: 420px;
   max-width: 90vw;

@@ -134,19 +134,21 @@
 .idx-mobile-preview { display: none; }
 
 /* ── Hover preview (desktop) ── */
+/* Floats over the list, so it needs edge definition — but a tight contact
+   shadow, not a 60px ambient cloud. No jaunty tilt. */
 .idx-preview {
   position: fixed;
   width: 300px;
   pointer-events: none;
   z-index: 150;
   opacity: 0;
-  transform: scale(0.9) rotate(-1deg);
+  transform: translateY(6px);
   transition: opacity 0.3s var(--expo), transform 0.35s var(--expo);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 14px rgba(0,0,0,0.13);
 }
 .idx-preview.show {
   opacity: 1;
-  transform: scale(1) rotate(0deg);
+  transform: translateY(0);
 }
 
 @media (max-width: 900px) {

@@ -12,7 +12,11 @@
   --fg: #0a0a0a;
   --dim: #777;
   --dim2: #aaa;
+  /* Two deliberate weights, nothing in between.
+     --line  hairline, divides peer items within a block
+     --rule  structural, closes a section or block */
   --line: rgba(0,0,0,0.07);
+  --rule: rgba(0,0,0,0.16);
   --accent: #6B4C3B;
   --nav-h: 48px;
   --expo: cubic-bezier(0.16, 1, 0.3, 1);

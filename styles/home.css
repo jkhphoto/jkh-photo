@@ -14,23 +14,19 @@
   opacity: 1; transition: opacity 0.5s ease;
 }
 .scroll-hint.hidden { opacity: 0; pointer-events: none; }
+/* A plain rule that draws itself downward. No arrowhead — the motion is
+   the instruction, and a bare line matches the hairlines everywhere else. */
 .scroll-hint-line {
-  display: block; width: 1px; height: 32px;
-  background: var(--dim);
+  display: block; width: 1px; height: 40px;
+  background: linear-gradient(to bottom, transparent, var(--dim));
   position: relative;
-  animation: scrollPulse 2s ease-in-out infinite;
-}
-.scroll-hint-line::after {
-  content: '';
-  position: absolute; bottom: 0; left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 6px; height: 6px;
-  border-right: 1px solid var(--dim);
-  border-bottom: 1px solid var(--dim);
+  animation: scrollPulse 2.4s var(--expo) infinite;
 }
 @keyframes scrollPulse {
-  0%, 100% { opacity: 0.4; transform: translateY(0); }
-  50% { opacity: 1; transform: translateY(6px); }
+  0%      { opacity: 0; transform: scaleY(0.2); transform-origin: top; }
+  40%     { opacity: 1; transform: scaleY(1); transform-origin: top; }
+  70%     { opacity: 1; transform: scaleY(1); transform-origin: bottom; }
+  100%    { opacity: 0; transform: scaleY(0.2); transform-origin: bottom; }
 }
 
 /* ── Featured Projects Grid ── */
@@ -120,22 +116,23 @@
   margin-left: auto;
 }
 
-/* Cards without images */
+/* No cover image: reads as an index entry — a rule and a title — rather
+   than a bordered card sitting in a grid of photographs. */
 .hp-card:not(:has(.hp-card-img)) {
-  justify-content: center;
-  border: 1px solid var(--line);
-  padding: 32px 20px;
-  min-height: 180px;
-  transition: border-color 0.3s ease, opacity 0.7s var(--expo), transform 0.7s var(--expo);
-}
-.hp-card:not(:has(.hp-card-img)):hover {
-  border-color: var(--dim);
+  justify-content: flex-start;
+  border-top: 1px solid var(--rule);
+  padding: 14px 0 0;
+  min-height: 0;
 }
 .hp-card:not(:has(.hp-card-img)) .hp-card-info {
   padding: 0;
 }
 .hp-card:not(:has(.hp-card-img)) .hp-card-title {
   font-size: clamp(16px, 1.8vw, 24px);
+  transition: color 0.25s ease;
+}
+.hp-card:not(:has(.hp-card-img)):hover .hp-card-title {
+  color: var(--accent);
 }
 
 /* View All link */
@@ -159,7 +156,7 @@
 /* ── Footer ── */
 .home-footer {
   padding: 28px 24px; display: flex; justify-content: space-between;
-  align-items: center; border-top: 1px solid var(--line);
+  align-items: center; border-top: 1px solid var(--rule);
 }
 .foot-l { font-size: 9px; color: var(--dim); letter-spacing: 0.04em; }
 .foot-r { display: flex; gap: 18px; }
@@ -190,7 +187,7 @@
 
   .hp-card-title { font-size: 16px; }
   .hp-card-cat { display: none; }
-  .hp-card:not(:has(.hp-card-img)) { min-height: 120px; padding: 20px 14px; }
+  .hp-card:not(:has(.hp-card-img)) { min-height: 0; padding: 10px 0 0; }
   .proj-preview { display: none; }
   .hero-video video { max-height: none; width: 100%; max-width: 100%; height: 65vh; object-fit: cover; object-position: center; }
   .home-footer { padding: 20px 16px; flex-direction: column; gap: 10px; text-align: center; }

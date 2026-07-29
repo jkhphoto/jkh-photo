@@ -22,19 +22,14 @@
 .gen-cover img {
   width: 100%;
   height: auto;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 .gen-cover[role='button'] { cursor: inherit; }
 .gen-cover-hint {
   position: absolute;
-  bottom: 14px; right: 14px;
+  bottom: -22px; left: 0;
   font-family: var(--mono);
   font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--bg);
-  background: rgba(10, 10, 10, 0.55);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 6px 10px;
+  color: var(--dim);
   opacity: 0;
   transition: opacity 0.35s var(--expo);
 }
@@ -49,23 +44,23 @@
 .gen-label {
   display: block;
   font-family: var(--mono);
-  font-size: 10px; font-weight: 500;
-  letter-spacing: 0.16em; text-transform: uppercase;
+  font-size: 9px; font-weight: 400;
+  letter-spacing: 0.08em; text-transform: uppercase;
   color: var(--dim);
   margin-bottom: 20px;
 }
-.gen-label--center { text-align: center; margin-bottom: 40px; }
+.gen-label--center { text-align: left; margin-bottom: 28px; }
 
 .gen-title {
   font-family: var(--display);
   /* sized off the meta column (cqw), not the viewport, so the single
      unbreakable word can't spill past the column on wide screens */
   font-size: clamp(40px, 13.5cqw, 116px);
-  font-weight: 700;
-  line-height: 0.92;
+  font-weight: 400;
+  line-height: 0.95;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  margin-bottom: 28px;
+  margin-bottom: 18px;
   overflow-wrap: anywhere;
 }
 
@@ -78,73 +73,66 @@
   margin-bottom: 34px;
 }
 
-.gen-specs {
+/* Metadata reads as one baseline line, same voice as .proj-meta on a
+   project page — no labels, no bounding rules, dot separators. */
+.gen-metarow {
   display: flex;
   flex-wrap: wrap;
-  gap: 28px 40px;
-  padding: 26px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  margin-bottom: 34px;
+  gap: 0 24px;
+  align-items: baseline;
+  margin-bottom: 40px;
 }
-.gen-spec dt {
+.gen-metarow span {
   font-family: var(--mono);
-  font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase;
+  font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+/* Separator trails its own item, so a wrap never orphans a dot to the
+   start of the next line. */
+.gen-metarow span:not(:last-child)::after {
+  content: '·';
+  margin-left: 24px;
   color: var(--dim2);
-  margin-bottom: 6px;
-}
-.gen-spec dd {
-  font-family: var(--mono);
-  font-size: 13px; font-weight: 400;
-  color: var(--fg);
 }
 
 .gen-purchase {
   display: flex;
-  align-items: center;
-  gap: 24px;
+  align-items: baseline;
+  gap: 28px;
   flex-wrap: wrap;
-  margin-bottom: 14px;
+  margin-bottom: 28px;
 }
 .gen-price {
   font-family: var(--mono);
-  font-size: 20px; font-weight: 500;
+  font-size: 15px; font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--fg);
 }
 
+/* The buy action is typographic, not a filled box. The rule under it is
+   2px — deliberately heavier than the 1px hairlines elsewhere, so weight
+   signals importance instead of a background colour doing it. */
 .gen-buy {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
   font-family: var(--mono);
   font-size: 11px; font-weight: 500;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--bg);
-  background: var(--accent);
-  padding: 16px 34px;
-  border: 1px solid var(--accent);
-  transition: background 0.3s var(--expo), color 0.3s var(--expo);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--fg);
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--fg);
+  transition: color 0.25s ease, border-color 0.25s ease;
 }
 .gen-buy:hover {
-  background: transparent;
   color: var(--accent);
+  border-color: var(--accent);
 }
 .gen-buy--off {
-  background: transparent;
   color: var(--dim2);
-  border-color: var(--line);
+  border-bottom-color: var(--line);
   cursor: not-allowed;
 }
-.gen-buy--off:hover { background: transparent; color: var(--dim2); }
-
-.gen-secure {
-  display: block;
-  font-family: var(--mono);
-  font-size: 10px; letter-spacing: 0.06em;
-  color: var(--dim);
-  margin-bottom: 28px;
-}
+.gen-buy--off:hover { color: var(--dim2); border-bottom-color: var(--line); }
 
 .gen-preview-link {
   background: none; border: none; padding: 0;
@@ -168,16 +156,12 @@
 }
 .gen-grid-item img {
   width: 100%; height: auto;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-  transition: transform 0.5s var(--expo);
 }
-.gen-grid-item:hover img { transform: scale(1.012); }
 
 .gen-preview-cta {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 24px;
+  align-items: baseline;
+  gap: 28px;
   margin-top: 64px;
 }
 
@@ -220,7 +204,6 @@
 .gen-reader-frame { width: 100%; max-width: 980px; }
 .gen-reader-frame img {
   width: 100%; height: auto;
-  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.12);
 }
 .gen-reader-progress {
   height: 2px; background: var(--line); flex-shrink: 0;
@@ -270,54 +253,49 @@
   width: 100%; height: auto;
   display: block;
   user-select: none; -webkit-user-drag: none;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 /* single image keeps the original static look */
 .gen-cover--single .gen-slides { overflow: visible; }
 
-.gen-slide-arrow {
-  position: absolute;
-  top: 50%; transform: translateY(-50%);
-  width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 15px;
-  color: var(--fg);
-  background: rgba(245, 244, 240, 0.78);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--line);
-  cursor: inherit;
-  opacity: 0;
-  transition: opacity 0.3s var(--expo), background 0.2s ease;
+/* Carousel chrome sits under the image on the page ground, as marks in a
+   plain row — no floating glass widgets, nothing overlapping the photo. */
+.gen-slide-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 14px;
 }
-.gen-cover:hover .gen-slide-arrow { opacity: 1; }
-.gen-slide-arrow:hover { background: var(--bg); }
-.gen-slide-arrow:disabled { opacity: 0 !important; pointer-events: none; }
-.gen-slide-arrow--prev { left: 14px; }
-.gen-slide-arrow--next { right: 14px; }
 
-.gen-slide-dots {
-  position: absolute;
-  bottom: 16px; left: 0; right: 0;
-  display: flex; justify-content: center; gap: 9px;
-}
+/* Ticks, not dots — a 1px mark is the same vocabulary as the hairlines. */
+.gen-slide-dots { display: flex; gap: 6px; }
 .gen-dot {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: rgba(10, 10, 10, 0.22);
+  width: 14px; height: 1px;
+  background: rgba(10, 10, 10, 0.18);
   border: none; padding: 0; cursor: inherit;
-  transition: background 0.25s ease, transform 0.25s var(--expo);
+  transition: background 0.25s ease;
 }
-.gen-dot.is-active { background: var(--accent); transform: scale(1.25); }
+.gen-dot.is-active { background: var(--fg); }
 
 .gen-slide-count {
-  position: absolute;
-  top: 14px; right: 14px;
   font-family: var(--mono);
   font-size: 9px; letter-spacing: 0.12em;
-  color: var(--bg);
-  background: rgba(10, 10, 10, 0.5);
-  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-  padding: 5px 9px;
+  color: var(--dim);
+  margin-left: auto;
 }
+
+.gen-slide-arrow {
+  width: 16px; height: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 13px;
+  color: var(--dim);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: inherit;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+.gen-slide-arrow:hover { color: var(--fg); }
+.gen-slide-arrow:disabled { opacity: 0.25; pointer-events: none; }
 
 @media (max-width: 768px) {
   .gen-slide-arrow { display: none; }

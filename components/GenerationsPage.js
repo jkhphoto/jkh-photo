@@ -76,20 +76,7 @@ function CoverSlideshow({ images, alt }) {
       </div>
 
       {!single && (
-        <>
-          <button
-            className="gen-slide-arrow gen-slide-arrow--prev"
-            aria-label="Previous cover"
-            onClick={() => goTo(active - 1)}
-            disabled={active === 0}
-          >←</button>
-          <button
-            className="gen-slide-arrow gen-slide-arrow--next"
-            aria-label="Next cover"
-            onClick={() => goTo(active + 1)}
-            disabled={active === images.length - 1}
-          >→</button>
-
+        <div className="gen-slide-bar">
           <div className="gen-slide-dots">
             {images.map((_, i) => (
               <button
@@ -104,7 +91,20 @@ function CoverSlideshow({ images, alt }) {
           <span className="gen-slide-count">
             {String(active + 1).padStart(2, '0')} / {String(images.length).padStart(2, '0')}
           </span>
-        </>
+
+          <button
+            className="gen-slide-arrow"
+            aria-label="Previous cover"
+            onClick={() => goTo(active - 1)}
+            disabled={active === 0}
+          >←</button>
+          <button
+            className="gen-slide-arrow"
+            aria-label="Next cover"
+            onClick={() => goTo(active + 1)}
+            disabled={active === images.length - 1}
+          >→</button>
+        </div>
       )}
     </div>
   )
@@ -176,17 +176,17 @@ export default function GenerationsPage({ item = {} }) {
 
   const price = item.price || DEFAULT_PRICE
   const link = item.link || PAYPAL_LINK
-  const processor = item.processor || 'PayPal'
   const pages = item.pages || ''
   const format = item.format || ''
   const edition = item.edition || ''
   const buyable = Boolean(link)
 
-  const specs = [
-    format && { label: 'Format', value: format },
-    pages && { label: 'Pages', value: pages },
-    item.year && { label: 'Year', value: String(item.year) },
-    edition && { label: 'Edition', value: edition },
+  // One baseline row of values, no labels — the values say what they are.
+  const meta = [
+    format,
+    pages && `${pages} pages`,
+    item.year && String(item.year),
+    edition,
   ].filter(Boolean)
 
   const scrollToPreview = () => {
@@ -199,21 +199,15 @@ export default function GenerationsPage({ item = {} }) {
         <CoverSlideshow images={covers} alt={item.title || 'Generations'} />
 
         <div className="gen-meta">
-          <span className="gen-label">Publication — {item.year || ''}</span>
           <h1 className="gen-title">{item.title || 'Generations'}</h1>
 
-          {item.description && <p className="gen-desc">{item.description}</p>}
-
-          {specs.length > 0 && (
-            <dl className="gen-specs">
-              {specs.map((s) => (
-                <div key={s.label} className="gen-spec">
-                  <dt>{s.label}</dt>
-                  <dd>{s.value}</dd>
-                </div>
-              ))}
-            </dl>
+          {meta.length > 0 && (
+            <div className="gen-metarow">
+              {meta.map((m) => <span key={m}>{m}</span>)}
+            </div>
           )}
+
+          {item.description && <p className="gen-desc">{item.description}</p>}
 
           <div className="gen-purchase">
             {price && <span className="gen-price">{price}</span>}
@@ -227,12 +221,6 @@ export default function GenerationsPage({ item = {} }) {
               </span>
             )}
           </div>
-
-          {buyable && (
-            <span className="gen-secure">
-              Secure checkout{processor ? ` via ${processor}` : ''} · ships worldwide
-            </span>
-          )}
 
           {spreads.length > 0 && (
             <button className="gen-preview-link" onClick={scrollToPreview}>
