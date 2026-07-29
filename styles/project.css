@@ -304,8 +304,11 @@ body:has(.proj-head) .clock-corner { display: none; }
 .g-sheet {
   background: #fff;
   align-self: stretch;      /* .gallery centres its children; opt out */
-  margin: 40px -14vw;
-  width: calc(100% + 28vw);
+  /* Full bleed. .gallery pads 23vw a side, so cancelling both edges puts
+     the sheet at exactly viewport width — no cream margin left to read as
+     a container. Same trick as .g-cinematic. */
+  margin: 40px -23vw;
+  width: calc(100% + 46vw);
 }
 .g-sheet-grid {
   display: grid;
@@ -329,7 +332,9 @@ body:has(.proj-head) .clock-corner { display: none; }
 }
 
 @media (max-width: 768px) {
-  .g-sheet { margin: 0; width: 100%; }
+  /* .gallery already runs edge-to-edge here, so only the vertical
+     rhythm needs keeping. */
+  .g-sheet { margin: 24px 0; width: 100%; }
 }
 
 /* ── Gallery Mosaic ── */
