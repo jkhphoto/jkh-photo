@@ -5,6 +5,11 @@ backend:
   base_url: https://jkh-photo.pages.dev
   auth_endpoint: /api/auth
 
+# Saving creates a draft on its own branch instead of committing to main,
+# so nothing reaches the live site until Publish is clicked. Drafts live in
+# the Workflow tab as Draft / In Review / Ready.
+publish_mode: editorial_workflow
+
 media_folder: public/images
 public_folder: /images
 
