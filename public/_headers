@@ -1,0 +1,22 @@
+# Cloudflare Pages header rules.
+#
+# The default was `max-age=14400, must-revalidate`, which forces a blocking
+# check with origin once an image is four hours old. Combined with the edge
+# cache being reset on every deploy, images were frequently cold — a 930 KB
+# file measured 57s on a miss against 0.1s warm.
+
+# Build output is content-hashed, so a new build always means a new
+# filename. Safe to cache indefinitely.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Photographs. One day fresh, then stale-while-revalidate: the browser
+# serves the cached copy instantly and refreshes in the background instead
+# of making the viewer wait. Replacing an image while keeping its filename
+# can therefore show the old version for up to a day; a new filename is
+# always immediate.
+/images/*
+  Cache-Control: public, max-age=86400, stale-while-revalidate=2592000
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
