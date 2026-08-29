@@ -3,7 +3,17 @@ import Script from 'next/script'
 import Nav from '../components/Nav'
 import Clock from '../components/Clock'
 
-export const metadata = { title: 'JKH Photo', description: 'Joe Hale — Photographer, Brooklyn NY' }
+export const metadata = {
+  metadataBase: new URL('https://josephkhale.com'),
+  title: 'JKH Photo',
+  description: 'Joe Hale — Photographer, Brooklyn NY',
+  openGraph: {
+    siteName: 'JKH Photo',
+    type: 'website',
+    images: [{ url: '/og/default.jpg', width: 1200, height: 630 }],
+  },
+  twitter: { card: 'summary_large_image' },
+}
 
 export default function RootLayout({ children }) {
   return (

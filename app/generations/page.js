@@ -8,7 +8,9 @@ export const metadata = {
   openGraph: {
     title: 'Generations — A Photo Book by Joe Hale',
     description: '7 years of capturing Tinman Elite. 300 pages, hardcover.',
+    images: [{ url: '/og/generations.jpg', width: 1200, height: 630 }],
   },
+  twitter: { card: 'summary_large_image' },
 }
 
 export default function Generations() {
