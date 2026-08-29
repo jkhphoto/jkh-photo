@@ -9,7 +9,7 @@ function GalleryImage({ src, onClick }) {
     if (!el) return
     const io = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVis(true); io.unobserve(el) } },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.05, rootMargin: '200px 0px' }
     )
     io.observe(el)
     return () => io.disconnect()
@@ -32,7 +32,7 @@ function GalleryVideo({ src }) {
     if (!el) return
     const io = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVis(true); io.unobserve(el) } },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+      { threshold: 0.05, rootMargin: '200px 0px' }
     )
     io.observe(el)
     return () => io.disconnect()
@@ -73,7 +73,7 @@ function MosaicImage({ src, onClick, style }) {
     if (!el) return
     const io = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVis(true); io.unobserve(el) } },
-      { threshold: 0.05, rootMargin: '0px 0px -30px 0px' }
+      { threshold: 0.05, rootMargin: '200px 0px' }
     )
     io.observe(el)
     return () => io.disconnect()
@@ -167,7 +167,7 @@ function SheetCell({ src, onClick }) {
     if (!el) return
     const io = new IntersectionObserver(
       ([e]) => { if (e.isIntersecting) { setVis(true); io.unobserve(el) } },
-      { threshold: 0.05, rootMargin: '0px 0px -30px 0px' }
+      { threshold: 0.05, rootMargin: '200px 0px' }
     )
     io.observe(el)
     return () => io.disconnect()

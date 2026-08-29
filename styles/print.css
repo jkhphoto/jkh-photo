@@ -291,7 +291,7 @@
   height: 100%;
   background: rgba(255,255,255,0.25);
   transform-origin: left;
-  transition: transform 0.15s ease-out;
+  transition: transform 0.15s var(--expo);
 }
 
 @media (max-width: 768px) {

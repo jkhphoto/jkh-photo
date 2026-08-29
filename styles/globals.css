@@ -185,3 +185,16 @@ nav.menu-open { transform: translateY(0); background: transparent; backdrop-filt
 }
 .err-actions button:hover,
 .err-actions a:hover { color: var(--accent); border-color: var(--accent); }
+
+/* ── Reduced motion ──
+   Honour the OS-level setting: reveals appear in place, nothing slides
+   or pulses. Content is never hidden — animated elements land in their
+   final state. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .scroll-hint { display: none; }
+}
