@@ -1,14 +1,26 @@
 'use client'
 import { useState, useEffect, useRef, useCallback } from 'react'
 
-export default function Lightbox({ images, startIndex, onClose }) {
+export default function Lightbox({ images, startIndex, onClose, alt }) {
   const scrollRef = useRef(null)
   const [current, setCurrent] = useState(startIndex + 1)
   const total = images.length
 
   const handleKey = useCallback((e) => {
-    if (e.key === 'Escape') onClose()
-  }, [onClose])
+    if (e.key === 'Escape') { onClose(); return }
+    // Arrow keys step between frames. The viewer is a vertical scroll, so
+    // down/right advance and up/left go back; smooth scroll keeps it in
+    // the same motion language as trackpad scrolling.
+    const step = (dir) => {
+      e.preventDefault()
+      const items = scrollRef.current?.querySelectorAll('.proj-lb-item')
+      if (!items || !items.length) return
+      const target = items[Math.max(0, Math.min(items.length - 1, current - 1 + dir))]
+      if (target) target.scrollIntoView({ behavior: 'smooth' })
+    }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') step(1)
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') step(-1)
+  }, [onClose, current])
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
@@ -60,7 +72,7 @@ export default function Lightbox({ images, startIndex, onClose }) {
       <div className="proj-lb-scroll" ref={scrollRef}>
         {images.map((src, i) => (
           <div key={i} className="proj-lb-item">
-            <img src={src} alt="" />
+            <img src={src} alt={alt || ''} />
           </div>
         ))}
       </div>

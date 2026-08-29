@@ -11,6 +11,8 @@ export default function ProjectPage({ project }) {
   const allImages = useMemo(() => extractImages(project.gallery), [project.gallery])
   const num = project.displayNumber ? String(project.displayNumber).padStart(2, '0') : null
 
+  const altText = [project.title, project.client, 'photographed by Joe Hale'].filter(Boolean).join(' — ')
+
   const handleImageClick = (src) => {
     const idx = allImages.indexOf(src)
     setLbIndex(idx !== -1 ? idx : 0)
@@ -29,11 +31,11 @@ export default function ProjectPage({ project }) {
         </div>
       </div>
 
-      <Gallery rows={project.gallery} onImageClick={handleImageClick} />
+      <Gallery rows={project.gallery} onImageClick={handleImageClick} alt={altText} />
       <Credits credits={project.credits} tags={project.tags} />
       <ProjectBanner title={project.title} category={project.category} date={project.date} number={project.displayNumber} location={project.location} client={project.client} />
       {lbIndex !== null && (
-        <Lightbox images={allImages} startIndex={lbIndex} onClose={() => setLbIndex(null)} />
+        <Lightbox images={allImages} startIndex={lbIndex} onClose={() => setLbIndex(null)} alt={altText} />
       )}
     </>
   )

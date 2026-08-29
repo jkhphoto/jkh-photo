@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef, useState, useMemo } from 'react'
 
-function GalleryImage({ src, onClick }) {
+function GalleryImage({ src, onClick, alt }) {
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
   useEffect(() => {
@@ -16,7 +16,7 @@ function GalleryImage({ src, onClick }) {
   }, [])
   return (
     <div ref={ref} className={`g-img ${vis ? 'vis' : ''}`} onClick={() => onClick(src)}>
-      <img src={src} alt="" loading="lazy" />
+      <img src={src} alt={alt || ''} loading="lazy" />
     </div>
   )
 }
@@ -65,7 +65,7 @@ function GalleryVideo({ src }) {
 }
 
 /* ── Mosaic: justified flexbox rows ── */
-function MosaicImage({ src, onClick, style }) {
+function MosaicImage({ src, onClick, style, alt }) {
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
   useEffect(() => {
@@ -80,12 +80,12 @@ function MosaicImage({ src, onClick, style }) {
   }, [])
   return (
     <div ref={ref} className={`g-mosaic-img ${vis ? 'vis' : ''}`} onClick={() => onClick(src)} style={style}>
-      <img src={src} alt="" loading="lazy" />
+      <img src={src} alt={alt || ''} loading="lazy" />
     </div>
   )
 }
 
-function GalleryMosaic({ images, onImageClick }) {
+function GalleryMosaic({ images, onImageClick, alt }) {
   const containerRef = useRef(null)
   const [ratios, setRatios] = useState(null)
   const gap = 32
@@ -142,6 +142,7 @@ function GalleryMosaic({ images, onImageClick }) {
             {row.map((item, ii) => (
               <MosaicImage
                 key={`${ri}-${ii}`}
+                alt={alt}
                 src={item.src}
                 onClick={onImageClick}
                 style={{ flex: `${item.ratio} 1 0%` }}
@@ -159,7 +160,7 @@ function GalleryMosaic({ images, onImageClick }) {
    with zero gaps — so the white in the photographs and the white of the
    container read as one continuous surface. A short last row just leaves
    white, which is invisible by design. */
-function SheetCell({ src, onClick }) {
+function SheetCell({ src, onClick, alt }) {
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
   useEffect(() => {
@@ -174,12 +175,12 @@ function SheetCell({ src, onClick }) {
   }, [])
   return (
     <div ref={ref} className={`g-sheet-cell ${vis ? 'vis' : ''}`} onClick={() => onClick(src)}>
-      <img src={src} alt="" loading="lazy" />
+      <img src={src} alt={alt || ''} loading="lazy" />
     </div>
   )
 }
 
-function GallerySheet({ images, columns, onImageClick, style }) {
+function GallerySheet({ images, columns, onImageClick, style, alt }) {
   const srcs = (images || [])
     .map((img) => (typeof img === 'string' ? img : img.image))
     .filter(Boolean)
@@ -189,7 +190,7 @@ function GallerySheet({ images, columns, onImageClick, style }) {
     <div className="g-sheet" style={style}>
       <div className="g-sheet-grid" style={{ gridTemplateColumns: `repeat(${cols}, 1fr)` }}>
         {srcs.map((src, i) => (
-          <SheetCell key={i} src={src} onClick={onImageClick} />
+          <SheetCell key={i} src={src} onClick={onImageClick} alt={alt} />
         ))}
       </div>
     </div>
@@ -236,7 +237,7 @@ export function extractImages(rows) {
   return imgs
 }
 
-export default function Gallery({ rows, onImageClick }) {
+export default function Gallery({ rows, onImageClick, alt }) {
   if (!rows || rows.length === 0) return null
   return (
     <div className="gallery">
@@ -246,33 +247,33 @@ export default function Gallery({ rows, onImageClick }) {
         const t = row.type || row._template
         switch (t) {
           case 'pair':
-            return <div key={i} className="g-row g-pair" style={style}><GalleryImage src={row.left} onClick={onImageClick} /><GalleryImage src={row.right} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-pair" style={style}><GalleryImage alt={alt} src={row.left} onClick={onImageClick} /><GalleryImage alt={alt} src={row.right} onClick={onImageClick} /></div>
           case 'pairWide':
-            return <div key={i} className="g-row g-pair-wide" style={style}><GalleryImage src={row.left} onClick={onImageClick} /><GalleryImage src={row.right} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-pair-wide" style={style}><GalleryImage alt={alt} src={row.left} onClick={onImageClick} /><GalleryImage alt={alt} src={row.right} onClick={onImageClick} /></div>
           case 'pairNarrow':
-            return <div key={i} className="g-row g-pair-narrow" style={style}><GalleryImage src={row.left} onClick={onImageClick} /><GalleryImage src={row.right} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-pair-narrow" style={style}><GalleryImage alt={alt} src={row.left} onClick={onImageClick} /><GalleryImage alt={alt} src={row.right} onClick={onImageClick} /></div>
           case 'trio':
-            return <div key={i} className="g-row g-trio" style={style}><GalleryImage src={row.img1} onClick={onImageClick} /><GalleryImage src={row.img2} onClick={onImageClick} /><GalleryImage src={row.img3} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-trio" style={style}><GalleryImage alt={alt} src={row.img1} onClick={onImageClick} /><GalleryImage alt={alt} src={row.img2} onClick={onImageClick} /><GalleryImage alt={alt} src={row.img3} onClick={onImageClick} /></div>
           case 'full':
-            return <div key={i} className="g-row g-full" style={style}><GalleryImage src={row.image} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-full" style={style}><GalleryImage alt={alt} src={row.image} onClick={onImageClick} /></div>
           case 'cinematic':
-            return <div key={i} className="g-row g-full g-cinematic" style={style}><GalleryImage src={row.image} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-full g-cinematic" style={style}><GalleryImage alt={alt} src={row.image} onClick={onImageClick} /></div>
           case 'centered':
-            return <div key={i} className="g-row g-centered" style={style}><GalleryImage src={row.image} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-centered" style={style}><GalleryImage alt={alt} src={row.image} onClick={onImageClick} /></div>
           case 'centeredSmall':
-            return <div key={i} className="g-row g-centered g-centered-sm" style={style}><GalleryImage src={row.image} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-centered g-centered-sm" style={style}><GalleryImage alt={alt} src={row.image} onClick={onImageClick} /></div>
           case 'centeredLarge':
-            return <div key={i} className="g-row g-centered g-centered-lg" style={style}><GalleryImage src={row.image} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-centered g-centered-lg" style={style}><GalleryImage alt={alt} src={row.image} onClick={onImageClick} /></div>
           case 'diptych':
-            return <div key={i} className="g-row g-diptych" style={style}><GalleryImage src={row.left} onClick={onImageClick} /><GalleryImage src={row.right} onClick={onImageClick} /></div>
+            return <div key={i} className="g-row g-diptych" style={style}><GalleryImage alt={alt} src={row.left} onClick={onImageClick} /><GalleryImage alt={alt} src={row.right} onClick={onImageClick} /></div>
           case 'video':
             return <div key={i} className="g-row g-full" style={style}><GalleryVideo src={row.video} /></div>
           case 'videoFull':
             return <div key={i} className="g-row g-full g-cinematic" style={style}><GalleryVideo src={row.video} /></div>
           case 'mosaic':
-            return <div key={i} style={style}><GalleryMosaic images={row.images} onImageClick={onImageClick} /></div>
+            return <div key={i} style={style}><GalleryMosaic images={row.images} onImageClick={onImageClick} alt={alt} /></div>
           case 'sheet':
-            return <GallerySheet key={i} images={row.images} columns={row.columns} onImageClick={onImageClick} style={style} />
+            return <GallerySheet key={i} images={row.images} columns={row.columns} onImageClick={onImageClick} style={style} alt={alt} />
           case 'text':
             return <div key={i} className="g-row g-text" style={style}><p>{row.content}</p></div>
           case 'spacer':

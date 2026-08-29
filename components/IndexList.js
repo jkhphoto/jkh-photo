@@ -168,6 +168,7 @@ export default function IndexList({ projects }) {
         className={`idx-preview ${previewSrc && active ? 'show' : ''}`}
         src={previewSrc || ''}
         alt=""
+        aria-hidden="true"
       />
     </>
   )

@@ -146,7 +146,7 @@ function Reader({ item, onClose }) {
       <div className="gen-reader-scroll" ref={scrollRef} onScroll={onScroll}>
         <div className="gen-reader-frame"><img src={item.cover} alt={item.title || ''} /></div>
         {spreads.map((s, i) => (
-          <div key={i} className="gen-reader-frame"><img src={s.image} alt="" /></div>
+          <div key={i} className="gen-reader-frame"><img src={s.image} alt={`Generations photo book spread ${i + 2}`} /></div>
         ))}
       </div>
       <div className="gen-reader-progress">
@@ -163,7 +163,7 @@ export default function GenerationsPage({ item = {} }) {
 
   // ── Defaults baked in so the page sells even before the mdx updates ──
   const PAYPAL_LINK = 'https://www.paypal.com/ncp/payment/PKFF2PCM8PSN8'
-  const DEFAULT_PRICE = '$60 pickup · $73 shipped'
+  const DEFAULT_PRICE = '$60 pickup · $73 shipped (US)'
   const COVER_FALLBACK = '/images/generations-cover.jpeg'
 
   // Cover slideshow: prefer `covers` list, else `cover`, ignoring the
@@ -236,7 +236,7 @@ export default function GenerationsPage({ item = {} }) {
           <div className="gen-grid">
             {spreads.map((s, i) => (
               <figure key={i} className="gen-grid-item" onClick={() => setReaderOpen(true)}>
-                <img src={s.image} alt="" loading="lazy" />
+                <img src={s.image} alt={`Generations photo book spread ${i + 1}`} loading="lazy" />
               </figure>
             ))}
           </div>

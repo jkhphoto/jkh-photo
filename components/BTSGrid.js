@@ -35,7 +35,7 @@ function BTSImage({ src, index, onClick }) {
       className={`bts-item ${vis ? 'vis' : ''}`}
       onClick={() => onClick(index)}
     >
-      {vis && <img src={src} alt="" />}
+      {vis && <img src={src} alt="Behind the scenes — JKH Photo" />}
     </div>
   )
 }
@@ -97,7 +97,7 @@ function BTSLightbox({ images, startIndex, onClose }) {
       <div className="bts-lb-scroll" ref={scrollRef}>
         {images.map((img, i) => (
           <div key={i} className="bts-lb-item">
-            <img src={fullSrc(img.image)} alt="" />
+            <img src={fullSrc(img.image)} alt="Behind the scenes — JKH Photo" />
           </div>
         ))}
       </div>

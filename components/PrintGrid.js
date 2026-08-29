@@ -45,7 +45,7 @@ function PrintSection({ item, index }) {
             <div className="print-filmstrip-track">
               {spreads.map((s, i) => (
                 <div key={i} className="print-filmstrip-frame" onClick={() => setReaderOpen(true)}>
-                  <img src={s.image} alt="" />
+                  <img src={s.image} alt={item.title || 'Print — JKH Photo'} />
                 </div>
               ))}
             </div>
@@ -101,7 +101,7 @@ function PrintReader({ item, onClose }) {
         </div>
         {spreads.map((s, i) => (
           <div key={i} className="print-reader-page-wrap">
-            <img src={s.image} alt="" />
+            <img src={s.image} alt={item.title || 'Print — JKH Photo'} />
           </div>
         ))}
         {(item.description || item.link) && (
