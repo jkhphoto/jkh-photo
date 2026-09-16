@@ -16,7 +16,7 @@ export default function HeroVideo() {
   }, [])
   return (
     <div className="hero-video" onClick={toggle}>
-      <video ref={ref} autoPlay muted loop playsInline>
+      <video ref={ref} autoPlay muted loop playsInline poster="/video/reel-poster.jpg" width="1920" height="1080">
         <source src="/video/reel.mp4" type="video/mp4" />
       </video>
       <div className={`scroll-hint ${hidden ? 'hidden' : ''}`}>

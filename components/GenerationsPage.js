@@ -194,7 +194,7 @@ export default function GenerationsPage({ item = {} }) {
   }
 
   return (
-    <main className="gen">
+    <div className="gen">
       <section className="gen-hero">
         <CoverSlideshow images={covers} alt={item.title || 'Generations'} />
 
@@ -252,6 +252,6 @@ export default function GenerationsPage({ item = {} }) {
       )}
 
       {readerOpen && <Reader item={item} onClose={() => setReaderOpen(false)} />}
-    </main>
+    </div>
   )
 }

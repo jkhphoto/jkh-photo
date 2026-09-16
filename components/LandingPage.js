@@ -23,7 +23,7 @@ export default function LandingPage() {
   }
 
   return (
-    <main className="landing">
+    <div className="landing">
       {/* Left: Video */}
       <section className="landing-left" onClick={toggle}>
         <video ref={videoRef} autoPlay muted loop playsInline>
@@ -67,6 +67,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   )
 }

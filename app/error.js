@@ -32,12 +32,12 @@ export default function Error({ error, reset }) {
   if (!gaveUp) return null
 
   return (
-    <main className="err">
+    <div className="err">
       <p className="err-label">Something went wrong</p>
       <div className="err-actions">
         <button onClick={() => { sessionStorage.removeItem(RELOAD_KEY); reset() }}>Try again</button>
         <a href="/">Home</a>
       </div>
-    </main>
+    </div>
   )
 }
