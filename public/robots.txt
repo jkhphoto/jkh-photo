@@ -1,5 +1,36 @@
+# Search engines and social unfurlers: welcome.
 User-agent: *
 Allow: /
 Disallow: /admin/
+
+# AI training and scraping crawlers: no. This is advisory — the major
+# labs' crawlers respect it, bad actors ignore it. The real protections
+# are the private repo, Cloudflare's AI bot blocking, and copyright.
+User-agent: GPTBot
+Disallow: /
+User-agent: ChatGPT-User
+Disallow: /
+User-agent: ClaudeBot
+Disallow: /
+User-agent: anthropic-ai
+Disallow: /
+User-agent: Claude-Web
+Disallow: /
+User-agent: CCBot
+Disallow: /
+User-agent: Google-Extended
+Disallow: /
+User-agent: Applebot-Extended
+Disallow: /
+User-agent: PerplexityBot
+Disallow: /
+User-agent: Bytespider
+Disallow: /
+User-agent: meta-externalagent
+Disallow: /
+User-agent: cohere-ai
+Disallow: /
+User-agent: Diffbot
+Disallow: /
 
 Sitemap: https://josephkhale.com/sitemap.xml
