@@ -205,6 +205,7 @@ collections:
         required: false
         fields:
           - { name: image, label: Image, widget: image }
+      - { name: link, label: "Links to", widget: string, required: false, hint: "Optional page this item opens, e.g. /generations or /projects/slug" }
       - { name: details, label: Details, widget: string, required: false, hint: "e.g. Archival pigment print · signed" }
       - { name: description, label: Description, widget: text, required: false }
       - name: variants

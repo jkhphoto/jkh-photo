@@ -47,6 +47,7 @@ export default function ShopClient({ products, shipping }) {
 
   const byKey = (slug, variant) => (l) => l.slug === slug && l.variant === variant
 
+  const [justAdded, setJustAdded] = useState(null)
   const add = (slug, variant) => {
     setCart((c) => {
       const hit = c.find(byKey(slug, variant))
@@ -54,7 +55,11 @@ export default function ShopClient({ products, shipping }) {
         return c.map((l) => (byKey(slug, variant)(l) ? { ...l, qty: Math.min(l.qty + 1, 10) } : l))
       return [...c, { slug, variant, qty: 1 }]
     })
-    setOpen(true)
+    // Quiet confirmation at the point of click — the cart count ticks up
+    // and the row says so. Opening the sheet on every add felt like being
+    // marched to the till.
+    setJustAdded(`${slug}:${variant}`)
+    setTimeout(() => setJustAdded((k) => (k === `${slug}:${variant}` ? null : k)), 1400)
     setError(null)
   }
   const bump = (slug, variant, d) =>
@@ -116,7 +121,7 @@ export default function ShopClient({ products, shipping }) {
       </button>
 
       {Object.entries(products).map(([slug, p]) => (
-        <ShopVariants key={slug} slug={slug} product={p} onAdd={add} />
+        <ShopVariants key={slug} slug={slug} product={p} onAdd={add} justAdded={justAdded} />
       ))}
 
       {open && (
@@ -200,7 +205,7 @@ export default function ShopClient({ products, shipping }) {
  * Renders into the per-product slot the server page leaves open —
  * variant rows live inside each product card, but state lives up here.
  */
-function ShopVariants({ slug, product, onAdd }) {
+function ShopVariants({ slug, product, onAdd, justAdded }) {
   const [mount, setMount] = useState(null)
   useEffect(() => {
     setMount(document.getElementById(`shop-variants-${slug}`))
@@ -221,7 +226,9 @@ function ShopVariants({ slug, product, onAdd }) {
           >
             <span className="shop-variant-label">{v.label}</span>
             <span className="shop-variant-price">{money(v.cents)}</span>
-            <span className="shop-variant-add">{v.soldOut ? '' : 'Add →'}</span>
+            <span className={`shop-variant-add${justAdded === `${slug}:${i}` ? ' shop-variant-add--done' : ''}`}>
+              {v.soldOut ? '' : justAdded === `${slug}:${i}` ? 'Added ✓' : 'Add →'}
+            </span>
           </button>
         ))
       )}

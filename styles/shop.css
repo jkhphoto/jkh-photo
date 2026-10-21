@@ -224,3 +224,6 @@
 @media (max-width: 480px) {
   .shop-grid { grid-template-columns: 1fr; }
 }
+
+/* Post-add confirmation: visible regardless of hover, accent, brief. */
+.shop-variant-add--done { opacity: 1 !important; color: var(--accent); }
