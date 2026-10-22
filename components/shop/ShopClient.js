@@ -35,7 +35,23 @@ export default function ShopClient({ products, shipping }) {
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(null)
 
-  useEffect(() => { setCart(loadCart()) }, [])
+  useEffect(() => {
+    const cart = loadCart()
+    // Deep link from a product page: /shop?add=slug.variantIndex lands
+    // with the item in the cart and the sheet open — "Buy now" without
+    // a detour. Ensure-don't-duplicate, then clean the URL.
+    const m = new URLSearchParams(window.location.search).get('add')
+    if (m) {
+      const [slug, v] = m.split('.')
+      const variant = Number(v) || 0
+      if (!cart.find((l) => l.slug === slug && l.variant === variant)) {
+        cart.push({ slug, variant, qty: 1 })
+      }
+      setOpen(true)
+      window.history.replaceState(null, '', window.location.pathname)
+    }
+    setCart(cart)
+  }, [])
   useEffect(() => {
     try { localStorage.setItem(KEY, JSON.stringify(cart)) } catch {}
   }, [cart])

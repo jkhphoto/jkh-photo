@@ -33,7 +33,7 @@ function PrintSection({ item, index }) {
             {item.year && <span>{item.year}</span>}
             {item.description && <span className="print-section-desc">{item.description}</span>}
             {item.link && (
-              <a href={item.link} target="_blank" rel="noopener" className="print-section-link">
+              <a href={item.link} {...(item.link.startsWith("/") ? {} : { target: "_blank", rel: "noopener" })} className="print-section-link">
                 Available ↗
               </a>
             )}
@@ -108,7 +108,7 @@ function PrintReader({ item, onClose }) {
           <div className="print-reader-colophon">
             {item.description && <p>{item.description}</p>}
             {item.link && (
-              <a href={item.link} target="_blank" rel="noopener">
+              <a href={item.link} {...(item.link.startsWith("/") ? {} : { target: "_blank", rel: "noopener" })}>
                 Available ↗
               </a>
             )}

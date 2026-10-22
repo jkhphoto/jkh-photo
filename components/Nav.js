@@ -45,7 +45,6 @@ export default function Nav() {
     { href: '/', label: 'Home' },
     { href: '/idx', label: 'Index' },
     { href: '/bts', label: 'BTS' },
-    { href: '/generations', label: 'Book' },
     { href: '/shop', label: 'Shop' },
     { href: '/info', label: 'Info' },
   ]
