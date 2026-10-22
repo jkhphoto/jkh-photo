@@ -4,3 +4,8 @@ out/
 tina/__generated__/
 .env
 .env.local
+
+# wrangler local test state
+.wrangler/
+# generated every build by scripts/gen-shop-catalog.mjs
+public/shop-catalog.json
