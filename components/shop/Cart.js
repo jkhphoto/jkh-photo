@@ -36,6 +36,11 @@ export default function Cart() {
   const [error, setError] = useState(null)
 
   // Boot: load state, honour /shop?add=slug.variant deep links.
+  // booted is state, not a ref, so it lands in the same render as the
+  // loaded cart — the persist effect below must never see booted=true
+  // while cart is still the initial empty array, or it would write that
+  // over a saved cart.
+  const [booted, setBooted] = useState(false)
   useEffect(() => {
     const c = loadCart()
     const m = new URLSearchParams(window.location.search).get('add')
@@ -49,13 +54,15 @@ export default function Cart() {
       window.history.replaceState(null, '', window.location.pathname)
     }
     setCart(c)
+    setBooted(true)
   }, [])
 
   // Persist + announce on every change.
   useEffect(() => {
+    if (!booted) return
     try { localStorage.setItem(CART_KEY, JSON.stringify(cart)) } catch {}
     announceCart(cart.reduce((t, l) => t + l.qty, 0))
-  }, [cart])
+  }, [cart, booted])
 
   // The bus: adds and opens arrive from anywhere on the site.
   useEffect(() => {

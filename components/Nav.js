@@ -24,6 +24,11 @@ export default function Nav() {
     openCart()
   }
 
+  // The count only belongs where selling happens — shop and product
+  // pages. Portfolio pages stay clean.
+  const onShopPages = pathname.startsWith('/shop') || pathname === '/print'
+  const cartVisible = onShopPages && cartCount > 0
+
   // Close menu on route change
   useEffect(() => {
     setMenuOpen(false)
@@ -74,7 +79,7 @@ export default function Nav() {
           {navLinks.map(l => (
             <Link key={l.href} href={l.href}>{l.label}</Link>
           ))}
-          {cartCount > 0 && (
+          {cartVisible && (
             <button type="button" className="nav-cart" onClick={showCart}>
               Cart ({cartCount})
             </button>
@@ -96,7 +101,7 @@ export default function Nav() {
         {navLinks.map(l => (
           <Link key={l.href} href={l.href}>{l.label}</Link>
         ))}
-        {cartCount > 0 && (
+        {cartVisible && (
           <button type="button" className="nav-cart" onClick={showCart}>
             Cart ({cartCount})
           </button>

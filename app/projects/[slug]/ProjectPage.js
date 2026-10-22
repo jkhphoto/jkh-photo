@@ -5,9 +5,8 @@ import Gallery, { extractImages } from '../../../components/Gallery'
 import Credits from '../../../components/Credits'
 import ProjectBanner from '../../../components/ProjectBanner'
 import Lightbox from '../../../components/Lightbox'
-import { BuyBlock } from '../../../components/shop/VariantRows'
 
-export default function ProjectPage({ project, buy = [] }) {
+export default function ProjectPage({ project }) {
   const [lbIndex, setLbIndex] = useState(null)
   const allImages = useMemo(() => extractImages(project.gallery), [project.gallery])
   const num = project.displayNumber ? String(project.displayNumber).padStart(2, '0') : null
@@ -34,13 +33,6 @@ export default function ProjectPage({ project, buy = [] }) {
 
       <Gallery rows={project.gallery} onImageClick={handleImageClick} alt={altText} />
       <Credits credits={project.credits} tags={project.tags} />
-      {buy.length > 0 && (
-        <div className="proj-buy">
-          {buy.map(({ slug, product }) => (
-            <BuyBlock key={slug} slug={slug} product={product} label={product.title} />
-          ))}
-        </div>
-      )}
       <ProjectBanner title={project.title} category={project.category} date={project.date} number={project.displayNumber} location={project.location} client={project.client} />
       {lbIndex !== null && (
         <Lightbox images={allImages} startIndex={lbIndex} onClose={() => setLbIndex(null)} alt={altText} />

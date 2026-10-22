@@ -87,11 +87,6 @@
 .buy-block { max-width: 420px; }
 /* On /print it sits between the meta rule and the filmstrip. */
 .print-section .buy-block { margin: 0 0 32px; }
-/* On project pages, under the credits, matching their side padding. */
-.proj-buy { padding: 0 32px 64px; }
-@media (max-width: 768px) {
-  .proj-buy { padding: 0 20px 48px; }
-}
 .buy-block-label {
   font-family: var(--mono);
   font-size: 9px;
