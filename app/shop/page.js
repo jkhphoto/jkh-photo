@@ -3,17 +3,12 @@ import Link from 'next/link'
 import fs from 'fs'
 import path from 'path'
 import { getCollection } from '../../lib/content'
+import { readCatalog } from '../../lib/shopCatalog'
 import ShopClient from '../../components/shop/ShopClient'
 
 export const metadata = {
   title: 'Shop — JKH Photo',
   description: 'Prints and books by Joe Hale. US shipping or Brooklyn pickup.',
-}
-
-/** Same numbers the checkout function charges — one generated source. */
-function readCatalog() {
-  const raw = fs.readFileSync(path.join(process.cwd(), 'public/shop-catalog.json'), 'utf-8')
-  return JSON.parse(raw)
 }
 
 export default function ShopPage() {
@@ -32,9 +27,10 @@ export default function ShopPage() {
       <div className="shop-header">
         <h1 className="shop-title">Shop</h1>
         {intro && <p className="shop-intro">{intro}</p>}
-        {/* ShopClient renders the cart button + sheet; it portals the
-            variant rows into each card's slot below. */}
-        <ShopClient products={catalog.products} shipping={catalog.shipping} />
+        {/* The cart itself is global (mounted in the layout); ShopClient
+            hosts this page's buy points — the header button and the
+            variant rows portaled into each card's slot below. */}
+        <ShopClient products={catalog.products} />
       </div>
 
       <div className="shop-grid">

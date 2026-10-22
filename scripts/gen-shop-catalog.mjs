@@ -58,6 +58,9 @@ if (existsSync(shopDir)) {
     products[slug] = {
       title: val(block, "title") || slug,
       soldOut: val(block, "soldOut") === "true",
+      // Where the product's page lives — lets that page host buy rows
+      // for it (the catalog is the one map of what's sold where).
+      link: val(block, "link") || "",
       variants: variants(block),
     };
   }

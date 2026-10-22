@@ -1,7 +1,9 @@
 import '../styles/globals.css'
+import '../styles/cart.css'
 import Script from 'next/script'
 import Nav from '../components/Nav'
 import Clock from '../components/Clock'
+import Cart from '../components/shop/Cart'
 
 export const metadata = {
   metadataBase: new URL('https://josephkhale.com'),
@@ -24,7 +26,7 @@ export default function RootLayout({ children }) {
           !function(key){if(window.reb2b)return;window.reb2b={loaded:true};var s=document.createElement("script");s.async=true;s.src="https://b2bjsstore.s3.us-west-2.amazonaws.com/b/"+key+"/"+key+".js.gz";document.getElementsByTagName("script")[0].parentNode.insertBefore(s,document.getElementsByTagName("script")[0]);}("0GOYPYHRQPOX");
         `}</Script>
       </head>
-      <body><Nav /><main>{children}</main><Clock /></body>
+      <body><Nav /><main>{children}</main><Cart /><Clock /></body>
     </html>
   )
 }

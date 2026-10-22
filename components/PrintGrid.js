@@ -1,7 +1,8 @@
 'use client'
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { BuyBlock } from './shop/VariantRows'
 
-function PrintSection({ item, index }) {
+function PrintSection({ item, index, buyProduct }) {
   const [readerOpen, setReaderOpen] = useState(false)
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
@@ -32,13 +33,17 @@ function PrintSection({ item, index }) {
           <div className="print-section-details">
             {item.year && <span>{item.year}</span>}
             {item.description && <span className="print-section-desc">{item.description}</span>}
-            {item.link && (
+            {/* With buy rows in place the old "Available ↗" bounce to the
+                shop is redundant — add to the same cart right here. */}
+            {!buyProduct && item.link && (
               <a href={item.link} {...(item.link.startsWith("/") ? {} : { target: "_blank", rel: "noopener" })} className="print-section-link">
                 Available ↗
               </a>
             )}
           </div>
         </div>
+
+        {buyProduct && <BuyBlock slug={item._sys.filename} product={buyProduct} />}
 
         {spreads.length > 0 && (
           <div className="print-filmstrip">
@@ -122,7 +127,7 @@ function PrintReader({ item, onClose }) {
   )
 }
 
-export default function PrintGrid({ items }) {
+export default function PrintGrid({ items, buy = {} }) {
   if (!items || items.length === 0) {
     return (
       <div className="print-page">
@@ -141,7 +146,7 @@ export default function PrintGrid({ items }) {
         <h1 className="print-page-title">Print</h1>
       </div>
       {items.map((item, i) => (
-        <PrintSection key={i} item={item} index={i} />
+        <PrintSection key={i} item={item} index={i} buyProduct={buy[item._sys?.filename]} />
       ))}
     </div>
   )

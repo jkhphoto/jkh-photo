@@ -2,12 +2,27 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { openCart, readCartCount } from './shop/cartBus'
 
 export default function Nav() {
   const ref = useRef(null)
   const last = useRef(0)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
   const pathname = usePathname()
+
+  // Cart count: seed from storage, then follow the global cart's announcements.
+  useEffect(() => {
+    setCartCount(readCartCount())
+    const onChanged = (e) => setCartCount(e.detail.count)
+    window.addEventListener('jkh:cart:changed', onChanged)
+    return () => window.removeEventListener('jkh:cart:changed', onChanged)
+  }, [])
+
+  const showCart = () => {
+    setMenuOpen(false)
+    openCart()
+  }
 
   // Close menu on route change
   useEffect(() => {
@@ -59,6 +74,11 @@ export default function Nav() {
           {navLinks.map(l => (
             <Link key={l.href} href={l.href}>{l.label}</Link>
           ))}
+          {cartCount > 0 && (
+            <button type="button" className="nav-cart" onClick={showCart}>
+              Cart ({cartCount})
+            </button>
+          )}
         </div>
 
         {/* Hamburger — mobile only */}
@@ -76,6 +96,11 @@ export default function Nav() {
         {navLinks.map(l => (
           <Link key={l.href} href={l.href}>{l.label}</Link>
         ))}
+        {cartCount > 0 && (
+          <button type="button" className="nav-cart" onClick={showCart}>
+            Cart ({cartCount})
+          </button>
+        )}
         <div className="mobile-menu-contact">
           <a href="mailto:hello@josephkhale.com">hello@josephkhale.com</a>
           <a href="tel:5187950309">518-795-0309</a>

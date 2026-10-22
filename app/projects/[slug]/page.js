@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import ProjectPage from './ProjectPage'
 import { getSlugs, getEntry, getOrderedProjects } from '../../../lib/content'
+import { productsLinkedTo } from '../../../lib/shopCatalog'
 
 export async function generateStaticParams() {
   return getSlugs('project').map(slug => ({ slug }))
@@ -39,5 +40,8 @@ export default async function Page({ params }) {
   if (match) {
     project.displayNumber = match.displayNumber
   }
-  return <ProjectPage project={project} />
+  // Shop products that point at this project sell here too — buy rows
+  // under the credits, same cart as everywhere else.
+  const buy = productsLinkedTo(`/projects/${params.slug}`)
+  return <ProjectPage project={project} buy={buy} />
 }
