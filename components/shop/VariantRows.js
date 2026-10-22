@@ -4,7 +4,7 @@ import { addToCart } from './cartBus'
 
 /*
   The buy point. Variant rows that add to the one global cart — hosted
-  by the shop grid (portaled into each card), /print, and project pages.
+  by the shop grid (portaled into each card) and the product pages.
   Confirmation is quiet: the row says "Added ✓" and the nav count ticks.
 */
 

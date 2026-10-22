@@ -3,10 +3,10 @@ import { useEffect, useMemo, useState } from 'react'
 import { CART_KEY, announceCart } from './cartBus'
 
 /*
-  The one cart. Mounted once in the root layout so every page — shop,
-  /print, project pages — shares the same sheet, the same localStorage
-  state, the same checkout. Buy points dispatch jkh:cart:add; the nav
-  badge listens to jkh:cart:changed.
+  The one cart. Mounted once in the root layout so the shop grid and
+  the product pages share the same sheet, the same localStorage state,
+  the same checkout. Buy points dispatch jkh:cart:add; the nav badge
+  listens to jkh:cart:changed.
 
   Needs the catalog to price lines; fetches /shop-catalog.json once on
   first use (it's a tiny static file on the same origin, cached hard).

@@ -156,7 +156,7 @@ collections:
           - { name: image, label: Image, widget: image }
 
   - name: print
-    label: Print
+    label: "Books — spreads (shown on the product page)"
     folder: content/print
     extension: mdx
     format: yaml-frontmatter
@@ -168,12 +168,12 @@ collections:
       - { name: cover, label: Cover Image, widget: image, required: true }
       - { name: description, label: Description, widget: text, required: false }
       - { name: link, label: Purchase Link, widget: string, required: false, hint: URL to buy }
-      - name: spreads
-        label: Interior Spreads
+      - name: covers
+        label: "Pages / spreads"
         widget: list
         required: false
-        fields:
-          - { name: image, label: Spread Image, widget: image }
+        hint: "Shown in the flip-through on the product page, in order."
+        field: { name: image, label: Image, widget: image }
   - name: shopSettings
     label: "Shop — settings"
     files:
@@ -205,7 +205,7 @@ collections:
         required: false
         fields:
           - { name: image, label: Image, widget: image }
-      - { name: link, label: "Links to", widget: string, required: false, hint: "Optional related page shown on the product page, e.g. /print" }
+      - { name: link, label: "Links to", widget: string, required: false, hint: "Optional related page shown on the product page, e.g. /projects/slug (books show the flip-through instead)" }
       - { name: details, label: Details, widget: string, required: false, hint: "e.g. Archival pigment print · signed" }
       - { name: description, label: Description, widget: text, required: false }
       - name: variants

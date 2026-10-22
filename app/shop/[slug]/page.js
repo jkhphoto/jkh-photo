@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { getSlugs, getEntry } from '../../../lib/content'
 import { readCatalog } from '../../../lib/shopCatalog'
 import VariantRows from '../../../components/shop/VariantRows'
+import BookReader from '../../../components/shop/BookReader'
 
 export async function generateStaticParams() {
   return getSlugs('shop').map((slug) => ({ slug }))
@@ -36,6 +37,15 @@ export default function ProductPage({ params }) {
   }
 
   const images = (item.images || []).map((i) => i.image).filter(Boolean)
+  // A matching entry in content/print carries the book's page images —
+  // if it has any, the product page gets the flip-through. The content
+  // predates the CMS schema: `covers` is the flat list actually in use,
+  // `spreads` the shape the config once promised.
+  const printEntry = getEntry('print', params.slug)
+  const spreads = [
+    ...(printEntry?.covers || []),
+    ...(printEntry?.spreads || []).map((s) => s?.image),
+  ].filter((src) => src && src !== item.cover)
 
   return (
     <div className="product-page">
@@ -55,10 +65,19 @@ export default function ProductPage({ params }) {
         <VariantRows slug={params.slug} product={product} />
 
         <p className="product-note">Ships in the US, or Brooklyn pickup.</p>
-        {item.link && (
-          <Link href={item.link} className="product-related">
-            {item.kind === 'book' ? 'Flip through the book →' : 'See it in context →'}
-          </Link>
+        {spreads.length > 0 ? (
+          <BookReader
+            title={item.title}
+            cover={item.cover}
+            spreads={spreads}
+            description={item.description}
+          />
+        ) : (
+          item.link && (
+            <Link href={item.link} className="product-related">
+              See it in context →
+            </Link>
+          )
         )}
       </div>
     </div>

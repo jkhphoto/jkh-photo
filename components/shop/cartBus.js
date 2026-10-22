@@ -2,9 +2,9 @@
 
 /*
   The cart is one global sheet (components/shop/Cart.js, mounted in the
-  layout) and many scattered buy points — shop grid, /print, project
-  pages, the nav badge. They're separate client islands, so they talk
-  over window events instead of threading context through server pages:
+  layout) and its buy points — the shop grid, product pages, the nav
+  badge. They're separate client islands, so they talk over window
+  events instead of threading context through server pages:
 
     jkh:cart:add      {slug, variant}  → Cart adds the line
     jkh:cart:open                      → Cart opens the sheet

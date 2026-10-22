@@ -3,7 +3,7 @@ import { getSlugs } from '../lib/content'
 const BASE = 'https://josephkhale.com'
 
 export default function sitemap() {
-  const staticPages = ['', '/idx', '/bts', '/info', '/print', '/shop'].map((p) => ({
+  const staticPages = ['', '/idx', '/bts', '/info', '/shop'].map((p) => ({
     url: `${BASE}${p}`,
     changeFrequency: 'monthly',
     priority: p === '' ? 1 : 0.7,
