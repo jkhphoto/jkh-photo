@@ -83,19 +83,6 @@
   color: var(--accent);
 }
 
-/* ── Buy block: variant rows hosted outside the shop grid ── */
-.buy-block { max-width: 420px; }
-/* On /print it sits between the meta rule and the filmstrip. */
-.print-section .buy-block { margin: 0 0 32px; }
-.buy-block-label {
-  font-family: var(--mono);
-  font-size: 9px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-.buy-block .shop-variants { margin-top: 8px; }
 
 /* ── Cart sheet ── */
 .cart-scrim {

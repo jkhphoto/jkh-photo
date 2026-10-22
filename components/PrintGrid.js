@@ -1,8 +1,7 @@
 'use client'
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { BuyBlock } from './shop/VariantRows'
 
-function PrintSection({ item, index, buyProduct }) {
+function PrintSection({ item, index }) {
   const [readerOpen, setReaderOpen] = useState(false)
   const ref = useRef(null)
   const [vis, setVis] = useState(false)
@@ -33,17 +32,13 @@ function PrintSection({ item, index, buyProduct }) {
           <div className="print-section-details">
             {item.year && <span>{item.year}</span>}
             {item.description && <span className="print-section-desc">{item.description}</span>}
-            {/* With buy rows in place the old "Available ↗" bounce to the
-                shop is redundant — add to the same cart right here. */}
-            {!buyProduct && item.link && (
+            {item.link && (
               <a href={item.link} {...(item.link.startsWith("/") ? {} : { target: "_blank", rel: "noopener" })} className="print-section-link">
-                Available ↗
+                {item.link.includes('?add=') ? 'Add to cart →' : 'Buy →'}
               </a>
             )}
           </div>
         </div>
-
-        {buyProduct && <BuyBlock slug={item._sys.filename} product={buyProduct} />}
 
         {spreads.length > 0 && (
           <div className="print-filmstrip">
@@ -114,7 +109,7 @@ function PrintReader({ item, onClose }) {
             {item.description && <p>{item.description}</p>}
             {item.link && (
               <a href={item.link} {...(item.link.startsWith("/") ? {} : { target: "_blank", rel: "noopener" })}>
-                Available ↗
+                {item.link.includes('?add=') ? 'Add to cart →' : 'Buy →'}
               </a>
             )}
           </div>
@@ -127,7 +122,7 @@ function PrintReader({ item, onClose }) {
   )
 }
 
-export default function PrintGrid({ items, buy = {} }) {
+export default function PrintGrid({ items }) {
   if (!items || items.length === 0) {
     return (
       <div className="print-page">
@@ -146,7 +141,7 @@ export default function PrintGrid({ items, buy = {} }) {
         <h1 className="print-page-title">Print</h1>
       </div>
       {items.map((item, i) => (
-        <PrintSection key={i} item={item} index={i} buyProduct={buy[item._sys?.filename]} />
+        <PrintSection key={i} item={item} index={i} />
       ))}
     </div>
   )

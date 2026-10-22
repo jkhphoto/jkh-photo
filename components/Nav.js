@@ -24,10 +24,9 @@ export default function Nav() {
     openCart()
   }
 
-  // The count only belongs where selling happens — shop and product
-  // pages. Portfolio pages stay clean.
-  const onShopPages = pathname.startsWith('/shop') || pathname === '/print'
-  const cartVisible = onShopPages && cartCount > 0
+  // The count only belongs where selling happens — the shop and its
+  // product pages. Portfolio pages stay clean.
+  const cartVisible = pathname.startsWith('/shop') && cartCount > 0
 
   // Close menu on route change
   useEffect(() => {

@@ -39,18 +39,12 @@ export default function ShopPage() {
           const soldOut = item.soldOut === true
           return (
             <div key={slug} className={`shop-item${soldOut ? ' shop-item--soldout' : ''}`}>
-              {item.link ? (
-                <Link href={item.link} className="shop-item-cover">
-                  <img src={item.cover} alt={`${item.title} — JKH Photo`} loading="lazy" />
-                </Link>
-              ) : (
-                <div className="shop-item-cover">
-                  <img src={item.cover} alt={`${item.title} — JKH Photo`} loading="lazy" />
-                </div>
-              )}
+              <Link href={`/shop/${slug}`} className="shop-item-cover">
+                <img src={item.cover} alt={`${item.title} — JKH Photo`} loading="lazy" />
+              </Link>
               <div className="shop-item-info">
                 <h2 className="shop-item-title">
-                  {item.link ? <Link href={item.link}>{item.title}</Link> : item.title}
+                  <Link href={`/shop/${slug}`}>{item.title}</Link>
                 </h2>
                 {item.details && <p className="shop-item-details">{item.details}</p>}
                 {item.description && <p className="shop-item-desc">{item.description}</p>}

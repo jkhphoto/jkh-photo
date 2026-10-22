@@ -45,14 +45,3 @@ export default function VariantRows({ slug, product }) {
     </div>
   )
 }
-
-/** Variant rows for hosting outside the shop grid. The label is for
-    pages where the rows sit away from the product's own title. */
-export function BuyBlock({ slug, product, label }) {
-  return (
-    <div className="buy-block">
-      {label && <p className="buy-block-label">{label}</p>}
-      <VariantRows slug={slug} product={product} />
-    </div>
-  )
-}
