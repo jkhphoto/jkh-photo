@@ -13,5 +13,10 @@ export default function sitemap() {
     changeFrequency: 'monthly',
     priority: 0.8,
   }))
-  return [...staticPages, ...projects]
+  const products = getSlugs('shop').map((slug) => ({
+    url: `${BASE}/shop/${slug}`,
+    changeFrequency: 'monthly',
+    priority: 0.8,
+  }))
+  return [...staticPages, ...projects, ...products]
 }
