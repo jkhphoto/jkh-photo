@@ -1,5 +1,14 @@
 'use client'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+
+function shuffle(arr) {
+  const a = [...arr]
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[a[i], a[j]] = [a[j], a[i]]
+  }
+  return a
+}
 
 function fullSrc(src) {
   if (!src) return src
@@ -98,6 +107,7 @@ function BTSLightbox({ images, startIndex, onClose }) {
 
 export default function BTSGrid({ images }) {
   const [lbIndex, setLbIndex] = useState(null)
+  const shuffled = useMemo(() => shuffle(images || []), [])
 
   if (!images || images.length === 0) {
     return (
@@ -117,14 +127,14 @@ export default function BTSGrid({ images }) {
           <h1 className="bts-title">BTS</h1>
         </div>
         <div className="bts-grid">
-          {images.map((img, i) => (
+          {shuffled.map((img, i) => (
             <BTSImage key={i} src={img.image} index={i} onClick={() => setLbIndex(i)} />
           ))}
         </div>
       </div>
 
       {lbIndex !== null && (
-        <BTSLightbox images={images} startIndex={lbIndex} onClose={() => setLbIndex(null)} />
+        <BTSLightbox images={shuffled} startIndex={lbIndex} onClose={() => setLbIndex(null)} />
       )}
     </>
   )
