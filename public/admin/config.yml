@@ -32,6 +32,7 @@ collections:
       - { name: active, label: Active, widget: boolean, default: true, hint: "Uncheck to hide this project from the site" }
       - { name: featured, label: Show on Homepage, widget: boolean, default: false }
       - { name: featuredImage, label: Featured Image (homepage hover), widget: image, required: false }
+      - { name: indexImage, label: "Index tile image (optional)", widget: image, required: false, hint: "The photo on this project's Index tile. Leave empty to use the Featured Image. Transparent PNG/WebP cut-outs work." }
       - { name: tags, label: Tags, widget: list, required: false, hint: "e.g. Running, Sports, Fashion, Portrait" }
       - name: gallery
         label: Gallery

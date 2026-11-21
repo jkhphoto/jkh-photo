@@ -93,7 +93,8 @@
   text-decoration: none;
 }
 
-.idx-img { background: var(--line); }
+/* No backdrop behind a frame — transparent cut-outs sit on the page. */
+.idx-img { background: none; }
 .idx-img img {
   display: block;
   width: 100%;
@@ -145,7 +146,7 @@
 .idx-num { flex: 0 0 12px; }
 
 /* A job with no photos yet still holds its place as an empty frame. */
-.idx-img:empty { aspect-ratio: var(--r); }
+.idx-img:empty { aspect-ratio: var(--r); background: var(--line); }
 
 /* Studio-Display-wide screens fit a seventh vertical in a row at 17vw. */
 @media (min-width: 2200px) {

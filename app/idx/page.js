@@ -13,9 +13,11 @@ function firstGalleryImage(p) {
   return m ? m[1] : null
 }
 
-/** The tile's photo. featuredImage drives the homepage hover and is often a
- *  cut-out PNG, which reads poorly as a grid tile — prefer a real frame. */
+/** The tile's photo: indexImage when set (chosen in Decap — may be a
+ *  transparent cut-out). Otherwise featuredImage, unless that's a PNG: those
+ *  are usually full-size homepage hover art, so a real frame is lighter. */
 function tileImage(p) {
+  if (p.indexImage) return p.indexImage
   const f = p.featuredImage
   if (f && !/\.png$/i.test(f)) return f
   return firstGalleryImage(p) || f || null
