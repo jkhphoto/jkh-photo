@@ -75,8 +75,10 @@
 /* ── Grid ──
    The ::after spacer soaks up the last row's slack so a short final row
    keeps the same height instead of stretching across the page. */
+/* Row height follows the page width, so a row holds about five or six
+   jobs on any desktop and the frames grow with the screen. */
 .idx-grid {
-  --row: 260px;
+  --row: clamp(200px, 17vw, 520px);
   display: flex;
   flex-wrap: wrap;
   gap: 44px 16px;
@@ -145,8 +147,13 @@
 /* A job with no photos yet still holds its place as an empty frame. */
 .idx-img:empty { aspect-ratio: var(--r); }
 
+/* Studio-Display-wide screens fit a seventh vertical in a row at 17vw. */
+@media (min-width: 2200px) {
+  .idx-grid { --row: 19vw; }
+}
+
 @media (max-width: 1100px) {
-  .idx-grid { --row: 200px; }
+  .idx-grid { --row: 24vw; }
 }
 
 @media (max-width: 768px) {
@@ -154,7 +161,7 @@
   .idx-header { margin-bottom: 24px; }
   .idx-filters { width: 100%; gap: 8px 14px; }
   .idx-count { display: none; }
-  .idx-grid { --row: 150px; gap: 28px 10px; }
+  .idx-grid { --row: 42vw; gap: 28px 10px; }
   .idx-name { font-size: 15px; }
   .idx-meta { display: none; }
 }
