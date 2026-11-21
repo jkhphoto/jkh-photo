@@ -158,7 +158,7 @@ nav.menu-open { transform: translateY(0); background: transparent; backdrop-filt
 }
 
 /* ── Image protection ── */
-.g-img img, .idx-preview, .hp-card-img img, .bts-img img, .print-cover img {
+.g-img img, .idx-img img, .hp-card-img img, .bts-img img, .print-cover img {
   -webkit-user-drag: none;
   user-select: none;
   pointer-events: none;

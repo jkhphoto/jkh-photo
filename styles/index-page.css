@@ -1,6 +1,12 @@
+/* ── Index ──
+   Every job as a photo tile in justified rows: frames uncropped at their
+   own shape, every frame in a row the same height. Each tile grows in
+   proportion to its width÷height (--r), so a landscape takes ~2.25× the
+   width of a vertical at equal height. */
+
 .idx-page {
   margin-top: var(--nav-h);
-  padding: 32px 24px 80px;
+  padding: 32px 24px 100px;
   min-height: calc(100vh - var(--nav-h));
 }
 
@@ -8,9 +14,11 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 24px;
+  gap: 24px;
+  flex-wrap: wrap;
   padding-bottom: 16px;
-  border-bottom: 1px solid var(--line);
+  margin-bottom: 32px;
+  border-bottom: 1px solid var(--rule);
 }
 
 .idx-title {
@@ -22,13 +30,6 @@
   line-height: 1;
 }
 
-.idx-count {
-  font-size: 9px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-
 .idx-empty {
   padding: 120px 0;
   text-align: center;
@@ -37,171 +38,107 @@
   letter-spacing: 0.06em;
 }
 
-/* ── Filters ── */
+/* ── Filters: typographic, the active one underlined. ── */
 .idx-filters {
   display: flex;
-  gap: 6px;
-  margin-bottom: 24px;
-  padding-bottom: 20px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 20px;
 }
 
 .idx-filter {
   font-family: var(--mono);
-  font-size: 9px;
-  letter-spacing: 0.08em;
+  font-size: 10px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--dim2);
+  color: var(--dim);
   background: none;
-  border: 1px solid var(--line);
-  padding: 6px 14px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  padding: 0 0 3px;
   cursor: pointer;
   transition: color 0.25s ease, border-color 0.25s ease;
 }
+.idx-filter:hover { color: var(--fg); }
+.idx-filter.active { color: var(--fg); border-color: var(--fg); }
 
-.idx-filter:hover {
-  color: var(--fg);
-  border-color: var(--dim);
-}
-
-.idx-filter.active {
-  color: var(--fg);
-  border-color: var(--fg);
-}
-
-/* ── Table ── */
-.idx-table { width: 100%; }
-
-.idx-table-head {
-  display: grid;
-  grid-template-columns: 48px 1fr 100px 120px 100px 140px;
-  gap: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 8px;
-  letter-spacing: 0.16em;
+.idx-count {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--dim2);
+  margin-left: 12px;
+  font-variant-numeric: tabular-nums;
 }
 
-.idx-row {
-  display: grid;
-  grid-template-columns: 48px 1fr 100px 120px 100px 140px;
-  gap: 12px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--line);
-  text-decoration: none;
+/* ── Grid ──
+   The ::after spacer soaks up the last row's slack so a short final row
+   keeps the same height instead of stretching across the page. */
+.idx-grid {
+  --row: 260px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 44px 16px;
+}
+.idx-grid::after { content: ''; flex: 1000 1 0; }
+
+.idx-tile {
+  flex: var(--r) 1 calc(var(--r) * var(--row));
+  min-width: 0;
+  display: block;
   color: inherit;
-  transition: padding-left 0.35s var(--expo);
+  text-decoration: none;
 }
-.idx-row:hover { padding-left: 10px; }
 
-.idx-col-num {
-  font-size: 10px;
+.idx-img { background: var(--line); }
+.idx-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: opacity 0.3s ease;
+}
+.idx-grid:hover .idx-tile:not(:hover) .idx-img img { opacity: 0.35; }
+
+.idx-cap {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-top: 10px;
+}
+.idx-num {
+  font-family: var(--mono);
+  font-size: 9px;
   color: var(--dim2);
-  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
 }
-
-.idx-col-name {
+.idx-name {
   font-family: var(--display);
-  font-size: clamp(18px, 3vw, 28px);
+  font-size: 17px;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   line-height: 1.1;
-  transition: opacity 0.25s;
 }
-
-.idx-col-cat,
-.idx-col-client,
-.idx-col-date,
-.idx-col-loc {
+.idx-meta {
+  font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--dim);
-  align-self: center;
-  transition: opacity 0.25s;
+  margin-top: 4px;
 }
 
-.idx-table:hover .idx-row:not(:hover) .idx-col-name { opacity: 0.15; }
-.idx-table:hover .idx-row:not(:hover) .idx-col-cat,
-.idx-table:hover .idx-row:not(:hover) .idx-col-client,
-.idx-table:hover .idx-row:not(:hover) .idx-col-date,
-.idx-table:hover .idx-row:not(:hover) .idx-col-loc,
-.idx-table:hover .idx-row:not(:hover) .idx-col-num { opacity: 0.1; }
-
-/* Hide mobile preview on desktop */
-.idx-mobile-preview { display: none; }
-
-/* ── Hover preview (desktop) ── */
-/* No shadow. A box-shadow paints the element's rectangle, so on a cut-out
-   PNG it draws a container around transparency and defeats the cut-out.
-   The artwork defines its own edge — and nothing else on the site casts a
-   shadow either. */
-.idx-preview {
-  position: fixed;
-  width: 300px;
-  pointer-events: none;
-  z-index: 150;
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity 0.3s var(--expo), transform 0.35s var(--expo);
-}
-.idx-preview.show {
-  opacity: 1;
-  transform: translateY(0);
+@media (max-width: 1100px) {
+  .idx-grid { --row: 200px; }
 }
 
-@media (max-width: 900px) {
-  .idx-table-head { display: none; }
-  .idx-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 14px;
-    align-items: baseline;
-  }
-  .idx-col-num { order: 2; }
-  .idx-col-name { order: 1; flex: 1 0 100%; font-size: 22px; }
-  .idx-col-client { display: none; }
-  .idx-col-loc { display: none; }
-  .idx-preview { display: none; }
-  .idx-filters { flex-wrap: wrap; }
-
-  /* Mobile inline preview */
-  .idx-mobile-preview {
-    display: block;
-    order: 10;
-    flex: 1 0 100%;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-                opacity 0.3s ease,
-                margin 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    margin: 0;
-  }
-  .idx-mobile-preview.show {
-    max-height: 600px;
-    opacity: 1;
-    margin: 12px 0 4px;
-  }
-  .idx-mobile-preview img {
-    width: 100%;
-    display: block;
-  }
-  .idx-mobile-cta {
-    display: block;
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-top: 8px;
-  }
-  .idx-row-expanded {
-    padding-bottom: 18px;
-  }
-  .idx-row-expanded .idx-col-name {
-    opacity: 1 !important;
-  }
+@media (max-width: 768px) {
+  .idx-page { padding: 24px 16px 80px; }
+  .idx-header { margin-bottom: 24px; }
+  .idx-filters { width: 100%; gap: 8px 14px; }
+  .idx-count { display: none; }
+  .idx-grid { --row: 150px; gap: 28px 10px; }
+  .idx-name { font-size: 15px; }
+  .idx-meta { display: none; }
 }
