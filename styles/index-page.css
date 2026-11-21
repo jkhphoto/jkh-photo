@@ -99,9 +99,15 @@
   display: block;
   width: 100%;
   height: auto;
-  transition: opacity 0.3s ease;
 }
-.idx-grid:hover .idx-tile:not(:hover) .idx-img img { opacity: 0.35; }
+
+/* Hover marks only the tile under the pointer — its title takes the
+   accent. The photos never change: fading the rest of the grid while
+   browsing it was the owner's complaint. */
+.idx-name { transition: color 0.2s ease; }
+@media (hover: hover) {
+  .idx-tile:hover .idx-name { color: var(--accent); }
+}
 
 .idx-cap {
   display: flex;
