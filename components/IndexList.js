@@ -103,7 +103,12 @@ export default function IndexList({ projects }) {
               <span className="idx-num">{p.num}</span>
               <span className="idx-name">{p.title}</span>
             </div>
-            <div className="idx-meta">{[p.client, p.date].filter(Boolean).join(' · ')}</div>
+            {(p.client || p.date) && (
+              <div className="idx-meta">
+                {p.client && <span>{p.client}</span>}
+                {p.date && <span>{p.date}</span>}
+              </div>
+            )}
           </Link>
         ))}
       </div>

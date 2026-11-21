@@ -120,14 +120,30 @@
   letter-spacing: 0.01em;
   line-height: 1.1;
 }
+/* Client and date on a line each, never wrapping mid-phrase: a narrow
+   vertical tile clips with an ellipsis instead of stranding "2026" on a
+   line of its own. Indented to sit under the title, not the number. */
 .idx-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 5px;
+  padding-left: 22px;
   font-family: var(--mono);
   font-size: 9px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--dim);
-  margin-top: 4px;
 }
+.idx-meta span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.idx-num { flex: 0 0 12px; }
+
+/* A job with no photos yet still holds its place as an empty frame. */
+.idx-img:empty { aspect-ratio: var(--r); }
 
 @media (max-width: 1100px) {
   .idx-grid { --row: 200px; }
